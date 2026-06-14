@@ -4,6 +4,13 @@ export default {
   theme: {
     extend: {
       colors: {
+        // Dark theme (homepage)
+        ink: '#0A0E1A',
+        'brand-violet': '#7C5CFC',
+        'brand-blue': '#3B82F6',
+        'brand-cyan': '#22D3EE',
+        'ink-text': '#F5F7FA',
+        // Original tokens (other pages)
         primary: '#1E2A4A',
         accent: '#FF5A3C',
         support: '#17B0A0',
@@ -11,8 +18,11 @@ export default {
         body: '#1A1A1A',
       },
       fontFamily: {
-        headline: ['"Space Grotesk"', 'sans-serif'],
+        headline: ['"Bricolage Grotesque"', 'sans-serif'],
         body: ['Inter', 'sans-serif'],
+      },
+      backgroundImage: {
+        'brand-gradient': 'linear-gradient(135deg, #7C5CFC 0%, #3B82F6 100%)',
       },
     },
   },
