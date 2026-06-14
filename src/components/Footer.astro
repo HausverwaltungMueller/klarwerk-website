@@ -1,0 +1,85 @@
+---
+const leistungen = [
+  { href: '/leistungen/social-media-content', label: 'Social Media & Content' },
+  { href: '/leistungen/performance-marketing', label: 'Performance Marketing' },
+  { href: '/leistungen/website-erstellung', label: 'Website-Erstellung' },
+  { href: '/leistungen/ki-automatisierung', label: 'KI-Automatisierung' },
+];
+
+const rechtliches = [
+  { href: '/datenschutz', label: 'Datenschutz' },
+  { href: '/impressum', label: 'Impressum' },
+];
+
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-primary text-white">
+  <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 gap-10 md:grid-cols-3">
+
+      <!-- Spalte 1: Logo + Kurzbeschreibung -->
+      <div>
+        <a href="/" class="inline-block">
+          <span class="font-headline text-xl font-bold tracking-tight">Klarwerk</span>
+        </a>
+        <p class="mt-4 text-sm leading-relaxed text-white/70">
+          Digitale Lösungen für Unternehmen, die wachsen wollen. Von Social Media bis KI-Automatisierung – klar, messbar, wirkungsvoll.
+        </p>
+      </div>
+
+      <!-- Spalte 2: Leistungen + Rechtliches -->
+      <div>
+        <h3 class="font-headline text-xs font-semibold uppercase tracking-widest text-white/50">Leistungen</h3>
+        <ul class="mt-4 space-y-2">
+          {leistungen.map(link => (
+            <li>
+              <a href={link.href} class="text-sm text-white/70 transition-colors hover:text-support">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+        <ul class="mt-6 space-y-2">
+          {rechtliches.map(link => (
+            <li>
+              <a href={link.href} class="text-sm text-white/70 transition-colors hover:text-support">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Spalte 3: Kontakt -->
+      <div>
+        <h3 class="font-headline text-xs font-semibold uppercase tracking-widest text-white/50">Kontakt</h3>
+        <ul class="mt-4 space-y-3 text-sm text-white/70">
+          <li>
+            <a href="mailto:info@klarwerk.de" class="transition-colors hover:text-support">
+              info@klarwerk.de
+            </a>
+          </li>
+          <li>
+            <a href="tel:+49000000000" class="transition-colors hover:text-support">
+              +49 (0) 000 000 000
+            </a>
+          </li>
+        </ul>
+        <div class="mt-6">
+          <a
+            href="/kontakt"
+            class="inline-block rounded-md bg-accent px-4 py-2 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+          >
+            Kostenloses Erstgespräch
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="mt-10 border-t border-white/10 pt-6 text-center text-xs text-white/40">
+      © {year} Klarwerk. Alle Rechte vorbehalten.
+    </div>
+  </div>
+</footer>

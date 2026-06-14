@@ -1,0 +1,92 @@
+---
+const navLinks = [
+  { href: '/leistungen', label: 'Leistungen' },
+  { href: '/referenzen', label: 'Referenzen' },
+  { href: '/ueber-uns', label: 'Über uns' },
+  { href: '/blog', label: 'Blog' },
+  { href: '/kontakt', label: 'Kontakt' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="sticky top-0 z-50 bg-primary shadow-md">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="flex h-16 items-center justify-between">
+
+      <!-- Logo -->
+      <a href="/" class="flex-shrink-0">
+        <span class="font-headline text-xl font-bold tracking-tight text-white">Klarwerk</span>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex md:items-center md:gap-6">
+        {navLinks.map(link => (
+          <a
+            href={link.href}
+            class={`text-sm font-medium transition-colors hover:text-support ${
+              currentPath.startsWith(link.href) ? 'text-support' : 'text-white/80'
+            }`}
+          >
+            {link.label}
+          </a>
+        ))}
+      </nav>
+
+      <!-- CTA Button -->
+      <div class="hidden md:block">
+        <a
+          href="/kontakt"
+          class="inline-block rounded-md bg-accent px-4 py-2 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+        >
+          Kostenloses Erstgespräch
+        </a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button
+        id="mobile-menu-btn"
+        class="md:hidden rounded-md p-2 text-white hover:bg-white/10"
+        aria-label="Menü öffnen"
+        aria-expanded="false"
+      >
+        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="hidden md:hidden border-t border-white/10 bg-primary">
+    <div class="space-y-1 px-4 py-3">
+      {navLinks.map(link => (
+        <a
+          href={link.href}
+          class="block rounded-md px-3 py-2 text-sm font-medium text-white/80 hover:bg-white/10 hover:text-white"
+        >
+          {link.label}
+        </a>
+      ))}
+      <div class="pt-2">
+        <a
+          href="/kontakt"
+          class="block rounded-md bg-accent px-3 py-2 text-center text-sm font-semibold text-white hover:opacity-90 transition-opacity"
+        >
+          Kostenloses Erstgespräch
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+
+  btn?.addEventListener('click', () => {
+    const isOpen = !menu?.classList.contains('hidden');
+    menu?.classList.toggle('hidden', isOpen);
+    btn.setAttribute('aria-expanded', String(!isOpen));
+  });
+</script>

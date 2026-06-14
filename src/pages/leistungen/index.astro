@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const leistungen = [
+  {
+    href: '/leistungen/social-media-content',
+    title: 'Social Media & Content',
+    desc: 'Strategische Präsenz auf den richtigen Kanälen.',
+  },
+  {
+    href: '/leistungen/performance-marketing',
+    title: 'Performance Marketing',
+    desc: 'Messbare Ergebnisse durch datengetriebene Kampagnen.',
+  },
+  {
+    href: '/leistungen/website-erstellung',
+    title: 'Website-Erstellung',
+    desc: 'Professionelle Websites, die konvertieren.',
+  },
+  {
+    href: '/leistungen/ki-automatisierung',
+    title: 'KI-Automatisierung',
+    desc: 'Prozesse automatisieren und skalieren mit KI.',
+  },
+];
+---
+
+<BaseLayout title="Leistungen" description="Unsere digitalen Leistungen für Ihr Unternehmen">
+  <section class="py-24 px-4">
+    <div class="mx-auto max-w-7xl">
+      <h1 class="font-headline text-4xl font-bold text-primary">Unsere Leistungen</h1>
+      <p class="mt-4 max-w-2xl text-lg text-body/70">
+        Hier entsteht die Leistungsübersicht.
+      </p>
+      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {leistungen.map(item => (
+          <a
+            href={item.href}
+            class="block rounded-lg bg-surface p-6 transition-shadow hover:shadow-md"
+          >
+            <h2 class="font-headline text-lg font-semibold text-primary">{item.title}</h2>
+            <p class="mt-2 text-sm text-body/70">{item.desc}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
