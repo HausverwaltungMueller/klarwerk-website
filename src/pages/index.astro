@@ -1,16 +1,416 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const leistungen = [
+  {
+    href: '/leistungen/social-media-content',
+    icon: '📱',
+    title: 'Social Media & Content',
+    text: 'Ihre Kanäle sollen verkaufen, nicht nur existieren. Wir übernehmen Strategie, Inhalte und Veröffentlichung – Sie bleiben sichtbar, ohne Zeit zu investieren.',
+  },
+  {
+    href: '/leistungen/performance-marketing',
+    icon: '📊',
+    title: 'Performance Marketing',
+    text: 'Werbung muss sich rechnen. Wir schalten und optimieren Kampagnen auf Meta und Google konsequent nach Zahlen – transparent, ohne Blackbox.',
+  },
+  {
+    href: '/leistungen/website-erstellung',
+    icon: '🖥️',
+    title: 'Website-Erstellung',
+    text: 'Moderne, schnelle Websites, die auf dem Handy genauso überzeugen wie am PC. Fair kalkuliert ab 1.000 €, in der Regel fertig in ein bis zwei Wochen.',
+  },
+  {
+    href: '/leistungen/ki-automatisierung',
+    icon: '⚙️',
+    title: 'KI-Automatisierung',
+    text: 'Terminerinnerungen, Bewertungsanfragen, Kundenanfragen – alles läuft zuverlässig im Hintergrund. Mehr Anfragen, keine verloren, täglich Zeit gespart.',
+  },
+];
+
+const schritte = [
+  {
+    nr: '01',
+    titel: 'Erstgespräch',
+    text: 'Wir lernen Ihr Unternehmen kennen, verstehen Ihre Ziele und geben eine erste ehrliche Einschätzung – kostenlos und unverbindlich.',
+  },
+  {
+    nr: '02',
+    titel: 'Strategie',
+    text: 'Auf Basis des Gesprächs entwickeln wir einen klaren Plan: Was machen wir, warum, mit welchem Ziel und wann sehen Sie erste Ergebnisse.',
+  },
+  {
+    nr: '03',
+    titel: 'Umsetzung & Reporting',
+    text: 'Wir setzen um – und Sie sehen schwarz auf weiß, was läuft. Monatliche Berichte, offene Kommunikation, keine Überraschungen.',
+  },
+];
+
+const differenzierung = [
+  {
+    titel: 'Transparent',
+    text: 'Kein Marketing-Kauderwelsch, keine versteckten Kosten. Sie wissen jederzeit, wofür Sie bezahlen und was es bringt.',
+  },
+  {
+    titel: 'Datenbasiert',
+    text: 'Entscheidungen werden mit Zahlen begründet, nicht mit Bauchgefühl. Jede Maßnahme ist messbar und nachvollziehbar.',
+  },
+  {
+    titel: 'Ohne Knebelvertrag',
+    text: 'Monatliche Zusammenarbeit, keine langen Bindungen. Wir verdienen Ihr Vertrauen durch Ergebnisse – nicht durch Vertragsklauseln.',
+  },
+  {
+    titel: 'Automatisierung inklusive',
+    text: 'Während andere beim Marketing aufhören, gehen wir weiter. KI-Automatisierung ist kein Aufpreis, sondern Teil unseres Ansatzes.',
+  },
+];
+
+const faqs = [
+  {
+    frage: 'Was kostet eine Zusammenarbeit mit Klarwerk?',
+    antwort: 'Das hängt von Ihrem Ziel ab. Websites starten ab 1.000 €, Social-Media-Betreuung und Performance Marketing besprechen wir individuell im Erstgespräch. Keine versteckten Kosten.',
+  },
+  {
+    frage: 'Wie lange dauert es, bis ich erste Ergebnisse sehe?',
+    antwort: 'Websites sind in der Regel in 1–2 Wochen fertig. Bei Performance-Kampagnen sehen die meisten Kunden nach 2–4 Wochen erste messbare Ergebnisse.',
+  },
+  {
+    frage: 'Bin ich langfristig gebunden?',
+    antwort: 'Nein. Wir arbeiten monatlich kündbar. Wir sind überzeugt, dass Sie bleiben wollen, weil die Ergebnisse stimmen – nicht weil ein Vertrag es erzwingt.',
+  },
+  {
+    frage: 'Für wen ist Klarwerk geeignet?',
+    antwort: 'Für lokale Unternehmen (Handwerk, Gastronomie, Praxen, Studios) und mittelständische Betriebe bis 250 Mitarbeiter, die online sichtbarer werden und mehr Anfragen generieren wollen.',
+  },
+  {
+    frage: 'Arbeitet ihr auch mit Unternehmen, die noch gar kein Marketing betreiben?',
+    antwort: 'Gerade dann. Wir fangen dort an, wo Sie stehen – ohne Vorwürfe, ohne Fachjargon. Das Erstgespräch klärt, was sofort Wirkung zeigt.',
+  },
+  {
+    frage: 'Was ist der Sichtbarkeits-Check?',
+    antwort: 'Sie geben uns Ihre Website oder Ihr Social-Media-Profil – wir schauen drauf und liefern 3–5 konkrete Verbesserungspunkte. Kostenlos, unverbindlich, in der Regel innerhalb von 48 Stunden.',
+  },
+];
 ---
 
-<BaseLayout title="Startseite" description="Klarwerk – Digitale Lösungen für Ihr Unternehmen">
-  <section class="py-24 px-4">
-    <div class="mx-auto max-w-7xl">
-      <h1 class="font-headline text-4xl font-bold text-primary md:text-5xl lg:text-6xl">
-        Willkommen bei Klarwerk
+<BaseLayout
+  title="Startseite"
+  description="Klarwerk: Marketing-Agentur für lokale & mittelständische Unternehmen. Social Media, Werbeanzeigen & Websites, die messbar Anfragen bringen."
+>
+
+  <!-- ===================== 1. HERO ===================== -->
+  <section class="bg-primary px-4 py-20 md:py-28 lg:py-36">
+    <div class="mx-auto max-w-4xl text-center">
+      <h1 class="font-headline text-4xl font-bold leading-tight text-white md:text-5xl lg:text-6xl">
+        Mehr Sichtbarkeit. Mehr Anfragen.<br class="hidden sm:block" />
+        Ohne Marketing-Kauderwelsch.
       </h1>
-      <p class="mt-6 max-w-2xl text-lg text-body/70">
-        Hier entsteht die Startseite.
+      <p class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-white/75 md:text-xl">
+        Klarwerk bringt lokale und mittelständische Unternehmen online nach vorn – mit Social Media, Werbeanzeigen, Websites und Automatisierung, die messbar Kunden bringen. Transparent, datenbasiert, ohne lange Bindung.
+      </p>
+      <div class="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+        <a
+          href="/kontakt"
+          class="inline-block rounded-md bg-accent px-7 py-3.5 text-base font-semibold text-white transition-opacity hover:opacity-90"
+        >
+          Kostenloses Erstgespräch vereinbaren
+        </a>
+        <a
+          href="/leistungen"
+          class="inline-block rounded-md border border-white/30 px-7 py-3.5 text-base font-semibold text-white transition-colors hover:border-white/60 hover:bg-white/10"
+        >
+          Unsere Leistungen ansehen
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 2. VERTRAUENSLEISTE ===================== -->
+  <section class="border-b border-gray-200 bg-white px-4 py-10">
+    <div class="mx-auto max-w-5xl">
+      <p class="mb-8 text-center text-xs font-semibold uppercase tracking-widest text-body/40">
+        Vertraut von Unternehmen aus der Region
+      </p>
+      <!-- Kundenlogos Platzhalter -->
+      <div class="flex flex-wrap items-center justify-center gap-6 md:gap-10">
+        {[1, 2, 3, 4, 5].map(i => (
+          <div class="flex h-10 w-28 items-center justify-center rounded border border-dashed border-gray-300 bg-surface text-xs text-body/30">
+            Logo {i}
+          </div>
+        ))}
+      </div>
+      <!-- Kennzahlen Platzhalter -->
+      <div class="mt-10 grid grid-cols-2 gap-6 border-t border-gray-100 pt-10 md:grid-cols-4">
+        {[
+          { zahl: '—', label: 'betreute Kunden' },
+          { zahl: '—', label: 'Ø ROAS Paid Ads' },
+          { zahl: '—', label: 'Websites live' },
+          { zahl: '—', label: 'Jahre Erfahrung' },
+        ].map(item => (
+          <div class="text-center">
+            <p class="font-headline text-3xl font-bold text-support">{item.zahl}</p>
+            <p class="mt-1 text-sm text-body/60">{item.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 3. PROBLEM & LÖSUNG ===================== -->
+  <section class="bg-surface px-4 py-20 md:py-24">
+    <div class="mx-auto max-w-4xl">
+      <div class="grid gap-12 md:grid-cols-2 md:gap-16">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-widest text-support">Das Problem</p>
+          <h2 class="mt-3 font-headline text-2xl font-bold text-primary md:text-3xl">
+            Sichtbar sein, aber keine Anfragen bekommen?
+          </h2>
+          <p class="mt-4 leading-relaxed text-body/70">
+            Viele Unternehmen posten regelmäßig, haben eine Website – aber die Telefone bleiben still. Marketing ohne Strategie ist verlorene Zeit und verlorenes Geld.
+          </p>
+        </div>
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-widest text-support">Die Lösung</p>
+          <h2 class="mt-3 font-headline text-2xl font-bold text-primary md:text-3xl">
+            Marketing, das messbar Anfragen bringt.
+          </h2>
+          <p class="mt-4 leading-relaxed text-body/70">
+            Klarwerk verbindet Strategie, Kreation und Daten zu einem System, das nicht für Likes optimiert ist – sondern für Kunden. Jede Maßnahme ist nachvollziehbar, jede Investition messbar.
+          </p>
+        </div>
+      </div>
+      <div class="mt-12 text-center">
+        <a
+          href="/leistungen"
+          class="inline-block rounded-md bg-primary px-6 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+        >
+          Leistungen ansehen
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 4. LEISTUNGEN ===================== -->
+  <section class="bg-white px-4 py-20 md:py-24">
+    <div class="mx-auto max-w-6xl">
+      <div class="text-center">
+        <p class="text-xs font-semibold uppercase tracking-widest text-support">Was wir tun</p>
+        <h2 class="mt-3 font-headline text-3xl font-bold text-primary md:text-4xl">
+          Vier Leistungen. Ein Ziel: mehr Anfragen.
+        </h2>
+      </div>
+      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {leistungen.map(l => (
+          <a
+            href={l.href}
+            class="group flex flex-col rounded-xl border border-gray-100 bg-white p-6 shadow-sm transition-shadow hover:shadow-md"
+          >
+            <span class="text-2xl">{l.icon}</span>
+            <h3 class="mt-4 font-headline text-lg font-semibold text-primary">{l.title}</h3>
+            <p class="mt-2 flex-1 text-sm leading-relaxed text-body/70">{l.text}</p>
+            <span class="mt-5 text-sm font-semibold text-support group-hover:underline">
+              Mehr erfahren →
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 5. SO ARBEITEN WIR ===================== -->
+  <section class="bg-surface px-4 py-20 md:py-24">
+    <div class="mx-auto max-w-5xl">
+      <div class="text-center">
+        <p class="text-xs font-semibold uppercase tracking-widest text-support">Der Ablauf</p>
+        <h2 class="mt-3 font-headline text-3xl font-bold text-primary md:text-4xl">
+          So arbeiten wir zusammen
+        </h2>
+      </div>
+      <div class="mt-12 grid gap-8 md:grid-cols-3">
+        {schritte.map(s => (
+          <div class="relative">
+            <span class="font-headline text-5xl font-bold text-primary/10">{s.nr}</span>
+            <h3 class="mt-2 font-headline text-xl font-semibold text-primary">{s.titel}</h3>
+            <p class="mt-3 leading-relaxed text-body/70">{s.text}</p>
+          </div>
+        ))}
+      </div>
+      <div class="mt-12 text-center">
+        <a
+          href="/kontakt"
+          class="inline-block rounded-md bg-accent px-7 py-3.5 text-base font-semibold text-white transition-opacity hover:opacity-90"
+        >
+          Unverbindlich anfragen – Antwort in 24 Stunden
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 6. DIFFERENZIERUNG ===================== -->
+  <section class="bg-primary px-4 py-20 md:py-24">
+    <div class="mx-auto max-w-5xl">
+      <div class="text-center">
+        <p class="text-xs font-semibold uppercase tracking-widest text-support">Warum Klarwerk</p>
+        <h2 class="mt-3 font-headline text-3xl font-bold text-white md:text-4xl">
+          Anders als klassische Agenturen
+        </h2>
+      </div>
+      <div class="mt-12 grid gap-6 sm:grid-cols-2">
+        {differenzierung.map(d => (
+          <div class="rounded-xl border border-white/10 bg-white/5 p-6">
+            <h3 class="font-headline text-lg font-semibold text-white">{d.titel}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-white/70">{d.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 7. REFERENZEN-TEASER ===================== -->
+  <section class="bg-white px-4 py-20 md:py-24">
+    <div class="mx-auto max-w-5xl">
+      <div class="text-center">
+        <p class="text-xs font-semibold uppercase tracking-widest text-support">Ergebnisse</p>
+        <h2 class="mt-3 font-headline text-3xl font-bold text-primary md:text-4xl">
+          Was für unsere Kunden entstanden ist
+        </h2>
+      </div>
+      <!-- Referenz-Platzhalter -->
+      <div class="mt-12 grid gap-6 md:grid-cols-3">
+        {[1, 2, 3].map(i => (
+          <div class="rounded-xl border border-dashed border-gray-300 bg-surface p-6">
+            <div class="mb-4 flex items-center gap-3">
+              <div class="h-10 w-10 rounded-full bg-gray-200" />
+              <div>
+                <div class="h-3 w-24 rounded bg-gray-200" />
+                <div class="mt-1 h-2.5 w-16 rounded bg-gray-200" />
+              </div>
+            </div>
+            <div class="mb-3 h-2.5 w-full rounded bg-gray-200" />
+            <div class="mb-2 h-2.5 w-5/6 rounded bg-gray-200" />
+            <div class="h-2.5 w-4/6 rounded bg-gray-200" />
+            <div class="mt-5 flex items-center gap-2">
+              <span class="font-headline text-2xl font-bold text-support">—</span>
+              <span class="text-xs text-body/50">Platzhalter Ergebnis</span>
+            </div>
+            <p class="mt-1 text-xs text-body/40 italic">"Platzhalter Kundenzitat"</p>
+          </div>
+        ))}
+      </div>
+      <div class="mt-10 text-center">
+        <a
+          href="/referenzen"
+          class="inline-block rounded-md border border-primary px-6 py-3 text-sm font-semibold text-primary transition-colors hover:bg-primary hover:text-white"
+        >
+          Alle Referenzen ansehen →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 8. ÜBER DEN GRÜNDER ===================== -->
+  <section class="bg-surface px-4 py-20 md:py-24">
+    <div class="mx-auto max-w-4xl">
+      <div class="flex flex-col items-center gap-10 md:flex-row md:items-start md:gap-14">
+        <!-- Foto-Platzhalter -->
+        <div class="flex-shrink-0">
+          <div class="flex h-40 w-40 items-center justify-center rounded-2xl border border-dashed border-gray-300 bg-gray-200 text-xs text-body/40 md:h-48 md:w-48">
+            Gründer-Foto
+          </div>
+        </div>
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-widest text-support">Hinter Klarwerk</p>
+          <h2 class="mt-3 font-headline text-2xl font-bold text-primary md:text-3xl">
+            Kein anonymes Agenturkonstrukt.
+          </h2>
+          <p class="mt-4 leading-relaxed text-body/70">
+            Hinter Klarwerk steht kein anonymes Agenturkonstrukt, sondern ein Unternehmer, der seit über acht Jahren selbst Geschäfte aufbaut – vom ersten eigenen Projekt als Jugendlicher über den Aufbau und Verkauf eines Unternehmens bis hin zur digitalen Vermarktung. Diese Erfahrung prägt unsere Arbeit: Wir denken nicht in Klicks, sondern in Anfragen, Kunden und Umsatz.
+          </p>
+          <a
+            href="/ueber-uns"
+            class="mt-6 inline-block text-sm font-semibold text-support hover:underline"
+          >
+            Mehr über uns →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 9. LEAD-MAGNET ===================== -->
+  <section class="bg-primary px-4 py-20 md:py-24">
+    <div class="mx-auto max-w-3xl text-center">
+      <p class="text-xs font-semibold uppercase tracking-widest text-support">Kostenlos & unverbindlich</p>
+      <h2 class="mt-3 font-headline text-3xl font-bold text-white md:text-4xl">
+        Wie sichtbar sind Sie gerade wirklich?
+      </h2>
+      <p class="mx-auto mt-4 max-w-xl leading-relaxed text-white/70">
+        Wir schauen uns Ihren Online-Auftritt an und liefern 3–5 konkrete Verbesserungspunkte – kostenlos, unverbindlich, in der Regel innerhalb von 48 Stunden.
+      </p>
+      <div class="mx-auto mt-8 flex max-w-lg flex-col gap-3 sm:flex-row">
+        <input
+          type="url"
+          placeholder="Ihre Website oder Social-Media-Profil"
+          class="flex-1 rounded-md border border-white/20 bg-white/10 px-4 py-3 text-sm text-white placeholder-white/40 outline-none focus:border-support focus:ring-1 focus:ring-support"
+          disabled
+          title="Formular wird verknüpft"
+        />
+        <a
+          href="/kontakt"
+          class="inline-block rounded-md bg-accent px-5 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+        >
+          Kostenlosen Sichtbarkeits-Check anfordern
+        </a>
+      </div>
+      <p class="mt-3 text-xs text-white/40">
+        Formular wird mit dem Kontaktsystem verknüpft. Kein Spam, keine Weitergabe.
       </p>
     </div>
   </section>
+
+  <!-- ===================== 10. FAQ ===================== -->
+  <section class="bg-white px-4 py-20 md:py-24">
+    <div class="mx-auto max-w-3xl">
+      <div class="text-center">
+        <p class="text-xs font-semibold uppercase tracking-widest text-support">Häufige Fragen</p>
+        <h2 class="mt-3 font-headline text-3xl font-bold text-primary md:text-4xl">
+          Was Sie wissen möchten
+        </h2>
+      </div>
+      <dl class="mt-12 divide-y divide-gray-100">
+        {faqs.map(item => (
+          <div class="py-6">
+            <dt class="font-headline text-base font-semibold text-primary">{item.frage}</dt>
+            <dd class="mt-2 leading-relaxed text-body/70">{item.antwort}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <!-- ===================== 11. ABSCHLUSS-CTA ===================== -->
+  <section class="bg-surface px-4 py-20 md:py-24">
+    <div class="mx-auto max-w-3xl text-center">
+      <h2 class="font-headline text-3xl font-bold text-primary md:text-4xl">
+        Bereit für mehr Anfragen?
+      </h2>
+      <p class="mx-auto mt-4 max-w-xl leading-relaxed text-body/70">
+        Das Erstgespräch ist kostenlos, dauert 30 Minuten und endet immer mit einer ehrlichen Einschätzung – egal ob wir zusammenarbeiten oder nicht.
+      </p>
+      <a
+        href="/kontakt"
+        class="mt-8 inline-block rounded-md bg-accent px-8 py-4 text-base font-semibold text-white transition-opacity hover:opacity-90"
+      >
+        Kostenloses Erstgespräch vereinbaren
+      </a>
+      <div class="mt-8 flex flex-col items-center gap-1 text-sm text-body/50 sm:flex-row sm:justify-center sm:gap-6">
+        <span>info@klarwerk.de</span>
+        <span class="hidden sm:inline">·</span>
+        <span>+49 (0) 000 000 000</span>
+        <span class="hidden sm:inline">·</span>
+        <span>Antwort innerhalb von 24 Stunden werktags</span>
+      </div>
+    </div>
+  </section>
+
 </BaseLayout>
