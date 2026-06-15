@@ -2,119 +2,234 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout
-  title="Startseite"
-  description="Klarwerk: Marketing-Agentur für lokale & mittelständische Unternehmen. Social Media, Werbeanzeigen & Websites, die messbar Anfragen bringen."
->
+<BaseLayout title="KI-Agenten für lokale Unternehmen" description="Klarwerk baut KI-Agenten für lokale Unternehmen – Termin-Kommunikation, Bewertungen, E-Mail-Triage und Lead-Qualifizierung. Fertig in 1–3 Tagen, ab 1.500 €.">
 
-<!-- Cursor glow -->
-<div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+<div class="cursor-glow" id="cursorGlow"></div>
 
-<!-- ══════ 1. HERO ══════ -->
+<!-- ══ 1. HERO ══ -->
 <section id="hero">
   <canvas id="hero-canvas"></canvas>
   <div class="hero-inner">
-    <p class="hero-eyebrow reveal">Digitale Marketing-Agentur</p>
-    <h1 class="hero-headline reveal" style="transition-delay:.08s">
-      Mehr Sichtbarkeit.<br>
-      Mehr <span class="accent">Anfragen.</span><br>
-      Ohne&nbsp;Kauderwelsch.
+    <p class="hero-eyebrow reveal">KI-Agenten für lokale Unternehmen</p>
+    <h1 class="hero-h1 reveal" style="transition-delay:.08s">
+      Mehr Zeit. Mehr Kunden.<br>
+      <span class="hl">Kein manueller</span> Aufwand.
     </h1>
     <p class="hero-sub reveal" style="transition-delay:.16s">
-      Klarwerk bringt lokale und mittelständische Unternehmen online nach vorn –
-      mit Social Media, Werbeanzeigen, Websites und Automatisierung, die messbar
-      Kunden bringen. Transparent, datenbasiert, ohne lange Bindung.
+      Klarwerk baut KI-Agenten, die Terminkommunikation, Kundenbewertungen,
+      E-Mail-Triage und Lead-Qualifizierung automatisieren —
+      fertig in 1–3 Tagen, ab 1.500 €.
     </p>
     <div class="hero-ctas reveal" style="transition-delay:.24s">
-      <a href="#abschluss" class="btn-primary">Kostenloses Erstgespräch vereinbaren</a>
-      <a href="#leistungen" class="btn-ghost">
-        Unsere Leistungen ansehen
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <a href="#agenten" class="btn-primary">
+        Agenten entdecken
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="margin-left:.3rem"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
+      <a href="#abschluss" class="btn-ghost">Kostenloses Erstgespräch</a>
     </div>
-    <div class="logos-section reveal" style="transition-delay:.34s">
-      <p class="logos-label">Vertraut von Unternehmen aus der Region</p>
+    <div class="logos-strip reveal" style="transition-delay:.34s">
+      <p class="logos-label">Vertrauen von lokalen Unternehmen</p>
       <div class="logos-overflow">
         <div class="logos-track">
-          <div class="logo-item">Kunde 1</div>
-          <div class="logo-item">Kunde 2</div>
-          <div class="logo-item">Kunde 3</div>
-          <div class="logo-item">Kunde 4</div>
-          <div class="logo-item">Kunde 5</div>
-          <div class="logo-item">Meta Partner</div>
-          <div class="logo-item">Google Partner</div>
-          <div class="logo-item">Kunde 1</div>
-          <div class="logo-item">Kunde 2</div>
-          <div class="logo-item">Kunde 3</div>
-          <div class="logo-item">Kunde 4</div>
-          <div class="logo-item">Kunde 5</div>
-          <div class="logo-item">Meta Partner</div>
-          <div class="logo-item">Google Partner</div>
+          <div class="logo-pill">Beauty-Studio</div>
+          <div class="logo-pill">Friseur</div>
+          <div class="logo-pill">Handwerker</div>
+          <div class="logo-pill">Physiotherapie</div>
+          <div class="logo-pill">Immobilienmakler</div>
+          <div class="logo-pill">Hausverwaltung</div>
+          <div class="logo-pill">Praxis</div>
+          <div class="logo-pill">Beauty-Studio</div>
+          <div class="logo-pill">Friseur</div>
+          <div class="logo-pill">Handwerker</div>
+          <div class="logo-pill">Physiotherapie</div>
+          <div class="logo-pill">Immobilienmakler</div>
+          <div class="logo-pill">Hausverwaltung</div>
+          <div class="logo-pill">Praxis</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══════ 2. LEISTUNGEN ══════ -->
-<section id="leistungen">
-  <div class="kw-container">
-    <div class="section-header reveal">
-      <span class="kw-label">Was wir tun</span>
-      <h2>Vier Leistungen.<br>Ein Ziel: mehr Anfragen.</h2>
-      <p>Wir kombinieren, was zusammengehört – und liefern Ergebnisse, die Sie schwarz auf weiß sehen.</p>
-    </div>
-    <div class="leistungen-list">
-      <div class="leistung-row reveal">
-        <span class="leistung-nr">01</span>
-        <span class="leistung-title">Social Media &amp; Content</span>
-        <p class="leistung-desc">Ihre Kanäle sollen verkaufen, nicht nur existieren. Strategie, Inhalte und Veröffentlichung – komplett aus einer Hand.</p>
-        <a href="/leistungen/social-media-content" class="leistung-link">Mehr erfahren <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+<!-- ══ 2. DAS PROBLEM ══ -->
+<section id="problem">
+  <div class="container">
+    <div class="problem-inner">
+      <div class="problem-left reveal-l">
+        <span class="label">Das Problem</span>
+        <h2>Routineaufgaben kosten täglich Geld und Zeit.</h2>
+        <p>Jedes dieser Probleme löst ein KI-Agent — automatisch, zuverlässig und ohne Ihr Zutun.</p>
+        <a href="#agenten" class="link-accent">
+          Zu den Lösungen
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 6.5h9M8 3l3.5 3.5L8 10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
       </div>
-      <div class="leistung-row reveal" style="transition-delay:.07s">
-        <span class="leistung-nr">02</span>
-        <span class="leistung-title">Performance Marketing</span>
-        <p class="leistung-desc">Werbung muss sich rechnen. Meta, Google &amp; Co. – konsequent nach Zahlen optimiert. Kein Budget verbrennen, keine Blackbox.</p>
-        <a href="/leistungen/performance-marketing" class="leistung-link">Mehr erfahren <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-      </div>
-      <div class="leistung-row reveal" style="transition-delay:.14s">
-        <span class="leistung-nr">03</span>
-        <span class="leistung-title">Website-Erstellung</span>
-        <p class="leistung-desc">Moderne, schnelle Websites ab 1.000 €. Mobiloptimiert, in 1–2 Wochen live. Erster Eindruck, der Kontakte macht.</p>
-        <a href="/leistungen/website-erstellung" class="leistung-link">Mehr erfahren <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-      </div>
-      <div class="leistung-row featured reveal" style="transition-delay:.21s">
-        <span class="leistung-nr">04</span>
-        <span class="leistung-title">KI-Automatisierung</span>
-        <p class="leistung-desc">Terminerinnerungen, Bewertungsanfragen, Kundenanfragen – alles läuft im Hintergrund. Mehr Anfragen, keine verloren, täglich Zeit gespart.</p>
-        <a href="/leistungen/ki-automatisierung" class="leistung-link">Mehr erfahren <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <div class="problem-grid reveal-r" style="transition-delay:.1s">
+        <div class="problem-card">
+          <div class="problem-nr">800 €</div>
+          <h4>No-Shows im Monat</h4>
+          <p>5–15 % aller Termine erscheinen nicht — ohne automatische Erinnerung.</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-nr">1–2h</div>
+          <h4>täglich für E-Mails</h4>
+          <p>Posteingang frisst Zeit. Wichtiges geht unter, Antworten brauchen Tage.</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-nr">★ 3.2</div>
+          <h4>Google-Score obwohl gut</h4>
+          <p>Zufriedene Kunden bewerten selten von selbst — unzufriedene immer.</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-nr">&gt; 24h</div>
+          <h4>bis zum Erstkontakt</h4>
+          <p>Leads kühlen ab. Wer zuerst antwortet, gewinnt — meistens der Wettbewerb.</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══════ 3. PROZESS ══════ -->
-<section id="prozess">
-  <div class="kw-container">
+<!-- ══ 3. DIE VIER KI-AGENTEN ══ -->
+<section id="agenten">
+  <div class="container">
     <div class="section-header reveal">
-      <span class="kw-label">Der Ablauf</span>
-      <h2>So arbeiten wir zusammen</h2>
+      <span class="label">Die Lösung</span>
+      <h2>Vier KI-Agenten.<br>Ein Ziel: weniger Aufwand, mehr Ertrag.</h2>
+      <p>Festpreis-Setup, kein Stundensatz, kein technisches Wissen nötig. DSGVO-konform.</p>
+    </div>
+    <div class="agent-list">
+
+      <div class="agent-row reveal">
+        <span class="agent-nr">A1</span>
+        <div class="agent-body">
+          <div class="agent-head">
+            <span class="agent-name">Termin- &amp; Follow-up-Agent</span>
+            <span class="badge badge-price">Setup 1.500 €</span>
+            <span class="badge badge-time">1 Tag Bauzeit</span>
+          </div>
+          <div class="agent-chips">
+            <span class="chip">Beauty-Studios</span>
+            <span class="chip">Friseure</span>
+            <span class="chip">Physiotherapeuten</span>
+            <span class="chip">Kosmetik</span>
+            <span class="chip">Coaches</span>
+          </div>
+          <p class="agent-desc">
+            Automatische Bestätigung und Erinnerung per WhatsApp, KI-Dialog bei Umbuchungswünschen,
+            automatischer Folgetermin-Vorschlag, No-Show-Handling. Wartung ab 99 €/Monat.
+          </p>
+        </div>
+        <a href="/kontakt" class="agent-link">
+          Mehr erfahren
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2.5 7.5h10M9 4l3.5 3.5L9 11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <div class="agent-row reveal" style="transition-delay:.07s">
+        <span class="agent-nr">A2</span>
+        <div class="agent-body">
+          <div class="agent-head">
+            <span class="agent-name">Bewertungs- &amp; Reputations-Agent</span>
+            <span class="badge badge-price">Setup 1.500 €</span>
+            <span class="badge badge-time">1 Tag Bauzeit</span>
+          </div>
+          <div class="agent-chips">
+            <span class="chip">Restaurants</span>
+            <span class="chip">Handwerker</span>
+            <span class="chip">Beauty</span>
+            <span class="chip">Werkstätten</span>
+            <span class="chip">Ärzte</span>
+          </div>
+          <p class="agent-desc">
+            Automatische Bewertungsanfrage nach jedem Termin, interne Abfederung negativer Stimmen,
+            KI-generierte Antworten auf Google-Rezensionen, monatliches Bewertungs-Reporting. Wartung ab 99 €/Monat.
+          </p>
+        </div>
+        <a href="/kontakt" class="agent-link">
+          Mehr erfahren
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2.5 7.5h10M9 4l3.5 3.5L9 11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <div class="agent-row reveal" style="transition-delay:.14s">
+        <span class="agent-nr">A3</span>
+        <div class="agent-body">
+          <div class="agent-head">
+            <span class="agent-name">Kundenanfragen-Agent (E-Mail-Triage)</span>
+            <span class="badge badge-price">Setup 2.000 €</span>
+            <span class="badge badge-time">2 Tage Bauzeit</span>
+          </div>
+          <div class="agent-chips">
+            <span class="chip">Handwerksbetriebe</span>
+            <span class="chip">Hausverwaltungen</span>
+            <span class="chip">Kanzleien</span>
+            <span class="chip">Praxen</span>
+          </div>
+          <p class="agent-desc">
+            KI klassifiziert und beantwortet 80 % der Standardanfragen automatisch. Komplexe Fälle werden
+            mit 2-Satz-Zusammenfassung eskaliert. Phase 1: nur Entwürfe zur Freigabe — schafft Vertrauen.
+            Wartung ab 149 €/Monat.
+          </p>
+        </div>
+        <a href="/kontakt" class="agent-link">
+          Mehr erfahren
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2.5 7.5h10M9 4l3.5 3.5L9 11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <div class="agent-row featured reveal" style="transition-delay:.21s">
+        <span class="agent-nr">A4</span>
+        <div class="agent-body">
+          <div class="agent-head">
+            <span class="agent-name">Lead-Recherche- &amp; Angebots-Agent</span>
+            <span class="badge badge-price">Setup 2.500–3.000 €</span>
+            <span class="badge badge-time">2–3 Tage Bauzeit</span>
+          </div>
+          <div class="agent-chips">
+            <span class="chip">Immobilienmakler</span>
+            <span class="chip">Versicherungsmakler</span>
+            <span class="chip">B2B-Dienstleister</span>
+            <span class="chip">Berater</span>
+          </div>
+          <p class="agent-desc">
+            Jeder neue Lead in unter 5 Minuten recherchiert, angereichert und mit personalisiertem
+            Anschreiben versehen. Automatische Follow-up-Sequenz Tag 3/7/14. Ein einziger zusätzlicher
+            Abschluss refinanziert den Agenten sofort. Wartung ab 199 €/Monat.
+          </p>
+        </div>
+        <a href="/kontakt" class="agent-link">
+          Mehr erfahren
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2.5 7.5h10M9 4l3.5 3.5L9 11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ 4. WIE ES FUNKTIONIERT ══ -->
+<section id="prozess">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="label">Der Ablauf</span>
+      <h2>Von Erstgespräch zu laufendem Agenten<br>in 3 Schritten</h2>
     </div>
     <div class="prozess-grid">
-      <div class="prozess-step reveal">
-        <div class="prozess-nr-wrap"><div class="prozess-nr">01</div></div>
+      <div class="p-step reveal">
+        <div class="p-nr">01</div>
         <h3>Erstgespräch</h3>
         <p>Wir lernen Ihr Unternehmen kennen, verstehen Ihre Ziele und geben eine erste ehrliche Einschätzung – kostenlos und unverbindlich.</p>
       </div>
-      <div class="prozess-step reveal" style="transition-delay:.1s">
-        <div class="prozess-nr-wrap"><div class="prozess-nr">02</div></div>
-        <h3>Strategie</h3>
-        <p>Auf Basis des Gesprächs entwickeln wir einen klaren Plan: Was machen wir, warum, mit welchem Ziel und wann sehen Sie erste Ergebnisse.</p>
+      <div class="p-step reveal" style="transition-delay:.1s">
+        <div class="p-nr">02</div>
+        <h3>Strategie &amp; Aufbau</h3>
+        <p>Auf Basis des Gesprächs entwickeln wir den passenden Agenten – konfiguriert auf Ihre Prozesse, in 1–3 Tagen einsatzbereit.</p>
       </div>
-      <div class="prozess-step reveal" style="transition-delay:.2s">
-        <div class="prozess-nr-wrap"><div class="prozess-nr">03</div></div>
-        <h3>Umsetzung &amp; Reporting</h3>
-        <p>Wir setzen um – und Sie sehen schwarz auf weiß, was läuft. Monatliche Berichte, offene Kommunikation, keine Überraschungen.</p>
+      <div class="p-step reveal" style="transition-delay:.2s">
+        <div class="p-nr">03</div>
+        <h3>Übergabe &amp; Betrieb</h3>
+        <p>Wir übergeben mit kurzem Einführungsvideo. Der Agent läuft – Sie sehen die Ergebnisse. Monatliches Reporting optional.</p>
       </div>
     </div>
     <div class="prozess-cta reveal" style="transition-delay:.28s">
@@ -123,106 +238,157 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   </div>
 </section>
 
-<!-- ══════ 4. WARUM KLARWERK ══════ -->
-<section id="warum">
-  <div class="kw-container">
+<!-- ══ 5. KENNZAHLEN ══ -->
+<section id="kennzahlen">
+  <div class="container">
+    <div class="stats-grid reveal">
+      <div class="stat-box">
+        <span class="stat-val" data-count="68" data-prefix="Ø –" data-suffix="%">Ø –68%</span>
+        <span class="stat-lbl">No-Show-Rate<br>nach 30 Tagen (A1)</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-val">1–3 Tage</span>
+        <span class="stat-lbl">Implementierungszeit</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-val" data-count="80" data-suffix="%">80%</span>
+        <span class="stat-lbl">der Standardmails<br>automatisch beantwortet (A3)</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-val">&lt; 5 Min.</span>
+        <span class="stat-lbl">Reaktionszeit<br>auf neue Leads (A4)</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 6. FALLSTUDIEN ══ -->
+<section id="fallstudien">
+  <div class="container">
     <div class="section-header reveal">
-      <span class="kw-label">Warum Klarwerk</span>
-      <h2>Anders als klassische Agenturen</h2>
+      <span class="label">Ergebnisse</span>
+      <h2>Was Kunden mit dem Agenten erreicht haben</h2>
+      <p>Echte Zahlen aus echten Betrieben. Erste Ergebnisse nach 30 Tagen.</p>
+    </div>
+    <div class="fallstudien-grid">
+
+      <!-- FALLSTUDIE: Echte Daten hier einfügen -->
+      <div class="fs-card reveal">
+        <div class="fs-tags">
+          <span class="fs-tag">Beauty-Studio</span>
+          <span class="fs-tag agent-tag">A1 Termin-Agent</span>
+        </div>
+        <div class="fs-kpi"><span>–73%</span> No-Shows</div>
+        <div class="fs-quote">"Platzhalter — echtes Kundenzitat folgt nach Projektabschluss."</div>
+        <a href="/referenzen" class="fs-link">
+          Case Study lesen
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 6.5h9M8 3l3.5 3.5L8 10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <!-- FALLSTUDIE: Echte Daten hier einfügen -->
+      <div class="fs-card reveal" style="transition-delay:.1s">
+        <div class="fs-tags">
+          <span class="fs-tag">Handwerksbetrieb</span>
+          <span class="fs-tag agent-tag">A2 Bewertungs-Agent</span>
+        </div>
+        <div class="fs-kpi"><span>+42</span> Google-Bewertungen</div>
+        <div class="fs-quote">"Platzhalter — echtes Kundenzitat folgt nach Projektabschluss."</div>
+        <a href="/referenzen" class="fs-link">
+          Case Study lesen
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 6.5h9M8 3l3.5 3.5L8 10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <!-- FALLSTUDIE: Echte Daten hier einfügen -->
+      <div class="fs-card reveal" style="transition-delay:.2s">
+        <div class="fs-tags">
+          <span class="fs-tag">Immobilienmakler</span>
+          <span class="fs-tag agent-tag">A4 Lead-Agent</span>
+        </div>
+        <div class="fs-kpi"><span>1h/Tag</span> zurückgewonnen</div>
+        <div class="fs-quote">"Platzhalter — echtes Kundenzitat folgt nach Projektabschluss."</div>
+        <a href="/referenzen" class="fs-link">
+          Case Study lesen
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 6.5h9M8 3l3.5 3.5L8 10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ 7. WARUM KLARWERK ══ -->
+<section id="warum">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="label">Warum Klarwerk</span>
+      <h2>Kein Agentur-Bullshit.<br>Nur was funktioniert.</h2>
     </div>
     <div class="warum-grid">
-      <div class="warum-item reveal"><div class="warum-bar"></div><h3>Transparent</h3><p>Kein Marketing-Kauderwelsch, keine versteckten Kosten. Sie wissen jederzeit, wofür Sie bezahlen und was es bringt.</p></div>
-      <div class="warum-item reveal" style="transition-delay:.07s"><div class="warum-bar"></div><h3>Datenbasiert</h3><p>Entscheidungen werden mit Zahlen begründet, nicht mit Bauchgefühl. Jede Maßnahme ist messbar und nachvollziehbar.</p></div>
-      <div class="warum-item reveal" style="transition-delay:.14s"><div class="warum-bar"></div><h3>Ohne Knebelvertrag</h3><p>Monatliche Zusammenarbeit, keine langen Bindungen. Wir verdienen Ihr Vertrauen durch Ergebnisse – nicht durch Vertragsklauseln.</p></div>
-      <div class="warum-item reveal" style="transition-delay:.21s"><div class="warum-bar"></div><h3>Automatisierung inklusive</h3><p>Während andere beim Marketing aufhören, gehen wir weiter. KI-Automatisierung ist kein Aufpreis, sondern Teil unseres Ansatzes.</p></div>
-    </div>
-    <div class="stats-band reveal" style="transition-delay:.1s">
-      <div class="stat-item"><span class="stat-value" data-count="—">—</span><span class="stat-label">betreute Kunden</span></div>
-      <div class="stat-item"><span class="stat-value" data-count="—">—</span><span class="stat-label">Ø ROAS Paid Ads</span></div>
-      <div class="stat-item"><span class="stat-value" data-count="—">—</span><span class="stat-label">Websites live</span></div>
-      <div class="stat-item"><span class="stat-value" data-count="—">—</span><span class="stat-label">Jahre Erfahrung</span></div>
+      <div class="w-item reveal">
+        <div class="w-bar"></div>
+        <h3>Festpreis — kein Stundensatz</h3>
+        <p>Sie wissen vorher, was es kostet. Kein Nachverhandeln, kein überraschendes Angebot. Setup-Preis ist Endpreis.</p>
+      </div>
+      <div class="w-item reveal" style="transition-delay:.07s">
+        <div class="w-bar"></div>
+        <h3>1–3 Tage, nicht Monate</h3>
+        <p>Andere Agenturen brauchen Wochen für Konzepte. Wir liefern einen laufenden Agenten — in Tagen.</p>
+      </div>
+      <div class="w-item reveal" style="transition-delay:.14s">
+        <div class="w-bar"></div>
+        <h3>DSGVO-konform (EU-Hosting, AVV)</h3>
+        <p>Alle Agenten werden mit EU-Hosting aufgesetzt. Auftragsverarbeitungsvertrag inklusive. Besonders für Praxen und Kanzleien wichtig.</p>
+      </div>
+      <div class="w-item reveal" style="transition-delay:.21s">
+        <div class="w-bar"></div>
+        <h3>Wartung optional, nicht Pflicht</h3>
+        <p>Das Wartungsabo (API-Kosten, Monitoring, Anpassungen) ist freiwillig. Kein Knebelvertrag — monatlich kündbar.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ══════ 5. GRÜNDER ══════ -->
+<!-- ══ 8. GRÜNDER ══ -->
 <section id="gruender">
-  <div class="kw-container">
-    <div class="gruender-inner">
-      <div class="gruender-photo-wrap reveal-l">
-        <div class="gruender-photo">Gründer-Foto</div>
+  <div class="container">
+    <div class="g-inner">
+      <div class="reveal-l">
+        <div class="g-photo">Gründer-Foto</div>
       </div>
-      <div class="gruender-text reveal-r" style="transition-delay:.1s">
-        <span class="kw-label">Hinter Klarwerk</span>
+      <div class="g-text reveal-r" style="transition-delay:.1s">
+        <span class="label">Hinter Klarwerk</span>
         <h2>Kein anonymes Agenturkonstrukt.</h2>
-        <p>Hinter Klarwerk steht kein anonymes Agenturkonstrukt, sondern ein Unternehmer, der seit über acht Jahren selbst Geschäfte aufbaut – vom ersten eigenen Projekt als Jugendlicher über den Aufbau und Verkauf eines Unternehmens bis hin zur digitalen Vermarktung.</p>
-        <p>Diese Erfahrung prägt unsere Arbeit: Wir denken nicht in Klicks, sondern in Anfragen, Kunden und Umsatz. Sie arbeiten direkt mit uns zusammen, bekommen ehrliche Einschätzungen statt Buzzwords – und Ergebnisse, die Sie schwarz auf weiß nachvollziehen können.</p>
-        <a href="/ueber-uns" class="link-accent">Mehr über uns <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <p>Hinter Klarwerk steht kein anonymes Agenturkonstrukt, sondern ein Unternehmer,
+        der seit über acht Jahren selbst Geschäfte aufbaut – vom ersten eigenen Projekt
+        als Jugendlicher über den Aufbau und Verkauf eines Unternehmens bis hin zur
+        digitalen Vermarktung.</p>
+        <p>Diese Erfahrung prägt unsere Arbeit: Wir denken nicht in Klicks, sondern in
+        Anfragen, Kunden und Umsatz. Sie arbeiten direkt mit uns zusammen, bekommen
+        ehrliche Einschätzungen statt Buzzwords – und Ergebnisse, die Sie schwarz auf
+        weiß nachvollziehen können.</p>
+        <a href="/ueber-uns" class="link-accent">
+          Mehr über uns
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 6.5h9M8 3l3.5 3.5L8 10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══════ 6. LEAD-MAGNET ══════ -->
-<section id="sichtbarkeit">
-  <div class="kw-container">
-    <div class="sichtbarkeit-inner">
-      <div class="reveal">
-        <span class="kw-label">Kostenlos &amp; unverbindlich</span>
-        <h2 class="sichtbarkeit-h2">Wie sichtbar sind Sie gerade wirklich?</h2>
-        <p class="sichtbarkeit-p">Wir schauen uns Ihren Online-Auftritt an und liefern 3–5 konkrete Verbesserungspunkte – kostenlos, unverbindlich, in der Regel innerhalb von 48 Stunden.</p>
-      </div>
-      <div class="sichtbarkeit-form-wrap reveal" style="transition-delay:.1s">
-        <h3>Kostenlosen Sichtbarkeits-Check anfordern</h3>
-        <div class="input-group"><input type="url" placeholder="Ihre Website (z. B. meinbetrieb.de)" disabled></div>
-        <div class="input-group"><input type="text" placeholder="Ihr Name" disabled></div>
-        <div class="input-group"><input type="email" placeholder="Ihre E-Mail" disabled></div>
-        <a href="/kontakt" class="btn-primary" style="display:block;text-align:center">Kostenlosen Sichtbarkeits-Check anfordern</a>
-        <p class="form-note">Kein Spam. Keine Weitergabe. Wir melden uns innerhalb von 48 Stunden.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════ 7. FAQ ══════ -->
-<section id="faq">
-  <div class="kw-container">
-    <div class="faq-layout">
-      <div class="reveal">
-        <span class="kw-label">Häufige Fragen</span>
-        <h2 class="faq-h2">Was Sie wissen möchten</h2>
-        <p class="faq-intro">Noch offen gebliebene Fragen? Schreiben Sie uns direkt – wir antworten innerhalb von 24 Stunden.</p>
-        <a href="#abschluss" class="link-accent" style="margin-top:1.5rem;display:inline-flex">Frage stellen <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-      </div>
-      <div class="faq-list reveal" style="transition-delay:.1s">
-        {[
-          { q: 'Was kostet eine Zusammenarbeit mit Klarwerk?', a: 'Das hängt von Ihrem Ziel ab. Websites starten ab 1.000 €, Social-Media-Betreuung und Performance Marketing besprechen wir individuell im Erstgespräch. Keine versteckten Kosten.' },
-          { q: 'Wie lange dauert es, bis ich erste Ergebnisse sehe?', a: 'Websites sind in der Regel in 1–2 Wochen fertig. Bei Performance-Kampagnen sehen die meisten Kunden nach 2–4 Wochen erste messbare Ergebnisse.' },
-          { q: 'Bin ich langfristig gebunden?', a: 'Nein. Wir arbeiten monatlich kündbar. Wir sind überzeugt, dass Sie bleiben wollen, weil die Ergebnisse stimmen – nicht weil ein Vertrag es erzwingt.' },
-          { q: 'Für wen ist Klarwerk geeignet?', a: 'Für lokale Unternehmen (Handwerk, Gastronomie, Praxen, Studios) und mittelständische Betriebe bis 250 Mitarbeiter, die online sichtbarer werden und mehr Anfragen generieren wollen.' },
-          { q: 'Arbeitet ihr auch mit Unternehmen ohne bisheriges Marketing?', a: 'Gerade dann. Wir fangen dort an, wo Sie stehen – ohne Vorwürfe, ohne Fachjargon. Das Erstgespräch klärt, was sofort Wirkung zeigt.' },
-          { q: 'Was ist der Sichtbarkeits-Check?', a: 'Sie geben uns Ihre Website oder Ihr Social-Media-Profil – wir schauen drauf und liefern 3–5 konkrete Verbesserungspunkte. Kostenlos, unverbindlich, in der Regel innerhalb von 48 Stunden.' },
-        ].map(item => (
-          <div class="faq-item">
-            <button class="faq-btn" aria-expanded="false">
-              {item.q}
-              <span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1v8M1 5h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-            </button>
-            <div class="faq-answer">{item.a}</div>
-          </div>
-        ))}
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════ 8. ABSCHLUSS CTA ══════ -->
+<!-- ══ 9. ABSCHLUSS CTA ══ -->
 <section id="abschluss">
-  <div class="kw-container">
+  <div class="container">
     <div class="abschluss-inner">
-      <h2 class="reveal">Bereit für mehr Anfragen?</h2>
-      <p class="reveal" style="transition-delay:.08s">Das Erstgespräch ist kostenlos, dauert 30 Minuten und endet immer mit einer ehrlichen Einschätzung – egal ob wir zusammenarbeiten oder nicht.</p>
-      <a href="/kontakt" class="btn-primary reveal" style="font-size:1rem;padding:1rem 2.25rem;transition-delay:.16s">Kostenloses Erstgespräch vereinbaren</a>
+      <h2 class="reveal">Bereit, einen Agenten zu testen?</h2>
+      <p class="reveal" style="transition-delay:.08s">
+        Das Erstgespräch ist kostenlos, dauert 30 Minuten und endet immer mit einer
+        ehrlichen Einschätzung – egal ob wir zusammenarbeiten oder nicht.
+      </p>
+      <a href="/kontakt" class="btn-primary reveal" style="font-size:.95rem;padding:.9rem 2rem;transition-delay:.16s">
+        Kostenloses Erstgespräch vereinbaren
+      </a>
       <div class="abschluss-meta reveal" style="transition-delay:.22s">
         <span>info@klarwerk.de</span>
         <span>+49 (0) 000 000 000</span>
@@ -232,249 +398,307 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   </div>
 </section>
 
-<style>
-  /* Design tokens */
-  :root {
-    --kw-bg:    #0D0F14;
-    --kw-bg2:   #131620;
-    --kw-bg3:   #1A1E2A;
-    --kw-bd:    rgba(255,255,255,0.06);
-    --kw-bd2:   rgba(255,255,255,0.10);
-    --kw-tx:    #F2F4F7;
-    --kw-tm:    rgba(242,244,247,0.45);
-    --kw-td:    rgba(242,244,247,0.25);
-    --kw-ac:    #00E87A;
-    --kw-adim:  rgba(0,232,122,0.10);
-    --kw-aglow: rgba(0,232,122,0.20);
-    --kw-max:   1160px;
-    --kw-px:    clamp(1.25rem,5vw,3.5rem);
-    --kw-py:    clamp(5rem,10vw,8rem);
-  }
+<!-- ══ 10. FAQ ══ -->
+<section id="faq">
+  <div class="container">
+    <div class="faq-layout">
+      <div class="reveal">
+        <span class="label">Häufige Fragen</span>
+        <h2>Was Sie wissen möchten</h2>
+        <p>Noch offen gebliebene Fragen? Schreiben Sie uns direkt – wir antworten innerhalb von 24 Stunden.</p>
+        <a href="#abschluss" class="link-accent" style="margin-top:1.25rem;display:inline-flex">
+          Frage stellen
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 6.5h9M8 3l3.5 3.5L8 10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+      <div class="faq-col reveal" style="transition-delay:.1s">
 
-  /* Scope all homepage styles */
-  #hero, #leistungen, #prozess, #warum, #gruender,
-  #sichtbarkeit, #faq, #abschluss, .cursor-glow {
-    font-family: 'Inter', sans-serif;
-    -webkit-font-smoothing: antialiased;
-  }
+        <div class="faq-item">
+          <button class="faq-btn" aria-expanded="false">
+            Was kostet ein KI-Agent?
+            <span class="faq-icon"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M4.5 1v7M1 4.5h7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+          </button>
+          <div class="faq-answer">Setup-Preise starten ab 1.500 € (Festpreis). Dazu gibt es ein optionales Wartungsabo ab 99 €/Monat, das API-Kosten, Monitoring und kleinere Anpassungen abdeckt.</div>
+        </div>
 
-  .cursor-glow {
-    position: fixed;
-    pointer-events: none;
-    width: 500px; height: 500px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(0,232,122,0.06) 0%, transparent 70%);
-    transform: translate(-50%,-50%);
-    transition: left .12s ease, top .12s ease;
-    z-index: 999;
-    opacity: 0;
-  }
+        <div class="faq-item">
+          <button class="faq-btn" aria-expanded="false">
+            Wie lange bis der Agent läuft?
+            <span class="faq-icon"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M4.5 1v7M1 4.5h7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+          </button>
+          <div class="faq-answer">Die einfacheren Agenten (A1, A2) sind in 1 Tag live. A3 und A4 brauchen 2–3 Tage. Sie sehen in den ersten 30 Tagen messbare Ergebnisse.</div>
+        </div>
 
-  /* Reveal */
-  .reveal { opacity:0; transform:translateY(24px); transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1); }
-  .reveal.visible { opacity:1; transform:none; }
-  .reveal-l { opacity:0; transform:translateX(-28px); transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1); }
-  .reveal-l.visible { opacity:1; transform:none; }
-  .reveal-r { opacity:0; transform:translateX(28px); transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1); }
-  .reveal-r.visible { opacity:1; transform:none; }
-  @media (prefers-reduced-motion:reduce) {
-    .reveal,.reveal-l,.reveal-r { opacity:1; transform:none; transition:none; }
-    .cursor-glow { display:none; }
-    .logos-track { animation:none; }
-    #hero-canvas { display:none; }
-  }
+        <div class="faq-item">
+          <button class="faq-btn" aria-expanded="false">
+            Bin ich langfristig gebunden?
+            <span class="faq-icon"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M4.5 1v7M1 4.5h7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+          </button>
+          <div class="faq-answer">Nein. Wir arbeiten monatlich kündbar. Wir sind überzeugt, dass Sie bleiben wollen, weil die Ergebnisse stimmen – nicht weil ein Vertrag es erzwingt.</div>
+        </div>
 
-  .kw-container { max-width:var(--kw-max); margin:0 auto; padding:0 var(--kw-px); }
-  .kw-label { display:inline-block; font-size:.7rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--kw-ac); margin-bottom:.75rem; }
-  .section-header { margin-bottom:clamp(3rem,6vw,5rem); }
-  .section-header h2 { font-family:'Bricolage Grotesque',sans-serif; font-size:clamp(2rem,4vw,3rem); font-weight:800; color:var(--kw-tx); line-height:1.08; }
-  .section-header p { margin-top:1rem; max-width:52ch; color:var(--kw-tm); font-size:1.05rem; }
+        <div class="faq-item">
+          <button class="faq-btn" aria-expanded="false">
+            Für wen sind die Agenten geeignet?
+            <span class="faq-icon"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M4.5 1v7M1 4.5h7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+          </button>
+          <div class="faq-answer">Für lokale Unternehmen mit klaren Routineprozessen: Terminkommunikation, Kundenbewertungen, E-Mail-Bearbeitung oder Lead-Qualifizierung. Friseure, Restaurants, Handwerker, Praxen, Makler.</div>
+        </div>
 
-  .btn-primary { display:inline-block; padding:.85rem 1.75rem; background:var(--kw-ac); color:#040907; font-weight:700; font-size:.9rem; border-radius:8px; transition:transform .2s,box-shadow .2s; box-shadow:0 0 28px rgba(0,232,122,.3); font-family:'Inter',sans-serif; }
-  .btn-primary:hover { transform:translateY(-2px); box-shadow:0 0 44px rgba(0,232,122,.45); }
-  .btn-ghost { display:inline-flex; align-items:center; gap:.5rem; padding:.85rem 1.75rem; border:1px solid var(--kw-bd2); border-radius:8px; font-size:.9rem; font-weight:600; color:var(--kw-tx); transition:border-color .2s,background .2s; font-family:'Inter',sans-serif; }
-  .btn-ghost:hover { border-color:rgba(255,255,255,.25); background:rgba(255,255,255,.04); }
-  .btn-ghost svg { transition:transform .2s; }
-  .btn-ghost:hover svg { transform:translateX(3px); }
-  .link-accent { display:inline-flex; align-items:center; gap:.4rem; font-weight:600; font-size:.9rem; color:var(--kw-ac); border-bottom:1px solid rgba(0,232,122,.3); padding-bottom:.15rem; transition:border-color .2s; font-family:'Inter',sans-serif; }
-  .link-accent:hover { border-color:var(--kw-ac); }
-  .link-accent svg { transition:transform .2s; }
-  .link-accent:hover svg { transform:translateX(3px); }
+        <div class="faq-item">
+          <button class="faq-btn" aria-expanded="false">
+            Brauche ich technisches Wissen?
+            <span class="faq-icon"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M4.5 1v7M1 4.5h7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+          </button>
+          <div class="faq-answer">Nein. Wir bauen, konfigurieren und übergeben — inklusive einem kurzen Video zur Bedienung. Sie klicken auf "Starten".</div>
+        </div>
 
-  /* ── Hero ── */
-  #hero { position:relative; min-height:100svh; display:flex; flex-direction:column; justify-content:center; overflow:hidden; padding:7rem var(--kw-px) 4rem; background:var(--kw-bg); }
-  #hero-canvas { position:absolute; inset:0; width:100%; height:100%; opacity:.7; }
-  .hero-inner { position:relative; z-index:2; max-width:var(--kw-max); margin:0 auto; width:100%; }
-  .hero-eyebrow { display:inline-flex; align-items:center; gap:.5rem; font-size:.75rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--kw-ac); margin-bottom:1.75rem; }
-  .hero-eyebrow::before { content:''; display:block; width:24px; height:1px; background:var(--kw-ac); }
-  .hero-headline { font-family:'Bricolage Grotesque',sans-serif; font-size:clamp(2.75rem,7vw,6rem); font-weight:800; letter-spacing:-.03em; line-height:1.04; color:var(--kw-tx); max-width:14ch; margin-bottom:1.75rem; }
-  .hero-headline .accent { color:var(--kw-ac); }
-  .hero-sub { font-size:clamp(1rem,1.4vw,1.15rem); color:var(--kw-tm); max-width:52ch; line-height:1.7; margin-bottom:2.75rem; }
-  .hero-ctas { display:flex; align-items:center; flex-wrap:wrap; gap:1rem; }
-  .logos-section { margin-top:clamp(3rem,6vw,5rem); padding-top:2rem; border-top:1px solid var(--kw-bd); }
-  .logos-label { font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:var(--kw-td); margin-bottom:1.25rem; }
-  .logos-overflow { overflow:hidden; }
-  .logos-track { display:flex; gap:3rem; width:max-content; animation:kw-marquee 24s linear infinite; }
-  .logo-item { display:flex; align-items:center; justify-content:center; height:36px; min-width:110px; border:1px dashed rgba(255,255,255,.08); border-radius:6px; font-size:.7rem; color:var(--kw-td); padding:0 1rem; flex-shrink:0; }
-  @keyframes kw-marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+        <div class="faq-item">
+          <button class="faq-btn" aria-expanded="false">
+            Was ist DSGVO-konform gemeint?
+            <span class="faq-icon"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M4.5 1v7M1 4.5h7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+          </button>
+          <div class="faq-answer">Alle Agenten werden mit EU-Hosting aufgesetzt. Auftragsverarbeitungsvertrag (AVV) ist inklusive. Besonders für Praxen und Kanzleien wichtig.</div>
+        </div>
 
-  /* ── Leistungen ── */
-  #leistungen { padding:var(--kw-py) var(--kw-px); background:var(--kw-bg); }
-  .leistungen-list { border-top:1px solid var(--kw-bd); }
-  .leistung-row { display:grid; grid-template-columns:72px 1fr 1fr auto; align-items:center; gap:clamp(1rem,3vw,2.5rem); padding:2rem 0; border-bottom:1px solid var(--kw-bd); position:relative; transition:background .25s; }
-  .leistung-row::before { content:''; position:absolute; left:0; top:0; bottom:0; width:2px; background:var(--kw-ac); transform:scaleY(0); transform-origin:bottom; transition:transform .35s cubic-bezier(.16,1,.3,1); }
-  .leistung-row:hover::before { transform:scaleY(1); }
-  .leistung-row:hover { background:rgba(255,255,255,.015); }
-  .leistung-row.featured { background:rgba(0,232,122,.025); }
-  .leistung-row.featured:hover { background:rgba(0,232,122,.04); }
-  .leistung-nr { font-family:'Bricolage Grotesque',sans-serif; font-size:1rem; font-weight:700; color:var(--kw-ac); letter-spacing:.05em; }
-  .leistung-title { font-family:'Bricolage Grotesque',sans-serif; font-size:clamp(1.2rem,2.2vw,1.7rem); font-weight:700; color:var(--kw-tx); }
-  .leistung-row.featured .leistung-title::after { content:'★'; font-size:.7em; color:var(--kw-ac); margin-left:.5rem; vertical-align:super; }
-  .leistung-desc { font-size:.9rem; color:var(--kw-tm); line-height:1.6; max-width:38ch; }
-  .leistung-link { display:inline-flex; align-items:center; gap:.4rem; font-size:.8rem; font-weight:600; color:var(--kw-tm); white-space:nowrap; transition:color .2s; font-family:'Inter',sans-serif; }
-  .leistung-link svg { transition:transform .2s; }
-  .leistung-row:hover .leistung-link { color:var(--kw-ac); }
-  .leistung-row:hover .leistung-link svg { transform:translateX(4px); }
-  @media(max-width:860px){.leistung-row{grid-template-columns:48px 1fr;grid-template-rows:auto auto auto}.leistung-nr{grid-row:1;grid-column:1}.leistung-title{grid-row:1;grid-column:2;font-size:1.2rem}.leistung-desc{grid-row:2;grid-column:2}.leistung-link{grid-row:3;grid-column:2}}
+      </div>
+    </div>
+  </div>
+</section>
 
-  /* ── Prozess ── */
-  #prozess { padding:var(--kw-py) var(--kw-px); background:var(--kw-bg2); }
-  .prozess-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; position:relative; }
-  .prozess-grid::before { content:''; position:absolute; top:1.6rem; left:calc(100%/6); right:calc(100%/6); height:1px; background:linear-gradient(to right,var(--kw-ac),rgba(0,232,122,.15)); }
-  .prozess-nr-wrap { display:flex; align-items:center; gap:1rem; margin-bottom:1.5rem; }
-  .prozess-nr { width:3.25rem; height:3.25rem; border-radius:50%; background:var(--kw-bg); border:1px solid var(--kw-ac); display:flex; align-items:center; justify-content:center; font-family:'Bricolage Grotesque',sans-serif; font-size:.8rem; font-weight:700; color:var(--kw-ac); position:relative; z-index:2; box-shadow:0 0 20px rgba(0,232,122,.2); }
-  .prozess-step h3 { font-family:'Bricolage Grotesque',sans-serif; font-size:1.2rem; font-weight:700; color:var(--kw-tx); margin-bottom:.75rem; }
-  .prozess-step p { font-size:.9rem; color:var(--kw-tm); line-height:1.7; }
-  .prozess-cta { margin-top:3.5rem; text-align:center; }
-  @media(max-width:680px){.prozess-grid{grid-template-columns:1fr}.prozess-grid::before{display:none}.prozess-step{padding-left:1rem;border-left:1px solid var(--kw-bd)}}
+</BaseLayout>
 
-  /* ── Warum ── */
-  #warum { padding:var(--kw-py) var(--kw-px); background:var(--kw-bg); }
-  .warum-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--kw-bd); border:1px solid var(--kw-bd); border-radius:12px; overflow:hidden; }
-  .warum-item { background:var(--kw-bg); padding:2.25rem; transition:background .25s; }
-  .warum-item:hover { background:var(--kw-bg3); }
-  .warum-bar { width:2rem; height:2px; background:var(--kw-ac); margin-bottom:1.25rem; transition:width .3s ease; }
-  .warum-item:hover .warum-bar { width:3.5rem; }
-  .warum-item h3 { font-family:'Bricolage Grotesque',sans-serif; font-size:1.1rem; font-weight:700; color:var(--kw-tx); margin-bottom:.6rem; }
-  .warum-item p { font-size:.875rem; color:var(--kw-tm); line-height:1.65; }
-  @media(max-width:600px){.warum-grid{grid-template-columns:1fr}}
-  .stats-band { margin-top:4rem; display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--kw-bd); border:1px solid var(--kw-bd); border-radius:12px; overflow:hidden; }
-  .stat-item { background:var(--kw-bg2); padding:2rem 1.5rem; text-align:center; }
-  .stat-value { font-family:'Bricolage Grotesque',sans-serif; font-size:clamp(2rem,4vw,3rem); font-weight:800; color:var(--kw-ac); display:block; line-height:1; margin-bottom:.5rem; }
-  .stat-label { font-size:.8rem; color:var(--kw-tm); }
-  @media(max-width:640px){.stats-band{grid-template-columns:repeat(2,1fr)}}
-
-  /* ── Gründer ── */
-  #gruender { padding:var(--kw-py) var(--kw-px); background:var(--kw-bg2); }
-  .gruender-inner { display:grid; grid-template-columns:1fr 2fr; gap:clamp(2rem,5vw,5rem); align-items:start; }
-  .gruender-photo-wrap { position:relative; }
-  .gruender-photo { width:100%; aspect-ratio:3/4; background:var(--kw-bg3); border-radius:12px; border:1px dashed var(--kw-bd2); display:flex; align-items:center; justify-content:center; font-size:.8rem; color:var(--kw-td); position:relative; }
-  .gruender-photo::after { content:''; position:absolute; inset:-1px; border-radius:13px; background:linear-gradient(135deg,rgba(0,232,122,.15),transparent 60%); pointer-events:none; }
-  .gruender-text .kw-label { margin-bottom:.75rem; }
-  .gruender-text h2 { font-family:'Bricolage Grotesque',sans-serif; font-size:clamp(1.75rem,3vw,2.5rem); font-weight:800; color:var(--kw-tx); margin-bottom:1.5rem; line-height:1.1; }
-  .gruender-text p { color:var(--kw-tm); line-height:1.75; margin-bottom:1.5rem; font-size:1.025rem; }
-  @media(max-width:720px){.gruender-inner{grid-template-columns:1fr}.gruender-photo{aspect-ratio:4/3}}
-
-  /* ── Sichtbarkeit ── */
-  #sichtbarkeit { padding:var(--kw-py) var(--kw-px); background:var(--kw-bg); }
-  .sichtbarkeit-inner { display:grid; grid-template-columns:1fr 1fr; gap:clamp(2rem,4vw,4rem); align-items:start; }
-  .sichtbarkeit-h2 { font-family:'Bricolage Grotesque',sans-serif; font-size:clamp(1.75rem,3vw,2.5rem); font-weight:800; color:var(--kw-tx); margin:1rem 0 1.25rem; letter-spacing:-.02em; line-height:1.1; }
-  .sichtbarkeit-p { color:var(--kw-tm); line-height:1.7; font-size:.975rem; }
-  .sichtbarkeit-form-wrap { background:var(--kw-bg2); border:1px solid var(--kw-bd); border-radius:12px; padding:2rem; }
-  .sichtbarkeit-form-wrap h3 { font-family:'Bricolage Grotesque',sans-serif; font-size:1.1rem; font-weight:700; color:var(--kw-tx); margin-bottom:1.5rem; }
-  .input-group { margin-bottom:1rem; }
-  .input-group input { width:100%; background:var(--kw-bg); border:1px solid var(--kw-bd); border-radius:8px; padding:.85rem 1rem; color:var(--kw-tx); font-family:'Inter',sans-serif; font-size:.9rem; outline:none; transition:border-color .2s; }
-  .input-group input:focus { border-color:var(--kw-ac); }
-  .input-group input::placeholder { color:var(--kw-td); }
-  .form-note { font-size:.75rem; color:var(--kw-td); margin-top:.75rem; line-height:1.5; }
-  @media(max-width:720px){.sichtbarkeit-inner{grid-template-columns:1fr}}
-
-  /* ── FAQ ── */
-  #faq { padding:var(--kw-py) var(--kw-px); background:var(--kw-bg2); }
-  .faq-layout { display:grid; grid-template-columns:1fr 1fr; gap:clamp(2rem,5vw,5rem); align-items:start; }
-  .faq-h2 { font-family:'Bricolage Grotesque',sans-serif; font-size:clamp(1.75rem,3vw,2.5rem); font-weight:800; color:var(--kw-tx); margin:1rem 0; letter-spacing:-.02em; line-height:1.1; }
-  .faq-intro { color:var(--kw-tm); line-height:1.7; font-size:.925rem; }
-  .faq-list { max-width:680px; }
-  .faq-item { border-bottom:1px solid var(--kw-bd); }
-  .faq-btn { width:100%; background:none; border:none; display:flex; justify-content:space-between; align-items:center; gap:1rem; padding:1.4rem 0; cursor:pointer; color:var(--kw-tx); font-family:'Bricolage Grotesque',sans-serif; font-size:1rem; font-weight:600; text-align:left; }
-  .faq-icon { flex-shrink:0; width:22px; height:22px; border:1px solid var(--kw-bd2); border-radius:50%; display:flex; align-items:center; justify-content:center; transition:background .2s,border-color .2s; }
-  .faq-btn[aria-expanded="true"] .faq-icon { background:var(--kw-adim); border-color:var(--kw-ac); }
-  .faq-icon svg { transition:transform .3s; }
-  .faq-btn[aria-expanded="true"] .faq-icon svg { transform:rotate(45deg); }
-  .faq-answer { display:none; padding-bottom:1.5rem; font-size:.9rem; color:var(--kw-tm); line-height:1.7; max-width:56ch; }
-  .faq-answer.open { display:block; }
-  @media(max-width:720px){.faq-layout{grid-template-columns:1fr}}
-
-  /* ── Abschluss ── */
-  #abschluss { padding:var(--kw-py) var(--kw-px); background:var(--kw-bg); position:relative; overflow:hidden; }
-  #abschluss::before { content:''; position:absolute; bottom:-100px; left:50%; transform:translateX(-50%); width:600px; height:300px; background:radial-gradient(ellipse,rgba(0,232,122,.1) 0%,transparent 70%); pointer-events:none; }
-  .abschluss-inner { position:relative; z-index:2; text-align:center; max-width:600px; margin:0 auto; }
-  .abschluss-inner h2 { font-family:'Bricolage Grotesque',sans-serif; font-size:clamp(2rem,4.5vw,3.25rem); font-weight:800; color:var(--kw-tx); margin-bottom:1.25rem; letter-spacing:-.02em; line-height:1.1; }
-  .abschluss-inner p { color:var(--kw-tm); font-size:1.05rem; margin-bottom:2.5rem; line-height:1.7; }
-  .abschluss-meta { margin-top:2rem; display:flex; justify-content:center; flex-wrap:wrap; gap:.35rem 1.5rem; font-size:.8rem; color:var(--kw-td); }
+<style is:global>
+:root {
+  --bg:      #0D0F14;
+  --bg-2:    #131620;
+  --bg-3:    #191D2A;
+  --bd:      rgba(255,255,255,0.06);
+  --bd-2:    rgba(255,255,255,0.11);
+  --tx:      #F2F4F7;
+  --tm:      #8A8F9E;
+  --td:      rgba(242,244,247,0.22);
+  --ac:      #00E87A;
+  --ac-dim:  rgba(0,232,122,0.10);
+  --ac-glow: rgba(0,232,122,0.20);
+  --red:     #FF5050;
+  --max:     1160px;
+  --px:      clamp(1.25rem,5vw,3.5rem);
+  --py:      clamp(5rem,9vw,7.5rem);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.container{max-width:var(--max);margin:0 auto;padding:0 var(--px)}
+.label{display:inline-block;font-size:.7rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ac);margin-bottom:.75rem}
+.section-header{margin-bottom:clamp(3rem,6vw,5rem)}
+.section-header h2{font-size:clamp(1.9rem,3.8vw,2.9rem);font-weight:700;line-height:1.1;color:var(--tx);letter-spacing:-.02em}
+.section-header p{margin-top:1rem;max-width:56ch;color:var(--tm);font-size:1.025rem}
+.btn-primary{display:inline-flex;align-items:center;padding:.75rem 1.6rem;background:var(--ac);color:#050e08;font-weight:700;font-size:.875rem;border-radius:100px;transition:transform .2s,box-shadow .2s;box-shadow:0 0 24px var(--ac-glow)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 40px rgba(0,232,122,.4)}
+.btn-ghost{display:inline-flex;align-items:center;gap:.45rem;padding:.75rem 1.6rem;border:1px solid var(--bd-2);border-radius:100px;font-size:.875rem;font-weight:600;color:var(--tx);transition:border-color .2s,background .2s}
+.btn-ghost:hover{border-color:rgba(255,255,255,.25);background:rgba(255,255,255,.04)}
+.link-accent{display:inline-flex;align-items:center;gap:.4rem;font-size:.875rem;font-weight:600;color:var(--ac);border-bottom:1px solid rgba(0,232,122,.3);padding-bottom:.1rem;transition:border-color .2s}
+.link-accent:hover{border-color:var(--ac)}
+.link-accent svg,.link-accent:hover svg{transition:transform .2s}
+.link-accent:hover svg{transform:translateX(3px)}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .65s cubic-bezier(.16,1,.3,1),transform .65s cubic-bezier(.16,1,.3,1)}
+.reveal.vis{opacity:1;transform:none}
+.reveal-l{opacity:0;transform:translateX(-26px);transition:opacity .65s cubic-bezier(.16,1,.3,1),transform .65s cubic-bezier(.16,1,.3,1)}
+.reveal-l.vis{opacity:1;transform:none}
+.reveal-r{opacity:0;transform:translateX(26px);transition:opacity .65s cubic-bezier(.16,1,.3,1),transform .65s cubic-bezier(.16,1,.3,1)}
+.reveal-r.vis{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.reveal,.reveal-l,.reveal-r{opacity:1;transform:none;transition:none}.logos-track{animation:none}#hero-canvas{display:none}.cursor-glow{display:none}}
+.cursor-glow{position:fixed;pointer-events:none;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle,rgba(0,232,122,.055) 0%,transparent 70%);transform:translate(-50%,-50%);transition:left .1s ease,top .1s ease;z-index:0;opacity:0}
+#hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:center;overflow:hidden;padding:6.5rem var(--px) 3.5rem;background:var(--bg)}
+#hero-canvas{position:absolute;inset:0;width:100%;height:100%;opacity:.65}
+.hero-inner{position:relative;z-index:2;max-width:var(--max);margin:0 auto;width:100%}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:.6rem;font-size:.72rem;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:var(--ac);margin-bottom:1.75rem}
+.hero-eyebrow::before{content:'';display:block;width:22px;height:1px;background:var(--ac)}
+h1.hero-h1{font-size:clamp(2.6rem,6.5vw,5.25rem);font-weight:700;line-height:1.06;letter-spacing:-.03em;color:var(--tx);max-width:18ch;margin-bottom:1.6rem}
+h1.hero-h1 .hl{color:var(--ac)}
+.hero-sub{font-size:clamp(1rem,1.5vw,1.125rem);color:var(--tm);max-width:54ch;line-height:1.7;margin-bottom:2.5rem}
+.hero-ctas{display:flex;flex-wrap:wrap;align-items:center;gap:.9rem}
+.logos-strip{position:relative;z-index:2;margin-top:clamp(3rem,6vw,5rem);padding-top:2rem;border-top:1px solid var(--bd);max-width:var(--max);margin-left:auto;margin-right:auto;width:100%}
+.logos-label{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--td);margin-bottom:1.2rem}
+.logos-overflow{overflow:hidden}
+.logos-track{display:flex;gap:2.5rem;width:max-content;animation:marquee 26s linear infinite}
+.logo-pill{display:flex;align-items:center;justify-content:center;height:34px;min-width:120px;border:1px dashed rgba(255,255,255,.08);border-radius:6px;font-size:.7rem;color:var(--td);padding:0 1rem;flex-shrink:0}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+#problem{padding:var(--py) var(--px);background:var(--bg-2)}
+.problem-inner{display:grid;grid-template-columns:1fr 1.3fr;gap:clamp(3rem,6vw,6rem);align-items:center}
+.problem-left h2{font-size:clamp(1.7rem,3vw,2.5rem);font-weight:700;line-height:1.15;letter-spacing:-.02em;color:var(--tx);margin-bottom:1.25rem}
+.problem-left p{color:var(--tm);font-size:.975rem;line-height:1.7;margin-bottom:2rem}
+.problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--bd);border:1px solid var(--bd);border-radius:12px;overflow:hidden}
+.problem-card{background:var(--bg);padding:1.75rem}
+.problem-nr{font-size:clamp(1.75rem,3vw,2.4rem);font-weight:700;color:var(--red);line-height:1;margin-bottom:.6rem;letter-spacing:-.02em}
+.problem-card h4{font-size:.875rem;font-weight:600;color:var(--tx);margin-bottom:.4rem}
+.problem-card p{font-size:.8rem;color:var(--tm);line-height:1.55}
+@media(max-width:860px){.problem-inner{grid-template-columns:1fr}}
+#agenten{padding:var(--py) var(--px);background:var(--bg)}
+.agent-list{border-top:1px solid var(--bd)}
+.agent-row{display:grid;grid-template-columns:64px 1fr auto;align-items:start;gap:clamp(.75rem,2.5vw,2rem);padding:2.25rem 0;border-bottom:1px solid var(--bd);position:relative;transition:background .25s;cursor:default}
+.agent-row::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--ac);transform:scaleY(0);transform-origin:bottom;transition:transform .35s cubic-bezier(.16,1,.3,1)}
+.agent-row:hover::before{transform:scaleY(1)}
+.agent-row:hover{background:rgba(255,255,255,.016)}
+.agent-row.featured{background:rgba(0,232,122,.022)}
+.agent-row.featured:hover{background:rgba(0,232,122,.04)}
+.agent-nr{font-size:.875rem;font-weight:700;color:var(--ac);letter-spacing:.06em;padding-top:.2rem}
+.agent-head{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem;margin-bottom:.85rem}
+.agent-name{font-size:clamp(1.1rem,2vw,1.5rem);font-weight:700;color:var(--tx);letter-spacing:-.02em}
+.badge{display:inline-block;padding:.25rem .65rem;border-radius:100px;font-size:.72rem;font-weight:600}
+.badge-price{background:rgba(0,232,122,.12);color:var(--ac);border:1px solid rgba(0,232,122,.2)}
+.badge-time{background:rgba(255,255,255,.06);color:var(--tm);border:1px solid var(--bd-2)}
+.agent-chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.9rem}
+.chip{display:inline-block;padding:.2rem .6rem;border-radius:4px;background:rgba(255,255,255,.05);border:1px solid var(--bd);font-size:.72rem;color:var(--tm)}
+.agent-desc{font-size:.9rem;color:var(--tm);line-height:1.65;max-width:56ch}
+.agent-link{display:inline-flex;align-items:center;gap:.4rem;font-size:.8rem;font-weight:600;color:var(--tm);white-space:nowrap;padding-top:.25rem;transition:color .2s}
+.agent-link svg{transition:transform .2s}
+.agent-row:hover .agent-link{color:var(--ac)}
+.agent-row:hover .agent-link svg{transform:translateX(4px)}
+@media(max-width:680px){.agent-row{grid-template-columns:48px 1fr}.agent-link{grid-column:2}}
+#prozess{padding:var(--py) var(--px);background:var(--bg-2)}
+.prozess-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;position:relative}
+.prozess-grid::before{content:'';position:absolute;top:1.55rem;left:calc(100%/6);right:calc(100%/6);height:1px;background:linear-gradient(to right,var(--ac),rgba(0,232,122,.12));pointer-events:none}
+.p-step h3{font-size:1.1rem;font-weight:700;color:var(--tx);margin-bottom:.65rem}
+.p-step p{font-size:.875rem;color:var(--tm);line-height:1.65}
+.p-nr{width:3.1rem;height:3.1rem;border-radius:50%;background:var(--bg);border:1px solid var(--ac);display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:700;color:var(--ac);margin-bottom:1.35rem;position:relative;z-index:2;box-shadow:0 0 18px rgba(0,232,122,.18)}
+.prozess-cta{margin-top:3rem;text-align:center}
+@media(max-width:640px){.prozess-grid{grid-template-columns:1fr}.prozess-grid::before{display:none}.p-step{padding-left:.75rem;border-left:1px solid var(--bd)}}
+#kennzahlen{padding:4rem var(--px);background:var(--bg)}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--bd);border:1px solid var(--bd);border-radius:12px;overflow:hidden}
+.stat-box{background:var(--bg-2);padding:2.25rem 1.75rem;text-align:center}
+.stat-val{font-size:clamp(1.9rem,3.5vw,2.75rem);font-weight:700;color:var(--ac);display:block;line-height:1;margin-bottom:.5rem;letter-spacing:-.02em}
+.stat-lbl{font-size:.8rem;color:var(--tm);line-height:1.4}
+@media(max-width:640px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
+#fallstudien{padding:var(--py) var(--px);background:var(--bg-2)}
+.fallstudien-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+.fs-card{background:rgba(255,255,255,.03);border:1px solid var(--bd);border-radius:14px;padding:1.75rem;display:flex;flex-direction:column;transition:border-color .3s,background .3s}
+.fs-card:hover{border-color:rgba(0,232,122,.2);background:rgba(0,232,122,.03)}
+.fs-tags{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.25rem}
+.fs-tag{font-size:.68rem;font-weight:600;color:var(--tm);background:rgba(255,255,255,.06);border:1px solid var(--bd-2);border-radius:4px;padding:.2rem .55rem;letter-spacing:.04em;text-transform:uppercase}
+.fs-tag.agent-tag{color:var(--ac);background:var(--ac-dim);border-color:rgba(0,232,122,.2)}
+.fs-kpi{font-size:clamp(2rem,4vw,2.75rem);font-weight:700;color:var(--tx);line-height:1;margin-bottom:.75rem;letter-spacing:-.03em}
+.fs-kpi span{color:var(--ac)}
+.fs-quote{flex:1;font-size:.875rem;color:var(--tm);line-height:1.6;font-style:italic;margin-bottom:1.5rem;padding-left:.75rem;border-left:2px solid var(--bd-2)}
+.fs-link{display:inline-flex;align-items:center;gap:.4rem;font-size:.8rem;font-weight:600;color:var(--tm);transition:color .2s}
+.fs-link svg{transition:transform .2s}
+.fs-card:hover .fs-link{color:var(--ac)}
+.fs-card:hover .fs-link svg{transform:translateX(3px)}
+@media(max-width:860px){.fallstudien-grid{grid-template-columns:1fr}}
+#warum{padding:var(--py) var(--px);background:var(--bg)}
+.warum-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--bd);border:1px solid var(--bd);border-radius:14px;overflow:hidden}
+.w-item{background:var(--bg);padding:2.25rem;transition:background .25s}
+.w-item:hover{background:var(--bg-3)}
+.w-bar{width:2rem;height:2px;background:var(--ac);margin-bottom:1.25rem;transition:width .3s}
+.w-item:hover .w-bar{width:3.5rem}
+.w-item h3{font-size:1rem;font-weight:700;color:var(--tx);margin-bottom:.5rem}
+.w-item p{font-size:.875rem;color:var(--tm);line-height:1.65}
+@media(max-width:560px){.warum-grid{grid-template-columns:1fr}}
+#gruender{padding:var(--py) var(--px);background:var(--bg-2)}
+.g-inner{display:grid;grid-template-columns:260px 1fr;gap:clamp(2.5rem,5vw,5rem);align-items:start}
+.g-photo{aspect-ratio:3/4;background:var(--bg-3);border-radius:12px;border:1px dashed var(--bd-2);display:flex;align-items:center;justify-content:center;font-size:.78rem;color:var(--td);position:relative}
+.g-photo::after{content:'';position:absolute;inset:-1px;border-radius:13px;background:linear-gradient(135deg,rgba(0,232,122,.12),transparent 55%);pointer-events:none}
+.g-text h2{font-size:clamp(1.5rem,2.8vw,2.25rem);font-weight:700;color:var(--tx);margin:.75rem 0 1.25rem;line-height:1.15;letter-spacing:-.02em}
+.g-text p{color:var(--tm);font-size:.975rem;line-height:1.75;margin-bottom:1.25rem}
+@media(max-width:680px){.g-inner{grid-template-columns:1fr}.g-photo{aspect-ratio:16/9}}
+#abschluss{padding:var(--py) var(--px);background:var(--bg);position:relative;overflow:hidden;text-align:center}
+#abschluss::before{content:'';position:absolute;bottom:-120px;left:50%;transform:translateX(-50%);width:700px;height:350px;background:radial-gradient(ellipse,rgba(0,232,122,.09) 0%,transparent 70%);pointer-events:none}
+.abschluss-inner{position:relative;z-index:2;max-width:580px;margin:0 auto}
+.abschluss-inner h2{font-size:clamp(1.9rem,4vw,3rem);font-weight:700;color:var(--tx);margin-bottom:1rem;letter-spacing:-.03em;line-height:1.1}
+.abschluss-inner p{color:var(--tm);font-size:1rem;line-height:1.7;margin-bottom:2.25rem}
+.abschluss-meta{margin-top:1.75rem;font-size:.8rem;color:var(--td);display:flex;justify-content:center;flex-wrap:wrap;gap:.3rem 1.25rem}
+#faq{padding:var(--py) var(--px);background:var(--bg-2)}
+.faq-layout{display:grid;grid-template-columns:1fr 1.4fr;gap:clamp(2.5rem,5vw,5rem);align-items:start}
+.faq-layout h2{font-size:clamp(1.7rem,3vw,2.4rem);font-weight:700;color:var(--tx);margin:.75rem 0 1rem;line-height:1.15;letter-spacing:-.02em}
+.faq-layout>div>p{font-size:.9rem;color:var(--tm);line-height:1.65;margin-bottom:1.5rem}
+.faq-item{border-bottom:1px solid var(--bd)}
+.faq-btn{width:100%;background:none;border:none;display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1.3rem 0;cursor:pointer;color:var(--tx);font-family:inherit;font-size:.9375rem;font-weight:600;text-align:left}
+.faq-icon{flex-shrink:0;width:20px;height:20px;border:1px solid var(--bd-2);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:background .2s,border-color .2s}
+.faq-btn[aria-expanded="true"] .faq-icon{background:rgba(0,232,122,.10);border-color:var(--ac)}
+.faq-icon svg{transition:transform .3s}
+.faq-btn[aria-expanded="true"] .faq-icon svg{transform:rotate(45deg)}
+.faq-answer{display:none;padding-bottom:1.4rem;font-size:.875rem;color:var(--tm);line-height:1.7;max-width:54ch}
+.faq-answer.open{display:block}
+@media(max-width:720px){.faq-layout{grid-template-columns:1fr}}
 </style>
 
 <script>
-  /* Cursor glow */
-  const glow = document.getElementById('cursorGlow');
-  if (glow && window.matchMedia('(pointer:fine)').matches) {
-    window.addEventListener('mousemove', e => {
-      glow.style.left = e.clientX + 'px';
-      glow.style.top  = e.clientY + 'px';
-      glow.style.opacity = '1';
-    }, { passive: true });
+const cg = document.getElementById('cursorGlow');
+if (window.matchMedia('(pointer:fine)').matches) {
+  window.addEventListener('mousemove', e => {
+    cg.style.left = e.clientX + 'px';
+    cg.style.top  = e.clientY + 'px';
+    cg.style.opacity = '1';
+  }, { passive:true });
+}
+
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) { e.target.classList.add('vis'); io.unobserve(e.target); }
+}), { threshold:.1 });
+document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el => io.observe(el));
+
+(function() {
+  const c = document.getElementById('hero-canvas');
+  if (!c) return;
+  const ctx = c.getContext('2d');
+  let W, H, pts, raf;
+  function resize() { W = c.width = c.offsetWidth; H = c.height = c.offsetHeight; }
+  function init() {
+    pts = Array.from({length:60}, () => ({
+      x:Math.random()*W, y:Math.random()*H,
+      r:Math.random()*1.3+.3,
+      vx:(Math.random()-.5)*.22, vy:(Math.random()-.5)*.22,
+      a:Math.random()*.4+.06
+    }));
   }
-
-  /* Scroll reveal */
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el => io.observe(el));
-
-  /* Hero canvas particles */
-  (function() {
-    const canvas = document.getElementById('hero-canvas');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    let W, H, pts, raf;
-    function resize() { W = canvas.width = canvas.offsetWidth; H = canvas.height = canvas.offsetHeight; }
-    function init() { pts = Array.from({length:55},() => ({ x:Math.random()*W, y:Math.random()*H, r:Math.random()*1.2+0.3, vx:(Math.random()-.5)*.25, vy:(Math.random()-.5)*.25, a:Math.random()*.45+.08 })); }
-    function frame() {
-      ctx.clearRect(0,0,W,H);
-      pts.forEach(p => { p.x=(p.x+p.vx+W)%W; p.y=(p.y+p.vy+H)%H; ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fillStyle=`rgba(0,232,122,${p.a})`; ctx.fill(); });
-      for (let i=0;i<pts.length;i++) for (let j=i+1;j<pts.length;j++) {
-        const dx=pts[i].x-pts[j].x, dy=pts[i].y-pts[j].y, d=Math.sqrt(dx*dx+dy*dy);
-        if (d<110) { ctx.beginPath(); ctx.moveTo(pts[i].x,pts[i].y); ctx.lineTo(pts[j].x,pts[j].y); ctx.strokeStyle=`rgba(0,232,122,${.06*(1-d/110)})`; ctx.lineWidth=.6; ctx.stroke(); }
-      }
-      raf = requestAnimationFrame(frame);
+  function frame() {
+    ctx.clearRect(0,0,W,H);
+    pts.forEach(p => {
+      p.x=(p.x+p.vx+W)%W; p.y=(p.y+p.vy+H)%H;
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(0,232,122,${p.a})`; ctx.fill();
+    });
+    for(let i=0;i<pts.length;i++) for(let j=i+1;j<pts.length;j++){
+      const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.hypot(dx,dy);
+      if(d<100){ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);ctx.strokeStyle=`rgba(0,232,122,${.055*(1-d/100)})`;ctx.lineWidth=.55;ctx.stroke();}
     }
-    resize(); init(); frame();
-    new ResizeObserver(() => { cancelAnimationFrame(raf); resize(); init(); frame(); }).observe(canvas.parentElement);
-  })();
+    raf=requestAnimationFrame(frame);
+  }
+  resize();init();frame();
+  new ResizeObserver(()=>{cancelAnimationFrame(raf);resize();init();frame();}).observe(c.parentElement);
+})();
 
-  /* FAQ accordion */
-  document.querySelectorAll('.faq-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const open = btn.getAttribute('aria-expanded') === 'true';
-      document.querySelectorAll('.faq-btn').forEach(b => { b.setAttribute('aria-expanded','false'); b.nextElementSibling.classList.remove('open'); });
-      if (!open) { btn.setAttribute('aria-expanded','true'); btn.nextElementSibling.classList.add('open'); }
+document.querySelectorAll('.faq-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const open = btn.getAttribute('aria-expanded') === 'true';
+    document.querySelectorAll('.faq-btn').forEach(b => {
+      b.setAttribute('aria-expanded','false');
+      b.nextElementSibling.classList.remove('open');
     });
+    if (!open) { btn.setAttribute('aria-expanded','true'); btn.nextElementSibling.classList.add('open'); }
   });
+});
 
-  /* Counter animation */
-  const cio = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (!e.isIntersecting) return;
-      const el = e.target, raw = el.dataset.count, num = parseFloat(raw);
-      if (isNaN(num)) return;
-      const suffix = raw.replace(/[\d.]/g,''), dec = raw.includes('.') ? raw.split('.')[1].length : 0;
-      let t0 = null;
-      function step(ts) { if(!t0) t0=ts; const p=Math.min((ts-t0)/1800,1), ease=1-Math.pow(1-p,3); el.textContent=(num*ease).toFixed(dec)+suffix; if(p<1) requestAnimationFrame(step); }
-      requestAnimationFrame(step);
-      cio.unobserve(el);
-    });
-  }, { threshold: 0.5 });
-  document.querySelectorAll('[data-count]').forEach(el => cio.observe(el));
+const cio = new IntersectionObserver(es => {
+  es.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target;
+    const num = parseFloat(el.dataset.count);
+    if (isNaN(num)) return;
+    const prefix = el.dataset.prefix || '';
+    const suffix = el.dataset.suffix || '';
+    const dec = String(num).includes('.') ? String(num).split('.')[1].length : 0;
+    let t0 = null;
+    (function step(ts) {
+      if (!t0) t0 = ts;
+      const p = Math.min((ts-t0)/1600,1), ease = 1-Math.pow(1-p,3);
+      el.textContent = prefix + (num*ease).toFixed(dec) + suffix;
+      if (p<1) requestAnimationFrame(step);
+    })(performance.now());
+    cio.unobserve(el);
+  });
+}, {threshold:.5});
+document.querySelectorAll('[data-count]').forEach(el => cio.observe(el));
 </script>
-
-</BaseLayout>

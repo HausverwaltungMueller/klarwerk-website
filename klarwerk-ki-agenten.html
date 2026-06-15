@@ -1,0 +1,1595 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Klarwerk baut KI-Agenten für lokale Unternehmen – Termin-Kommunikation, Bewertungen, E-Mail-Triage und Lead-Qualifizierung. Fertig in 1–3 Tagen, ab 1.500 €.">
+  <title>Klarwerk – KI-Agenten für lokale Unternehmen</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+/* ═══════════════════════════════════════════════════
+   DESIGN SYSTEM
+═══════════════════════════════════════════════════ */
+:root {
+  --bg:        #0D0F14;
+  --bg-2:      #131620;
+  --bg-3:      #191D2A;
+  --bd:        rgba(255,255,255,0.06);
+  --bd-2:      rgba(255,255,255,0.11);
+  --tx:        #F2F4F7;
+  --tm:        #8A8F9E;
+  --td:        rgba(242,244,247,0.22);
+  --ac:        #00E87A;
+  --ac-dim:    rgba(0,232,122,0.10);
+  --ac-glow:   rgba(0,232,122,0.20);
+  --ac-glow2:  rgba(0,232,122,0.06);
+  --red-dim:   rgba(255,80,80,0.10);
+  --red:       #FF5050;
+  --font:      'Inter', sans-serif;
+  --max:       1160px;
+  --px:        clamp(1.25rem,5vw,3.5rem);
+  --py:        clamp(5rem,9vw,7.5rem);
+}
+
+*,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background: var(--bg);
+  color: var(--tx);
+  font-family: var(--font);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+a { color:inherit; text-decoration:none; }
+
+/* ── Layout helpers ── */
+.container { max-width:var(--max); margin:0 auto; padding:0 var(--px); }
+
+.label {
+  display: inline-block;
+  font-size: .7rem;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ac);
+  margin-bottom: .75rem;
+}
+.section-header { margin-bottom: clamp(3rem,6vw,5rem); }
+.section-header h2 {
+  font-size: clamp(1.9rem,3.8vw,2.9rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--tx);
+  letter-spacing: -.02em;
+}
+.section-header p {
+  margin-top: 1rem;
+  max-width: 56ch;
+  color: var(--tm);
+  font-size: 1.025rem;
+}
+
+/* ── Buttons ── */
+.btn-primary {
+  display: inline-block;
+  padding: .75rem 1.6rem;
+  background: var(--ac);
+  color: #050e08;
+  font-weight: 700;
+  font-size: .875rem;
+  border-radius: 100px;
+  transition: transform .2s, box-shadow .2s;
+  box-shadow: 0 0 24px var(--ac-glow);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 40px rgba(0,232,122,.4);
+}
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  padding: .75rem 1.6rem;
+  border: 1px solid var(--bd-2);
+  border-radius: 100px;
+  font-size: .875rem;
+  font-weight: 600;
+  color: var(--tx);
+  transition: border-color .2s, background .2s;
+}
+.btn-ghost:hover {
+  border-color: rgba(255,255,255,.25);
+  background: rgba(255,255,255,.04);
+}
+.btn-ghost svg { transition: transform .2s; }
+.btn-ghost:hover svg { transform: translateX(3px); }
+
+.link-accent {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  font-size: .875rem;
+  font-weight: 600;
+  color: var(--ac);
+  border-bottom: 1px solid rgba(0,232,122,.3);
+  padding-bottom: .1rem;
+  transition: border-color .2s;
+}
+.link-accent:hover { border-color: var(--ac); }
+.link-accent svg { transition: transform .2s; }
+.link-accent:hover svg { transform: translateX(3px); }
+
+/* ── Scroll reveal ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity .65s cubic-bezier(.16,1,.3,1), transform .65s cubic-bezier(.16,1,.3,1);
+}
+.reveal.vis { opacity:1; transform:none; }
+.reveal-l {
+  opacity: 0;
+  transform: translateX(-26px);
+  transition: opacity .65s cubic-bezier(.16,1,.3,1), transform .65s cubic-bezier(.16,1,.3,1);
+}
+.reveal-l.vis { opacity:1; transform:none; }
+.reveal-r {
+  opacity: 0;
+  transform: translateX(26px);
+  transition: opacity .65s cubic-bezier(.16,1,.3,1), transform .65s cubic-bezier(.16,1,.3,1);
+}
+.reveal-r.vis { opacity:1; transform:none; }
+
+@media (prefers-reduced-motion:reduce) {
+  .reveal,.reveal-l,.reveal-r { opacity:1; transform:none; transition:none; }
+  .logos-track { animation:none; }
+  #hero-canvas { display:none; }
+  .cursor-glow { display:none; }
+}
+
+/* ── Cursor glow ── */
+.cursor-glow {
+  position: fixed;
+  pointer-events: none;
+  width: 480px; height: 480px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,232,122,.055) 0%, transparent 70%);
+  transform: translate(-50%,-50%);
+  transition: left .1s ease, top .1s ease;
+  z-index: 0;
+  opacity: 0;
+}
+
+/* ══════════════════════════════════════════════
+   HEADER
+══════════════════════════════════════════════ */
+header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 1.1rem var(--px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid transparent;
+  transition: border-color .3s, background .3s, backdrop-filter .3s;
+}
+header.scrolled {
+  background: rgba(13,15,20,0.88);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-color: var(--bd);
+}
+.logo {
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: -.03em;
+  color: var(--tx);
+}
+.logo span { color: var(--ac); }
+nav {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+}
+nav a.nav-link {
+  font-size: .85rem;
+  color: var(--tm);
+  transition: color .2s;
+}
+nav a.nav-link:hover { color: var(--tx); }
+.nav-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  padding: .55rem 1.1rem;
+  background: var(--ac);
+  color: #050e08;
+  font-size: .8rem;
+  font-weight: 700;
+  border-radius: 100px;
+  transition: box-shadow .2s, transform .2s;
+  box-shadow: 0 0 16px var(--ac-glow);
+}
+.nav-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 28px rgba(0,232,122,.4);
+}
+.mobile-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--tx);
+  cursor: pointer;
+  padding: .25rem;
+}
+@media(max-width:720px) {
+  nav { display:none; }
+  .mobile-btn { display:block; }
+}
+
+/* ══════════════════════════════════════════════
+   1. HERO
+══════════════════════════════════════════════ */
+#hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  padding: 6.5rem var(--px) 3.5rem;
+  background: var(--bg);
+}
+#hero-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  opacity: .65;
+}
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: var(--max);
+  margin: 0 auto;
+  width: 100%;
+}
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+  color: var(--ac);
+  margin-bottom: 1.75rem;
+}
+.hero-eyebrow::before {
+  content: '';
+  display: block;
+  width: 22px; height: 1px;
+  background: var(--ac);
+}
+h1.hero-h1 {
+  font-size: clamp(2.6rem,6.5vw,5.25rem);
+  font-weight: 700;
+  line-height: 1.06;
+  letter-spacing: -.03em;
+  color: var(--tx);
+  max-width: 18ch;
+  margin-bottom: 1.6rem;
+}
+h1.hero-h1 .hl { color: var(--ac); }
+.hero-sub {
+  font-size: clamp(1rem,1.5vw,1.125rem);
+  color: var(--tm);
+  max-width: 54ch;
+  line-height: 1.7;
+  margin-bottom: 2.5rem;
+}
+.hero-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .9rem;
+}
+
+/* ══ Logo strip ══ */
+.logos-strip {
+  position: relative;
+  z-index: 2;
+  margin-top: clamp(3rem,6vw,5rem);
+  padding-top: 2rem;
+  border-top: 1px solid var(--bd);
+  max-width: var(--max);
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+.logos-strip .logos-label {
+  font-size: .68rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--td);
+  margin-bottom: 1.2rem;
+}
+.logos-overflow { overflow: hidden; }
+.logos-track {
+  display: flex;
+  gap: 2.5rem;
+  width: max-content;
+  animation: marquee 26s linear infinite;
+}
+.logo-pill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 34px;
+  min-width: 120px;
+  border: 1px dashed rgba(255,255,255,.08);
+  border-radius: 6px;
+  font-size: .7rem;
+  color: var(--td);
+  padding: 0 1rem;
+  flex-shrink: 0;
+}
+@keyframes marquee {
+  from { transform:translateX(0); }
+  to   { transform:translateX(-50%); }
+}
+
+/* ══════════════════════════════════════════════
+   2. DAS PROBLEM
+══════════════════════════════════════════════ */
+#problem {
+  padding: var(--py) var(--px);
+  background: var(--bg-2);
+}
+.problem-inner {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: clamp(3rem,6vw,6rem);
+  align-items: center;
+}
+.problem-left h2 {
+  font-size: clamp(1.7rem,3vw,2.5rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -.02em;
+  color: var(--tx);
+  margin-bottom: 1.25rem;
+}
+.problem-left p {
+  color: var(--tm);
+  font-size: .975rem;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+.problem-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--bd);
+  border: 1px solid var(--bd);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.problem-card {
+  background: var(--bg);
+  padding: 1.75rem;
+}
+.problem-nr {
+  font-size: clamp(1.75rem,3vw,2.4rem);
+  font-weight: 700;
+  color: var(--red);
+  line-height: 1;
+  margin-bottom: .6rem;
+  letter-spacing: -.02em;
+}
+.problem-card h4 {
+  font-size: .875rem;
+  font-weight: 600;
+  color: var(--tx);
+  margin-bottom: .4rem;
+}
+.problem-card p {
+  font-size: .8rem;
+  color: var(--tm);
+  line-height: 1.55;
+}
+@media(max-width:860px) {
+  .problem-inner { grid-template-columns:1fr; }
+}
+
+/* ══════════════════════════════════════════════
+   3. KI-AGENTEN (01–04)
+══════════════════════════════════════════════ */
+#agenten {
+  padding: var(--py) var(--px);
+  background: var(--bg);
+}
+.agent-list {
+  border-top: 1px solid var(--bd);
+}
+.agent-row {
+  display: grid;
+  grid-template-columns: 64px 1fr auto;
+  align-items: start;
+  gap: clamp(.75rem,2.5vw,2rem);
+  padding: 2.25rem 0;
+  border-bottom: 1px solid var(--bd);
+  position: relative;
+  transition: background .25s;
+  cursor: default;
+}
+.agent-row::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 2px;
+  background: var(--ac);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform .35s cubic-bezier(.16,1,.3,1);
+}
+.agent-row:hover::before { transform: scaleY(1); }
+.agent-row:hover { background: rgba(255,255,255,.016); }
+.agent-row.featured {
+  background: rgba(0,232,122,.022);
+}
+.agent-row.featured:hover { background: rgba(0,232,122,.04); }
+
+.agent-nr {
+  font-size: .875rem;
+  font-weight: 700;
+  color: var(--ac);
+  letter-spacing: .06em;
+  padding-top: .2rem;
+}
+.agent-body {}
+.agent-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .6rem;
+  margin-bottom: .85rem;
+}
+.agent-name {
+  font-size: clamp(1.1rem,2vw,1.5rem);
+  font-weight: 700;
+  color: var(--tx);
+  letter-spacing: -.02em;
+}
+.badge {
+  display: inline-block;
+  padding: .25rem .65rem;
+  border-radius: 100px;
+  font-size: .72rem;
+  font-weight: 600;
+}
+.badge-price {
+  background: rgba(0,232,122,.12);
+  color: var(--ac);
+  border: 1px solid rgba(0,232,122,.2);
+}
+.badge-time {
+  background: rgba(255,255,255,.06);
+  color: var(--tm);
+  border: 1px solid var(--bd-2);
+}
+.agent-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+  margin-bottom: .9rem;
+}
+.chip {
+  display: inline-block;
+  padding: .2rem .6rem;
+  border-radius: 4px;
+  background: rgba(255,255,255,.05);
+  border: 1px solid var(--bd);
+  font-size: .72rem;
+  color: var(--tm);
+}
+.agent-desc {
+  font-size: .9rem;
+  color: var(--tm);
+  line-height: 1.65;
+  max-width: 56ch;
+}
+.agent-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--tm);
+  white-space: nowrap;
+  padding-top: .25rem;
+  transition: color .2s;
+}
+.agent-link svg { transition: transform .2s; }
+.agent-row:hover .agent-link { color: var(--ac); }
+.agent-row:hover .agent-link svg { transform: translateX(4px); }
+
+@media(max-width:680px) {
+  .agent-row { grid-template-columns:48px 1fr; }
+  .agent-link { grid-column:2; }
+}
+
+/* ══════════════════════════════════════════════
+   4. WIE ES FUNKTIONIERT
+══════════════════════════════════════════════ */
+#prozess {
+  padding: var(--py) var(--px);
+  background: var(--bg-2);
+}
+.prozess-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 2rem;
+  position: relative;
+}
+.prozess-grid::before {
+  content: '';
+  position: absolute;
+  top: 1.55rem;
+  left: calc(100%/6);
+  right: calc(100%/6);
+  height: 1px;
+  background: linear-gradient(to right, var(--ac), rgba(0,232,122,.12));
+  pointer-events: none;
+}
+.p-step h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--tx);
+  margin-bottom: .65rem;
+}
+.p-step p {
+  font-size: .875rem;
+  color: var(--tm);
+  line-height: 1.65;
+}
+.p-nr {
+  width: 3.1rem; height: 3.1rem;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 1px solid var(--ac);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .78rem;
+  font-weight: 700;
+  color: var(--ac);
+  margin-bottom: 1.35rem;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 0 18px rgba(0,232,122,.18);
+}
+.prozess-cta { margin-top:3rem; text-align:center; }
+@media(max-width:640px) {
+  .prozess-grid { grid-template-columns:1fr; }
+  .prozess-grid::before { display:none; }
+  .p-step { padding-left:.75rem; border-left:1px solid var(--bd); }
+}
+
+/* ══════════════════════════════════════════════
+   5. KENNZAHLEN
+══════════════════════════════════════════════ */
+#kennzahlen {
+  padding: 4rem var(--px);
+  background: var(--bg);
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 1px;
+  background: var(--bd);
+  border: 1px solid var(--bd);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.stat-box {
+  background: var(--bg-2);
+  padding: 2.25rem 1.75rem;
+  text-align: center;
+}
+.stat-val {
+  font-size: clamp(1.9rem,3.5vw,2.75rem);
+  font-weight: 700;
+  color: var(--ac);
+  display: block;
+  line-height: 1;
+  margin-bottom: .5rem;
+  letter-spacing: -.02em;
+}
+.stat-lbl {
+  font-size: .8rem;
+  color: var(--tm);
+  line-height: 1.4;
+}
+@media(max-width:640px) {
+  .stats-grid { grid-template-columns:repeat(2,1fr); }
+}
+
+/* ══════════════════════════════════════════════
+   6. FALLSTUDIEN
+══════════════════════════════════════════════ */
+#fallstudien {
+  padding: var(--py) var(--px);
+  background: var(--bg-2);
+}
+.fallstudien-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 1.25rem;
+}
+.fs-card {
+  background: rgba(255,255,255,.03);
+  border: 1px solid var(--bd);
+  border-radius: 14px;
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  transition: border-color .3s, background .3s;
+}
+.fs-card:hover {
+  border-color: rgba(0,232,122,.2);
+  background: rgba(0,232,122,.03);
+}
+.fs-tags {
+  display: flex;
+  gap: .5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+}
+.fs-tag {
+  font-size: .68rem;
+  font-weight: 600;
+  color: var(--tm);
+  background: rgba(255,255,255,.06);
+  border: 1px solid var(--bd-2);
+  border-radius: 4px;
+  padding: .2rem .55rem;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.fs-tag.agent-tag {
+  color: var(--ac);
+  background: var(--ac-dim);
+  border-color: rgba(0,232,122,.2);
+}
+.fs-kpi {
+  font-size: clamp(2rem,4vw,2.75rem);
+  font-weight: 700;
+  color: var(--tx);
+  line-height: 1;
+  margin-bottom: .75rem;
+  letter-spacing: -.03em;
+}
+.fs-kpi span { color: var(--ac); }
+.fs-quote {
+  flex: 1;
+  font-size: .875rem;
+  color: var(--tm);
+  line-height: 1.6;
+  font-style: italic;
+  margin-bottom: 1.5rem;
+  padding-left: .75rem;
+  border-left: 2px solid var(--bd-2);
+}
+.fs-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--tm);
+  transition: color .2s;
+}
+.fs-link svg { transition: transform .2s; }
+.fs-card:hover .fs-link { color: var(--ac); }
+.fs-card:hover .fs-link svg { transform: translateX(3px); }
+@media(max-width:860px) {
+  .fallstudien-grid { grid-template-columns:1fr; }
+}
+
+/* ══════════════════════════════════════════════
+   7. WARUM KLARWERK
+══════════════════════════════════════════════ */
+#warum {
+  padding: var(--py) var(--px);
+  background: var(--bg);
+}
+.warum-grid {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 1px;
+  background: var(--bd);
+  border: 1px solid var(--bd);
+  border-radius: 14px;
+  overflow: hidden;
+}
+.w-item {
+  background: var(--bg);
+  padding: 2.25rem;
+  transition: background .25s;
+}
+.w-item:hover { background: var(--bg-3); }
+.w-bar {
+  width: 2rem; height: 2px;
+  background: var(--ac);
+  margin-bottom: 1.25rem;
+  transition: width .3s;
+}
+.w-item:hover .w-bar { width: 3.5rem; }
+.w-item h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--tx);
+  margin-bottom: .5rem;
+}
+.w-item p { font-size: .875rem; color: var(--tm); line-height: 1.65; }
+@media(max-width:560px) {
+  .warum-grid { grid-template-columns:1fr; }
+}
+
+/* ══════════════════════════════════════════════
+   8. GRÜNDER
+══════════════════════════════════════════════ */
+#gruender {
+  padding: var(--py) var(--px);
+  background: var(--bg-2);
+}
+.g-inner {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: clamp(2.5rem,5vw,5rem);
+  align-items: start;
+}
+.g-photo {
+  aspect-ratio: 3/4;
+  background: var(--bg-3);
+  border-radius: 12px;
+  border: 1px dashed var(--bd-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .78rem;
+  color: var(--td);
+  position: relative;
+}
+.g-photo::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 13px;
+  background: linear-gradient(135deg,rgba(0,232,122,.12),transparent 55%);
+  pointer-events: none;
+}
+.g-text h2 {
+  font-size: clamp(1.5rem,2.8vw,2.25rem);
+  font-weight: 700;
+  color: var(--tx);
+  margin: .75rem 0 1.25rem;
+  line-height: 1.15;
+  letter-spacing: -.02em;
+}
+.g-text p { color: var(--tm); font-size:.975rem; line-height:1.75; margin-bottom:1.25rem; }
+@media(max-width:680px) {
+  .g-inner { grid-template-columns:1fr; }
+  .g-photo { aspect-ratio:16/9; }
+}
+
+/* ══════════════════════════════════════════════
+   9. ABSCHLUSS CTA
+══════════════════════════════════════════════ */
+#abschluss {
+  padding: var(--py) var(--px);
+  background: var(--bg);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+#abschluss::before {
+  content: '';
+  position: absolute;
+  bottom: -120px; left: 50%;
+  transform: translateX(-50%);
+  width: 700px; height: 350px;
+  background: radial-gradient(ellipse, rgba(0,232,122,.09) 0%, transparent 70%);
+  pointer-events: none;
+}
+.abschluss-inner { position: relative; z-index: 2; max-width: 580px; margin: 0 auto; }
+.abschluss-inner h2 {
+  font-size: clamp(1.9rem,4vw,3rem);
+  font-weight: 700;
+  color: var(--tx);
+  margin-bottom: 1rem;
+  letter-spacing: -.03em;
+  line-height: 1.1;
+}
+.abschluss-inner p { color: var(--tm); font-size:1rem; line-height:1.7; margin-bottom:2.25rem; }
+.abschluss-meta {
+  margin-top: 1.75rem;
+  font-size: .8rem;
+  color: var(--td);
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: .3rem 1.25rem;
+}
+
+/* ══════════════════════════════════════════════
+   10. FAQ
+══════════════════════════════════════════════ */
+#faq {
+  padding: var(--py) var(--px);
+  background: var(--bg-2);
+}
+.faq-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: clamp(2.5rem,5vw,5rem);
+  align-items: start;
+}
+.faq-intro-col h2 {
+  font-size: clamp(1.7rem,3vw,2.4rem);
+  font-weight: 700;
+  color: var(--tx);
+  margin: .75rem 0 1rem;
+  line-height: 1.15;
+  letter-spacing: -.02em;
+}
+.faq-intro-col p { font-size:.9rem; color:var(--tm); line-height:1.65; margin-bottom:1.5rem; }
+.faq-col {}
+.faq-item { border-bottom: 1px solid var(--bd); }
+.faq-btn {
+  width: 100%;
+  background: none;
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.3rem 0;
+  cursor: pointer;
+  color: var(--tx);
+  font-family: var(--font);
+  font-size: .9375rem;
+  font-weight: 600;
+  text-align: left;
+}
+.faq-icon {
+  flex-shrink: 0;
+  width: 20px; height: 20px;
+  border: 1px solid var(--bd-2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .2s, border-color .2s;
+}
+.faq-btn[aria-expanded="true"] .faq-icon {
+  background: var(--ac-dim);
+  border-color: var(--ac);
+}
+.faq-icon svg { transition: transform .3s; }
+.faq-btn[aria-expanded="true"] .faq-icon svg { transform: rotate(45deg); }
+.faq-answer {
+  display: none;
+  padding-bottom: 1.4rem;
+  font-size: .875rem;
+  color: var(--tm);
+  line-height: 1.7;
+  max-width: 54ch;
+}
+.faq-answer.open { display: block; }
+@media(max-width:720px) {
+  .faq-layout { grid-template-columns:1fr; }
+}
+
+/* ══════════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════════ */
+footer {
+  background: var(--bg-3);
+  border-top: 1px solid var(--bd);
+  padding: 3.5rem var(--px) 2rem;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr;
+  gap: 2.5rem;
+  margin-bottom: 2.75rem;
+}
+.footer-brand .logo { margin-bottom: .9rem; }
+.footer-brand p { font-size:.84rem; color:var(--tm); line-height:1.65; max-width:28ch; }
+.f-col h4 { font-size:.68rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--td); margin-bottom:.9rem; }
+.f-col ul { list-style:none; }
+.f-col li { margin-bottom:.55rem; }
+.f-col a { font-size:.86rem; color:var(--tm); transition:color .2s; }
+.f-col a:hover { color:var(--tx); }
+.footer-btm {
+  border-top: 1px solid var(--bd);
+  padding-top: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: .5rem;
+  font-size: .75rem;
+  color: var(--td);
+}
+@media(max-width:680px) {
+  .footer-grid { grid-template-columns:1fr; }
+}
+  </style>
+</head>
+<body>
+
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<!-- ══════════════════════════════════════════════
+     HEADER
+══════════════════════════════════════════════ -->
+<header id="hdr">
+  <a href="/" class="logo">Klar<span>werk</span></a>
+  <nav>
+    <a href="#agenten" class="nav-link">KI-Agenten</a>
+    <a href="#fallstudien" class="nav-link">Fallstudien</a>
+    <a href="/ueber-uns" class="nav-link">Über uns</a>
+    <a href="/kontakt" class="nav-link">Kontakt</a>
+    <a href="#abschluss" class="nav-cta">Kostenloses Erstgespräch</a>
+  </nav>
+  <button class="mobile-btn" aria-label="Menü">
+    <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+      <line x1="2" y1="6" x2="20" y2="6"/><line x1="2" y1="11" x2="20" y2="11"/><line x1="2" y1="16" x2="20" y2="16"/>
+    </svg>
+  </button>
+</header>
+
+<!-- ══════════════════════════════════════════════
+     1. HERO
+══════════════════════════════════════════════ -->
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+
+  <div class="hero-inner">
+    <p class="hero-eyebrow reveal">KI-Agenten für lokale Unternehmen</p>
+
+    <h1 class="hero-h1 reveal" style="transition-delay:.08s">
+      Mehr Zeit. Mehr Kunden.<br>
+      <span class="hl">Kein manueller</span> Aufwand.
+    </h1>
+
+    <p class="hero-sub reveal" style="transition-delay:.16s">
+      Klarwerk baut KI-Agenten, die Terminkommunikation, Kundenbewertungen,
+      E-Mail-Triage und Lead-Qualifizierung automatisieren —
+      fertig in 1–3 Tagen, ab 1.500 €.
+    </p>
+
+    <div class="hero-ctas reveal" style="transition-delay:.24s">
+      <a href="#agenten" class="btn-primary">
+        Agenten entdecken
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="margin-left:.3rem"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="#abschluss" class="btn-ghost">Kostenloses Erstgespräch</a>
+    </div>
+
+    <!-- Scrolling logo strip -->
+    <div class="logos-strip reveal" style="transition-delay:.34s">
+      <p class="logos-label">Vertrauen von lokalen Unternehmen</p>
+      <div class="logos-overflow">
+        <div class="logos-track">
+          <div class="logo-pill">Beauty-Studio</div>
+          <div class="logo-pill">Friseur</div>
+          <div class="logo-pill">Handwerker</div>
+          <div class="logo-pill">Physiotherapie</div>
+          <div class="logo-pill">Immobilienmakler</div>
+          <div class="logo-pill">Hausverwaltung</div>
+          <div class="logo-pill">Praxis</div>
+          <div class="logo-pill">Beauty-Studio</div>
+          <div class="logo-pill">Friseur</div>
+          <div class="logo-pill">Handwerker</div>
+          <div class="logo-pill">Physiotherapie</div>
+          <div class="logo-pill">Immobilienmakler</div>
+          <div class="logo-pill">Hausverwaltung</div>
+          <div class="logo-pill">Praxis</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     2. DAS PROBLEM
+══════════════════════════════════════════════ -->
+<section id="problem">
+  <div class="container">
+    <div class="problem-inner">
+      <div class="problem-left reveal-l">
+        <span class="label">Das Problem</span>
+        <h2>Routineaufgaben kosten täglich Geld und Zeit.</h2>
+        <p>Jedes dieser Probleme löst ein KI-Agent — automatisch, zuverlässig und ohne Ihr Zutun.</p>
+        <a href="#agenten" class="link-accent">
+          Zu den Lösungen
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 6.5h9M8 3l3.5 3.5L8 10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+      <div class="problem-grid reveal-r" style="transition-delay:.1s">
+        <div class="problem-card">
+          <div class="problem-nr">800 €</div>
+          <h4>No-Shows im Monat</h4>
+          <p>5–15 % aller Termine erscheinen nicht — ohne automatische Erinnerung.</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-nr">1–2h</div>
+          <h4>täglich für E-Mails</h4>
+          <p>Posteingang frisst Zeit. Wichtiges geht unter, Antworten brauchen Tage.</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-nr">★ 3.2</div>
+          <h4>Google-Score obwohl gut</h4>
+          <p>Zufriedene Kunden bewerten selten von selbst — unzufriedene immer.</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-nr">&gt; 24h</div>
+          <h4>bis zum Erstkontakt</h4>
+          <p>Leads kühlen ab. Wer zuerst antwortet, gewinnt — meistens der Wettbewerb.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     3. DIE VIER KI-AGENTEN
+══════════════════════════════════════════════ -->
+<section id="agenten">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="label">Die Lösung</span>
+      <h2>Vier KI-Agenten.<br>Ein Ziel: weniger Aufwand, mehr Ertrag.</h2>
+      <p>Festpreis-Setup, kein Stundensatz, kein technisches Wissen nötig. DSGVO-konform.</p>
+    </div>
+
+    <div class="agent-list">
+
+      <!-- A1 -->
+      <div class="agent-row reveal">
+        <span class="agent-nr">A1</span>
+        <div class="agent-body">
+          <div class="agent-head">
+            <span class="agent-name">Termin- &amp; Follow-up-Agent</span>
+            <span class="badge badge-price">Setup 1.500 €</span>
+            <span class="badge badge-time">1 Tag Bauzeit</span>
+          </div>
+          <div class="agent-chips">
+            <span class="chip">Beauty-Studios</span>
+            <span class="chip">Friseure</span>
+            <span class="chip">Physiotherapeuten</span>
+            <span class="chip">Kosmetik</span>
+            <span class="chip">Coaches</span>
+          </div>
+          <p class="agent-desc">
+            Automatische Bestätigung und Erinnerung per WhatsApp, KI-Dialog bei Umbuchungswünschen,
+            automatischer Folgetermin-Vorschlag, No-Show-Handling. Wartung ab 99 €/Monat.
+          </p>
+        </div>
+        <a href="/kontakt" class="agent-link">
+          Mehr erfahren
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2.5 7.5h10M9 4l3.5 3.5L9 11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <!-- A2 -->
+      <div class="agent-row reveal" style="transition-delay:.07s">
+        <span class="agent-nr">A2</span>
+        <div class="agent-body">
+          <div class="agent-head">
+            <span class="agent-name">Bewertungs- &amp; Reputations-Agent</span>
+            <span class="badge badge-price">Setup 1.500 €</span>
+            <span class="badge badge-time">1 Tag Bauzeit</span>
+          </div>
+          <div class="agent-chips">
+            <span class="chip">Restaurants</span>
+            <span class="chip">Handwerker</span>
+            <span class="chip">Beauty</span>
+            <span class="chip">Werkstätten</span>
+            <span class="chip">Ärzte</span>
+          </div>
+          <p class="agent-desc">
+            Automatische Bewertungsanfrage nach jedem Termin, interne Abfederung negativer Stimmen,
+            KI-generierte Antworten auf Google-Rezensionen, monatliches Bewertungs-Reporting. Wartung ab 99 €/Monat.
+          </p>
+        </div>
+        <a href="/kontakt" class="agent-link">
+          Mehr erfahren
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2.5 7.5h10M9 4l3.5 3.5L9 11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <!-- A3 -->
+      <div class="agent-row reveal" style="transition-delay:.14s">
+        <span class="agent-nr">A3</span>
+        <div class="agent-body">
+          <div class="agent-head">
+            <span class="agent-name">Kundenanfragen-Agent (E-Mail-Triage)</span>
+            <span class="badge badge-price">Setup 2.000 €</span>
+            <span class="badge badge-time">2 Tage Bauzeit</span>
+          </div>
+          <div class="agent-chips">
+            <span class="chip">Handwerksbetriebe</span>
+            <span class="chip">Hausverwaltungen</span>
+            <span class="chip">Kanzleien</span>
+            <span class="chip">Praxen</span>
+          </div>
+          <p class="agent-desc">
+            KI klassifiziert und beantwortet 80 % der Standardanfragen automatisch. Komplexe Fälle werden
+            mit 2-Satz-Zusammenfassung eskaliert. Phase 1: nur Entwürfe zur Freigabe — schafft Vertrauen.
+            Wartung ab 149 €/Monat.
+          </p>
+        </div>
+        <a href="/kontakt" class="agent-link">
+          Mehr erfahren
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2.5 7.5h10M9 4l3.5 3.5L9 11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <!-- A4 — featured -->
+      <div class="agent-row featured reveal" style="transition-delay:.21s">
+        <span class="agent-nr">A4</span>
+        <div class="agent-body">
+          <div class="agent-head">
+            <span class="agent-name">Lead-Recherche- &amp; Angebots-Agent</span>
+            <span class="badge badge-price">Setup 2.500–3.000 €</span>
+            <span class="badge badge-time">2–3 Tage Bauzeit</span>
+          </div>
+          <div class="agent-chips">
+            <span class="chip">Immobilienmakler</span>
+            <span class="chip">Versicherungsmakler</span>
+            <span class="chip">B2B-Dienstleister</span>
+            <span class="chip">Berater</span>
+          </div>
+          <p class="agent-desc">
+            Jeder neue Lead in unter 5 Minuten recherchiert, angereichert und mit personalisiertem
+            Anschreiben versehen. Automatische Follow-up-Sequenz Tag 3/7/14. Ein einziger zusätzlicher
+            Abschluss refinanziert den Agenten sofort. Wartung ab 199 €/Monat.
+          </p>
+        </div>
+        <a href="/kontakt" class="agent-link">
+          Mehr erfahren
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2.5 7.5h10M9 4l3.5 3.5L9 11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     4. WIE ES FUNKTIONIERT
+══════════════════════════════════════════════ -->
+<section id="prozess">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="label">Der Ablauf</span>
+      <h2>Von Erstgespräch zu laufendem Agenten<br>in 3 Schritten</h2>
+    </div>
+    <div class="prozess-grid">
+      <div class="p-step reveal">
+        <div class="p-nr">01</div>
+        <h3>Erstgespräch</h3>
+        <p>Wir lernen Ihr Unternehmen kennen, verstehen Ihre Ziele und geben eine erste ehrliche Einschätzung – kostenlos und unverbindlich.</p>
+      </div>
+      <div class="p-step reveal" style="transition-delay:.1s">
+        <div class="p-nr">02</div>
+        <h3>Strategie &amp; Aufbau</h3>
+        <p>Auf Basis des Gesprächs entwickeln wir den passenden Agenten – konfiguriert auf Ihre Prozesse, in 1–3 Tagen einsatzbereit.</p>
+      </div>
+      <div class="p-step reveal" style="transition-delay:.2s">
+        <div class="p-nr">03</div>
+        <h3>Übergabe &amp; Betrieb</h3>
+        <p>Wir übergeben mit kurzem Einführungsvideo. Der Agent läuft – Sie sehen die Ergebnisse. Monatliches Reporting optional.</p>
+      </div>
+    </div>
+    <div class="prozess-cta reveal" style="transition-delay:.28s">
+      <a href="#abschluss" class="btn-primary">Unverbindlich anfragen – Antwort in 24 Stunden</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     5. KENNZAHLEN
+══════════════════════════════════════════════ -->
+<section id="kennzahlen">
+  <div class="container">
+    <div class="stats-grid reveal">
+      <div class="stat-box">
+        <span class="stat-val" data-count="68" data-prefix="Ø –" data-suffix="%">Ø –68%</span>
+        <span class="stat-lbl">No-Show-Rate<br>nach 30 Tagen (A1)</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-val">1–3 Tage</span>
+        <span class="stat-lbl">Implementierungszeit</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-val" data-count="80" data-suffix="%">80%</span>
+        <span class="stat-lbl">der Standardmails<br>automatisch beantwortet (A3)</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-val">&lt; 5 Min.</span>
+        <span class="stat-lbl">Reaktionszeit<br>auf neue Leads (A4)</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     6. FALLSTUDIEN
+══════════════════════════════════════════════ -->
+<section id="fallstudien">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="label">Ergebnisse</span>
+      <h2>Was Kunden mit dem Agenten erreicht haben</h2>
+      <p>Echte Zahlen aus echten Betrieben. Erste Ergebnisse nach 30 Tagen.</p>
+    </div>
+    <div class="fallstudien-grid">
+
+      <!-- FALLSTUDIE: Echte Daten hier einfügen -->
+      <div class="fs-card reveal">
+        <div class="fs-tags">
+          <span class="fs-tag">Beauty-Studio</span>
+          <span class="fs-tag agent-tag">A1 Termin-Agent</span>
+        </div>
+        <div class="fs-kpi"><span>–73%</span> No-Shows</div>
+        <div class="fs-quote">"Platzhalter — echtes Kundenzitat folgt nach Projektabschluss."</div>
+        <a href="/referenzen" class="fs-link">
+          Case Study lesen
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 6.5h9M8 3l3.5 3.5L8 10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <!-- FALLSTUDIE: Echte Daten hier einfügen -->
+      <div class="fs-card reveal" style="transition-delay:.1s">
+        <div class="fs-tags">
+          <span class="fs-tag">Handwerksbetrieb</span>
+          <span class="fs-tag agent-tag">A2 Bewertungs-Agent</span>
+        </div>
+        <div class="fs-kpi"><span>+42</span> Google-Bewertungen</div>
+        <div class="fs-quote">"Platzhalter — echtes Kundenzitat folgt nach Projektabschluss."</div>
+        <a href="/referenzen" class="fs-link">
+          Case Study lesen
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 6.5h9M8 3l3.5 3.5L8 10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <!-- FALLSTUDIE: Echte Daten hier einfügen -->
+      <div class="fs-card reveal" style="transition-delay:.2s">
+        <div class="fs-tags">
+          <span class="fs-tag">Immobilienmakler</span>
+          <span class="fs-tag agent-tag">A4 Lead-Agent</span>
+        </div>
+        <div class="fs-kpi"><span>1h/Tag</span> zurückgewonnen</div>
+        <div class="fs-quote">"Platzhalter — echtes Kundenzitat folgt nach Projektabschluss."</div>
+        <a href="/referenzen" class="fs-link">
+          Case Study lesen
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 6.5h9M8 3l3.5 3.5L8 10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     7. WARUM KLARWERK
+══════════════════════════════════════════════ -->
+<section id="warum">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="label">Warum Klarwerk</span>
+      <h2>Kein Agentur-Bullshit.<br>Nur was funktioniert.</h2>
+    </div>
+    <div class="warum-grid">
+      <div class="w-item reveal">
+        <div class="w-bar"></div>
+        <h3>Festpreis — kein Stundensatz</h3>
+        <p>Sie wissen vorher, was es kostet. Kein Nachverhandeln, kein überraschendes Angebot. Setup-Preis ist Endpreis.</p>
+      </div>
+      <div class="w-item reveal" style="transition-delay:.07s">
+        <div class="w-bar"></div>
+        <h3>1–3 Tage, nicht Monate</h3>
+        <p>Andere Agenturen brauchen Wochen für Konzepte. Wir liefern einen laufenden Agenten — in Tagen.</p>
+      </div>
+      <div class="w-item reveal" style="transition-delay:.14s">
+        <div class="w-bar"></div>
+        <h3>DSGVO-konform (EU-Hosting, AVV)</h3>
+        <p>Alle Agenten werden mit EU-Hosting aufgesetzt. Auftragsverarbeitungsvertrag inklusive. Besonders für Praxen und Kanzleien wichtig.</p>
+      </div>
+      <div class="w-item reveal" style="transition-delay:.21s">
+        <div class="w-bar"></div>
+        <h3>Wartung optional, nicht Pflicht</h3>
+        <p>Das Wartungsabo (API-Kosten, Monitoring, Anpassungen) ist freiwillig. Kein Knebelvertrag — monatlich kündbar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     8. GRÜNDER
+══════════════════════════════════════════════ -->
+<section id="gruender">
+  <div class="container">
+    <div class="g-inner">
+      <div class="reveal-l">
+        <div class="g-photo">Gründer-Foto</div>
+      </div>
+      <div class="reveal-r" style="transition-delay:.1s">
+        <span class="label">Hinter Klarwerk</span>
+        <h2>Kein anonymes Agenturkonstrukt.</h2>
+        <p>Hinter Klarwerk steht kein anonymes Agenturkonstrukt, sondern ein Unternehmer,
+        der seit über acht Jahren selbst Geschäfte aufbaut – vom ersten eigenen Projekt
+        als Jugendlicher über den Aufbau und Verkauf eines Unternehmens bis hin zur
+        digitalen Vermarktung.</p>
+        <p>Diese Erfahrung prägt unsere Arbeit: Wir denken nicht in Klicks, sondern in
+        Anfragen, Kunden und Umsatz. Sie arbeiten direkt mit uns zusammen, bekommen
+        ehrliche Einschätzungen statt Buzzwords – und Ergebnisse, die Sie schwarz auf
+        weiß nachvollziehen können.</p>
+        <a href="/ueber-uns" class="link-accent">
+          Mehr über uns
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 6.5h9M8 3l3.5 3.5L8 10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     9. ABSCHLUSS CTA
+══════════════════════════════════════════════ -->
+<section id="abschluss">
+  <div class="container">
+    <div class="abschluss-inner">
+      <h2 class="reveal">Bereit, einen Agenten zu testen?</h2>
+      <p class="reveal" style="transition-delay:.08s">
+        Das Erstgespräch ist kostenlos, dauert 30 Minuten und endet immer mit einer
+        ehrlichen Einschätzung – egal ob wir zusammenarbeiten oder nicht.
+      </p>
+      <a href="/kontakt" class="btn-primary reveal" style="font-size:.95rem;padding:.9rem 2rem;transition-delay:.16s">
+        Kostenloses Erstgespräch vereinbaren
+      </a>
+      <div class="abschluss-meta reveal" style="transition-delay:.22s">
+        <span>info@klarwerk.de</span>
+        <span>+49 (0) 000 000 000</span>
+        <span>Antwort innerhalb von 24 Stunden werktags</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     10. FAQ
+══════════════════════════════════════════════ -->
+<section id="faq">
+  <div class="container">
+    <div class="faq-layout">
+      <div class="reveal">
+        <span class="label">Häufige Fragen</span>
+        <h2>Was Sie wissen möchten</h2>
+        <p>Noch offen gebliebene Fragen? Schreiben Sie uns direkt – wir antworten innerhalb von 24 Stunden.</p>
+        <a href="#abschluss" class="link-accent" style="margin-top:1.25rem;display:inline-flex">
+          Frage stellen
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 6.5h9M8 3l3.5 3.5L8 10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+      <div class="faq-col reveal" style="transition-delay:.1s">
+
+        <div class="faq-item">
+          <button class="faq-btn" aria-expanded="false">
+            Was kostet ein KI-Agent?
+            <span class="faq-icon"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M4.5 1v7M1 4.5h7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+          </button>
+          <div class="faq-answer">Setup-Preise starten ab 1.500 € (Festpreis). Dazu gibt es ein optionales Wartungsabo ab 99 €/Monat, das API-Kosten, Monitoring und kleinere Anpassungen abdeckt.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn" aria-expanded="false">
+            Wie lange bis der Agent läuft?
+            <span class="faq-icon"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M4.5 1v7M1 4.5h7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+          </button>
+          <div class="faq-answer">Die einfacheren Agenten (A1, A2) sind in 1 Tag live. A3 und A4 brauchen 2–3 Tage. Sie sehen in den ersten 30 Tagen messbare Ergebnisse.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn" aria-expanded="false">
+            Bin ich langfristig gebunden?
+            <span class="faq-icon"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M4.5 1v7M1 4.5h7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+          </button>
+          <div class="faq-answer">Nein. Wir arbeiten monatlich kündbar. Wir sind überzeugt, dass Sie bleiben wollen, weil die Ergebnisse stimmen – nicht weil ein Vertrag es erzwingt.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn" aria-expanded="false">
+            Für wen sind die Agenten geeignet?
+            <span class="faq-icon"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M4.5 1v7M1 4.5h7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+          </button>
+          <div class="faq-answer">Für lokale Unternehmen mit klaren Routineprozessen: Terminkommunikation, Kundenbewertungen, E-Mail-Bearbeitung oder Lead-Qualifizierung. Friseure, Restaurants, Handwerker, Praxen, Makler.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn" aria-expanded="false">
+            Brauche ich technisches Wissen?
+            <span class="faq-icon"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M4.5 1v7M1 4.5h7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+          </button>
+          <div class="faq-answer">Nein. Wir bauen, konfigurieren und übergeben — inklusive einem kurzen Video zur Bedienung. Sie klicken auf "Starten".</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn" aria-expanded="false">
+            Was ist DSGVO-konform gemeint?
+            <span class="faq-icon"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M4.5 1v7M1 4.5h7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span>
+          </button>
+          <div class="faq-answer">Alle Agenten werden mit EU-Hosting aufgesetzt. Auftragsverarbeitungsvertrag (AVV) ist inklusive. Besonders für Praxen und Kanzleien wichtig.</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">Klar<span>werk</span></div>
+        <p>KI-Agenten für lokale Unternehmen. Weniger Aufwand, mehr Ertrag — in 1–3 Tagen live.</p>
+      </div>
+      <div class="f-col">
+        <h4>KI-Agenten</h4>
+        <ul>
+          <li><a href="/kontakt">A1 Termin-Agent</a></li>
+          <li><a href="/kontakt">A2 Bewertungs-Agent</a></li>
+          <li><a href="/kontakt">A3 E-Mail-Triage</a></li>
+          <li><a href="/kontakt">A4 Lead-Agent</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Unternehmen</h4>
+        <ul>
+          <li><a href="/ueber-uns">Über uns</a></li>
+          <li><a href="/referenzen">Fallstudien</a></li>
+          <li><a href="/blog">Blog</a></li>
+          <li><a href="/kontakt">Kontakt</a></li>
+          <li><a href="/impressum">Impressum</a></li>
+          <li><a href="/datenschutz">Datenschutz</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-btm">
+      <span>© 2025 Klarwerk. Alle Rechte vorbehalten.</span>
+      <span>info@klarwerk.de</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════════════ -->
+<script>
+/* Header scroll */
+const hdr = document.getElementById('hdr');
+window.addEventListener('scroll', () => hdr.classList.toggle('scrolled', scrollY > 50), { passive:true });
+
+/* Cursor glow */
+const cg = document.getElementById('cursorGlow');
+if (window.matchMedia('(pointer:fine)').matches) {
+  window.addEventListener('mousemove', e => {
+    cg.style.left = e.clientX + 'px';
+    cg.style.top  = e.clientY + 'px';
+    cg.style.opacity = '1';
+  }, { passive:true });
+}
+
+/* Scroll reveal */
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) { e.target.classList.add('vis'); io.unobserve(e.target); }
+}), { threshold:.1 });
+document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el => io.observe(el));
+
+/* ── Hero canvas particles ── */
+(function() {
+  const c = document.getElementById('hero-canvas');
+  if (!c) return;
+  const ctx = c.getContext('2d');
+  let W, H, pts, raf;
+
+  function resize() {
+    W = c.width  = c.offsetWidth;
+    H = c.height = c.offsetHeight;
+  }
+  function init() {
+    pts = Array.from({length:60}, () => ({
+      x: Math.random()*W, y: Math.random()*H,
+      r: Math.random()*1.3+.3,
+      vx:(Math.random()-.5)*.22, vy:(Math.random()-.5)*.22,
+      a: Math.random()*.4+.06
+    }));
+  }
+  function frame() {
+    ctx.clearRect(0,0,W,H);
+    pts.forEach(p => {
+      p.x = (p.x+p.vx+W)%W;
+      p.y = (p.y+p.vy+H)%H;
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle = `rgba(0,232,122,${p.a})`;
+      ctx.fill();
+    });
+    for (let i=0;i<pts.length;i++) for(let j=i+1;j<pts.length;j++) {
+      const dx=pts[i].x-pts[j].x, dy=pts[i].y-pts[j].y, d=Math.hypot(dx,dy);
+      if (d<100) {
+        ctx.beginPath();
+        ctx.moveTo(pts[i].x,pts[i].y);
+        ctx.lineTo(pts[j].x,pts[j].y);
+        ctx.strokeStyle = `rgba(0,232,122,${.055*(1-d/100)})`;
+        ctx.lineWidth = .55;
+        ctx.stroke();
+      }
+    }
+    raf = requestAnimationFrame(frame);
+  }
+  resize(); init(); frame();
+  new ResizeObserver(() => { cancelAnimationFrame(raf); resize(); init(); frame(); }).observe(c.parentElement);
+})();
+
+/* ── FAQ accordion ── */
+document.querySelectorAll('.faq-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const open = btn.getAttribute('aria-expanded') === 'true';
+    document.querySelectorAll('.faq-btn').forEach(b => {
+      b.setAttribute('aria-expanded','false');
+      b.nextElementSibling.classList.remove('open');
+    });
+    if (!open) {
+      btn.setAttribute('aria-expanded','true');
+      btn.nextElementSibling.classList.add('open');
+    }
+  });
+});
+
+/* ── Counter animation ── */
+const cio = new IntersectionObserver(es => {
+  es.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target;
+    const num = parseFloat(el.dataset.count);
+    if (isNaN(num)) return;
+    const prefix = el.dataset.prefix || '';
+    const suffix = el.dataset.suffix || '';
+    const dec = String(num).includes('.') ? String(num).split('.')[1].length : 0;
+    let t0 = null;
+    (function step(ts) {
+      if (!t0) t0 = ts;
+      const p = Math.min((ts-t0)/1600,1), ease = 1-Math.pow(1-p,3);
+      el.textContent = prefix + (num*ease).toFixed(dec) + suffix;
+      if (p<1) requestAnimationFrame(step);
+    })(performance.now());
+    cio.unobserve(el);
+  });
+}, {threshold:.5});
+document.querySelectorAll('[data-count]').forEach(el => cio.observe(el));
+</script>
+
+</body>
+</html>
