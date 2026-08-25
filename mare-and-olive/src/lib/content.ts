@@ -268,10 +268,21 @@ export const menu: MenuCategory[] = [
 
 export const founders = {
   names: 'Luca Moretti & Sofia Conti',
+  luca: {
+    name: 'Luca Moretti',
+    role: 'Chef & Co-Founder',
+    origin: 'Naples',
+  },
+  sofia: {
+    name: 'Sofia Conti',
+    role: 'Host & Co-Founder',
+    origin: 'the Adriatic coast, near Split',
+  },
+  metCity: 'Barcelona',
   year: 2018,
-  story: `Luca grew up in Naples, in a kitchen that never really closed — his grandmother cooked for whoever walked through the door. Sofia was raised on the Adriatic coast, in a family of fishermen and Sunday-lunch cooks. They met in a restaurant kitchen in Milan, and spent a decade cooking across the Mediterranean before deciding to build something of their own.
+  story: `Luca grew up in Naples, in a kitchen that never really closed — his grandmother cooked for whoever walked through the door. Sofia was raised on the Adriatic coast near Split, in a family of fishermen and Sunday-lunch cooks. They met years later in Barcelona, working the same summer season two doors apart, and spent the following decade cooking across the Mediterranean before deciding to build something of their own.
 
-In 2018, they opened MARE & OLIVE in Hamburg's HafenCity, a city they had come to love for its light, its water and its quiet appreciation of good things. The restaurant was built around one idea: that the Mediterranean is not a single cuisine, but a shared philosophy — of fire, of the sea, of unhurried tables.
+In 2018, they opened MARE & OLIVE in a converted waterfront building in Hamburg's HafenCity — a city neither of them expected to love, but did, for its light, its water and its quiet appreciation of good things. The restaurant was built around one idea: that the Mediterranean is not a single cuisine, but a shared philosophy — of fire, of the sea, of unhurried tables.
 
 Today, the kitchen still runs on the same principles. Ingredients are sourced by season, not by convenience. The grill is always lit. And the table, as it should be, is for sharing.`,
 }
@@ -280,4 +291,69 @@ export const philosophy = {
   eyebrow: 'Our Philosophy',
   headline: 'Sun. Sea. Fire. Olive oil.',
   body: `At MARE & OLIVE, Mediterranean cooking is less about recipes and more about feeling. We cook with the seasons, follow the rhythm of the sea and let exceptional ingredients speak for themselves.`,
+}
+
+// The five recurring ideas the homepage journey is built around. Each
+// pillar carries its own tone, motif and short line of copy — used by
+// the Journey sections on the homepage, in that order.
+export type Pillar = {
+  key: string
+  word: string
+  eyebrow: string
+  headline: string
+  body: string
+  tone: 'sea' | 'terracotta' | 'olive' | 'stone' | 'night'
+  motif: 'wave' | 'flame' | 'olive-branch' | 'table' | 'candle'
+}
+
+export const pillars: Pillar[] = [
+  {
+    key: 'sea',
+    word: 'Sea',
+    eyebrow: 'From the coast',
+    headline: 'From the coast to the city.',
+    body: 'Every menu at MARE & OLIVE starts with what the water gives us that morning — not the other way around.',
+    tone: 'sea',
+    motif: 'wave',
+  },
+  {
+    key: 'fire',
+    word: 'Fire',
+    eyebrow: 'Open flame',
+    headline: 'Almost everything passes over fire.',
+    body: 'A charcoal grill sits at the centre of the kitchen, tended through service by hand. Little is fried; nothing is rushed.',
+    tone: 'terracotta',
+    motif: 'flame',
+  },
+  {
+    key: 'olive',
+    word: 'Olive',
+    eyebrow: 'The one ingredient',
+    headline: 'Everything starts with good oil.',
+    body: 'A single, cold-pressed oil from a small grove outside Split — the one ingredient that touches almost every plate we serve.',
+    tone: 'olive',
+    motif: 'olive-branch',
+  },
+  {
+    key: 'table',
+    word: 'Table',
+    eyebrow: 'Made for sharing',
+    headline: 'The best meals are never eaten alone.',
+    body: 'Plates are built to be passed hand to hand. Nothing on the menu is meant to be eaten in silence, or alone.',
+    tone: 'stone',
+    motif: 'table',
+  },
+  {
+    key: 'night',
+    word: 'Night',
+    eyebrow: 'After dark',
+    headline: 'Stay for one more glass.',
+    body: 'As the room dims, the candles start to matter more than the lighting design. This is the hour the restaurant was built for.',
+    tone: 'night',
+    motif: 'candle',
+  },
+]
+
+export const opening = {
+  coordinates: 'HAMBURG · 53°32\'N',
 }

@@ -61,6 +61,13 @@ const gradients: Record<Tone, { from: string; to: string; motif: string; wash: s
   sea: { from: '#2E4A52', to: '#17262B', motif: '#F4EFE6', wash: '#C1592B' },
 }
 
+// The darker "to" anchor of each tone's gradient, exposed so pages can
+// build a SectionBridge that melts into a Visual panel's actual edge
+// color rather than an approximated one.
+export const toneEdgeColor: Record<Tone, string> = Object.fromEntries(
+  Object.entries(gradients).map(([tone, g]) => [tone, g.to]),
+) as Record<Tone, string>
+
 type VisualProps = {
   tone: Tone
   motif: MotifName
@@ -70,6 +77,8 @@ type VisualProps = {
   motifClassName?: string
   motifOpacity?: number
   grain?: boolean
+  /** A soft diagonal highlight standing in for a fluid/glass/ceramic sheen — used sparingly, for materiality (olive oil, glass, wet ceramic), never as a default. */
+  sheen?: boolean
 }
 
 /**
@@ -88,6 +97,7 @@ export default function Visual({
   motifClassName = '',
   motifOpacity = 0.85,
   grain = true,
+  sheen = false,
 }: VisualProps) {
   const Motif = motifs[motif]
   const g = gradients[tone]
@@ -113,6 +123,14 @@ export default function Visual({
         <div
           className="absolute inset-0 opacity-[0.12] mix-blend-overlay"
           style={{ backgroundImage: NOISE_TILE, backgroundRepeat: 'repeat', backgroundSize: '96px 96px' }}
+          aria-hidden="true"
+        />
+      )}
+
+      {sheen && (
+        <div
+          className="absolute inset-0 opacity-[0.16] mix-blend-overlay"
+          style={{ background: 'linear-gradient(115deg, transparent 28%, #FFFFFF 46%, transparent 62%)' }}
           aria-hidden="true"
         />
       )}
