@@ -1,9 +1,17 @@
 import Reveal from '../components/Reveal'
 import Visual from '../components/Visual'
 import VisualBreak from '../components/VisualBreak'
+import Timeline from '../components/Timeline'
 import { founders } from '../lib/content'
 
 const paragraphs = founders.story.split('\n\n')
+
+const timelineSteps = [
+  { label: 'Naples', sublabel: "Luca's start" },
+  { label: 'Split', sublabel: "Sofia's coast" },
+  { label: 'Barcelona', sublabel: 'Where they met' },
+  { label: 'Hamburg, 2018', sublabel: 'The beginning' },
+]
 
 export default function Story() {
   return (
@@ -26,7 +34,11 @@ export default function Story() {
         </div>
       </section>
 
-      <section className="container-edit py-24 sm:py-32">
+      <section className="container-edit py-16 sm:py-20">
+        <Timeline steps={timelineSteps} />
+      </section>
+
+      <section className="container-edit py-16 sm:py-24">
         <div className="grid grid-cols-1 gap-14 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
           <Reveal direction="up" y={40} className="aspect-[3/4] lg:sticky lg:top-32 lg:h-fit">
             <Visual tone="sand" motif="leaf" className="h-full w-full" label={founders.names} sublabel={`Founders, est. ${founders.year}`} />
