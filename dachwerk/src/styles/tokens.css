@@ -1,0 +1,91 @@
+/* DACHWERK Design Tokens.
+   Einzige Quelle fuer Farbe, Typografie, Raster, Bewegung.
+   Grundlage: docs/02-ART-DIRECTION.md und docs/06-PRODUCTION-ARCHITECTURE.md, Abschnitt 7. */
+
+:root {
+  /* Flaechen und Text, Nachtmodus */
+  --surface-0: #111211;
+  --surface-1: #1b1c1a;
+  --surface-2: #232420;
+  --text-0: #f3f0e9;
+  --text-1: #c9c1b4;
+  --text-2: #928c80;   /* 4,7:1 auf surface-2, damit Meta auch in Feldern lesbar bleibt */
+  --hair: rgba(243, 240, 233, 0.1);
+  --hair-1: rgba(243, 240, 233, 0.2);
+
+  /* Domaenen. Flaechenfarbe und Textfarbe sind getrennt, siehe 05-KOHAERENZPRUEFUNG W10 */
+  --dach: #9a6950;        /* 4,0:1 auf Obsidian, Flaechen und Display ab 24px */
+  --dach-text: #c08a6e;   /* 6,4:1, fuer Labels und Textauszeichnung */
+  --energie: #d5b45a;     /* 9,4:1, Primaerakzent */
+  --nature: #667060;
+  --nature-text: #8fa083;
+
+  /* Zustaende, immer zusaetzlich als Text kodiert */
+  --state-error: #e08b76; /* 7,3:1 */
+  --state-ok: #8fa083;    /* 6,8:1 */
+  --focus: var(--energie);
+
+  /* Typografie */
+  --font-display: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  --t-display-xl: clamp(3.25rem, 9vw, 9.5rem);
+  --t-display-l: clamp(2.5rem, 5.5vw, 5rem);
+  --t-display-m: clamp(1.875rem, 3.4vw, 3rem);
+  --t-display-s: clamp(1.375rem, 2.2vw, 1.875rem);
+  --t-numeral: clamp(3rem, 8vw, 8rem);
+  --t-lead: clamp(1.0625rem, 1.3vw, 1.3125rem);
+  --t-body: 1rem;
+  --t-body-s: 0.875rem;
+  --t-label: 0.6875rem;
+  --t-spec: 0.75rem;
+
+  /* Raster */
+  --s-1: 4px;  --s-2: 8px;  --s-3: 12px; --s-4: 16px; --s-5: 24px; --s-6: 32px;
+  --s-7: 48px; --s-8: 64px; --s-9: 96px; --s-10: 128px; --s-11: 192px;
+  --rail: 170px;
+  --page-max: 1440px;
+  --measure: 68ch;
+  --radius: 2px;
+  --angle-roof: 38deg;
+
+  /* Bewegung */
+  --dur-1: 240ms; --dur-2: 480ms; --dur-3: 640ms;
+  --dur-4: 900ms; --dur-5: 1100ms; --dur-6: 1800ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
+  --stagger: 80ms;
+  /* Masseregel: je groesser die Flaeche, desto kleiner der Weg */
+  --move-surface: 8px;
+  --move-block: 12px;
+  --move-text: 16px;
+  --move-detail: 24px;
+  --parallax-max: 8%;
+
+  /* Abdeckungen. Tailwind kann bei CSS-Variablen kein Alpha einsetzen,
+     deshalb liegen die halbtransparenten Flaechen als eigene Token hier. */
+  --scrim-header: rgba(17, 18, 17, 0.94);
+  --scrim-tag: rgba(17, 18, 17, 0.72);
+
+  /* Tiefe. Genau ein Schatten im Projekt, fuer die mobile Aktionsleiste */
+  --shadow-sticky: 0 -1px 24px rgba(0, 0, 0, 0.5);
+}
+
+/* Tagflaeche. Der Wechsel laeuft ueber ein Attribut am Abschnitt,
+   nicht ueber eine zweite Palette in den Komponenten. */
+[data-surface='day'] {
+  --surface-0: #f3f0e9;
+  --surface-1: #e9e4d9;
+  --surface-2: #e2dccf;
+  --text-0: #111211;
+  --text-1: #57534b;
+  --text-2: #635d54;   /* 4,8:1 auf surface-2 im Tagmodus */
+  --hair: rgba(17, 18, 17, 0.12);
+  --hair-1: rgba(17, 18, 17, 0.22);
+  --dach-text: #8a5c45;
+  --nature-text: #4f5a4a;
+}
+
+:root {
+  /* Filmkorn als eine Kachel. Verbindet fotografische und gerenderte Flaechen. */
+  --grain-src: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+}
