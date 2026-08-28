@@ -49,7 +49,7 @@ export function GuidePage({ meta, slug }: { meta: RouteMeta; slug: string }) {
               </Link>
             );
           })}
-          <Link to="/dach-und-pv/" className="text-s text-energie underline decoration-hair">Dach und Photovoltaik kombinieren</Link>
+          <Link to="/dach-und-pv/" className="text-s text-energie-text underline decoration-hair">Dach und Photovoltaik kombinieren</Link>
         </div>
       </Section>
       <CtaBlock first="Wie sieht das bei Ihrem Haus aus?" />

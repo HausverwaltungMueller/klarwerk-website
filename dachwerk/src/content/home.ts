@@ -13,7 +13,7 @@ export const hero = {
     energie: 'Energiefläche',
   },
   measure: 'Dachneigung 38°',
-  measureLate: '24 Module · Belegung 74 %',
+  measureLate: '24 Module · 74 % der Dachbreite',
   closing: 'Aus Dachfläche wird Energiefläche.',
   closingEyebrow: 'Dieselbe Fläche, zwei Aufgaben',
 };
@@ -86,6 +86,8 @@ export const projekte = {
   h2: 'Gute Arbeit sieht man.',
   lead: 'Vorher und nachher aus identischer Kameraachse. Der Regler läuft beim Scrollen einmal durch und bleibt danach zum Ziehen bedienbar.',
   note: 'Musterprojekt. Die gezeigten Projekte dienen der Darstellung von Leistungen und sind keine realen Referenzen. Keine Kundennamen, keine Bewertungen, keine Ertragsangaben.',
+  /** Die Projektseite zeigt Paare nebeneinander, keinen Regler. Eigener Vorspann. */
+  leadSeite: 'Vorher und nachher aus identischer Kameraachse, je Projekt nebeneinander. Daneben stehen Ausgangslage, Ausführung und Ergebnis.',
 };
 
 export const qualitaet = {
@@ -98,6 +100,11 @@ export const qualitaet = {
     'Wartung und Kontrolle vereinbaren wir auf Wunsch, nicht automatisch.',
   ],
   note: 'Keine erfundenen Garantien, keine Zertifikate, keine Mitgliedschaften. Was hier steht, muss der Betrieb bestätigen können.',
+  guide: {
+    text: 'Worauf es beim Dachaufbau und bei der Auslegung einer Anlage ankommt, erklären wir ausführlich im',
+    link: 'Ratgeber',
+    to: '/ratgeber/',
+  },
 };
 
 export const statement = {
@@ -109,8 +116,8 @@ export const statement = {
 
 export const arbeitsgebiet = {
   label: 'Arbeitsgebiet',
-  h2: '70 Kilometer rund um Hildesheim.',
-  lead: 'Zuhause im Landkreis Hildesheim, im Einsatz bis etwa 70 Kilometer.',
+  h2: 'Zuhause im Landkreis Hildesheim.',
+  lead: 'Im Einsatz bis etwa 70 Kilometer.',
   text: 'Wir kennen die Bauweisen zwischen Leinebergland und Börde, die typischen Dachformen der Siedlungen der Nachkriegsjahre und die Anforderungen der Netzbetreiber vor Ort. Kurze Wege bedeuten, dass ein Ortstermin keine Tagesreise ist.',
 };
 

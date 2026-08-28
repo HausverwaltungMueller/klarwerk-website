@@ -7,7 +7,10 @@
 @tailwind utilities;
 
 @layer base {
-  *, *::before, *::after { box-sizing: border-box; }
+  /* Ohne Tailwind-Preflight fehlt der Rahmenstandard. Ohne ihn bleibt jede
+     Utility wie `border-t` ohne Wirkung, weil `border-style` auf `none` steht.
+     Deshalb hier derselbe Standard, den Preflight sonst setzt. */
+  *, *::before, *::after { box-sizing: border-box; border-style: solid; border-width: 0; }
 
   html {
     -webkit-text-size-adjust: 100%;
@@ -92,6 +95,7 @@
   /* Kopfzeile bleibt immer dunkel, auch ueber einer Tagflaeche */
   .bg-scrim-header { background: var(--scrim-header); }
   .bg-scrim-tag { background: var(--scrim-tag); }
+  .text-on-scrim { color: var(--text-on-scrim); }
 
   /* ---------- Haarlinie und Flaechen ---------- */
   .hairline { height: 1px; background: var(--hair); border: 0; }
@@ -141,4 +145,21 @@
     background-image: var(--grain-src);
     opacity: 0.035; mix-blend-mode: screen;
   }
+}
+
+/* Flächenwechsel: waagerechter Weg und Länge der 38-Grad-Kante je Bandhöhe.
+   120px / tan(38°) = 154px, 120px / sin(38°) = 195px.
+   190px / tan(38°) = 243px, 190px / sin(38°) = 309px. */
+.arc { --arc-run: 154px; --arc-edge: 195px; }
+@media (min-width: 768px) {
+  .arc { --arc-run: 243px; --arc-edge: 309px; }
+}
+
+/* Reduzierte Bewegung: Die Hero-Sequenz entfaellt, an ihre Stelle tritt die
+   Standbildfassung, docs/04, Teil E. Als Medienabfrage, damit es auch ohne
+   JavaScript stimmt. Unlayered, deshalb schlaegt es `md:hidden`. */
+@media (prefers-reduced-motion: reduce) {
+  html .hero-stills { display: block; }   /* eine Stufe spezifischer als md:hidden */
+  [data-hero-stage] canvas { display: none; }
+  #hero { height: auto; }
 }

@@ -66,7 +66,7 @@ export function RegionPage({ meta, slug }: { meta: RouteMeta; slug: string }) {
           Entfernung zur Werkstatt: {r.distanceKm === 0 ? 'am Ort' : `etwa ${r.distanceKm} km`}.
         </p>
         <div className="mt-4" data-reveal>
-          <Link to="/dach-und-pv/" className="text-s text-energie underline decoration-hair">Dach und Photovoltaik kombinieren</Link>
+          <Link to="/dach-und-pv/" className="text-s text-energie-text underline decoration-hair">Dach und Photovoltaik kombinieren</Link>
         </div>
       </Section>
 

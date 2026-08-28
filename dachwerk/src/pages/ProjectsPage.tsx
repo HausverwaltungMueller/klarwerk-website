@@ -12,7 +12,7 @@ export function ProjectsPage({ meta }: { meta: RouteMeta }) {
   void meta;
   return (
     <>
-      <PageIntro label="Beispielprojekte" h1="Gute Arbeit sieht man." lead={projekte.lead} />
+      <PageIntro label="Beispielprojekte" h1="Gute Arbeit sieht man." lead={projekte.leadSeite} />
       {projects.map((p) => (
         <Section key={p.id} id={`projekt-${p.id}`} label={`Beispielprojekt ${p.id}`}>
           <div className="grid gap-7 md:grid-cols-2">

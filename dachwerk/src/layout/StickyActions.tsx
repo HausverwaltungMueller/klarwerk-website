@@ -15,7 +15,8 @@ export function StickyActions() {
   useEffect(() => {
     const decide = () => {
       const hero = document.getElementById('hero');
-      const contact = document.getElementById('kontakt');
+      /* Kontaktabschnitt der Startseite oder der Anfragebereich der Kontaktseite. */
+      const contact = document.getElementById('kontakt') ?? document.getElementById('anfrage');
       const heroPassed = hero ? hero.getBoundingClientRect().bottom < 80 : true;
       const inContact = contact ? contact.getBoundingClientRect().top < window.innerHeight * 0.7 : false;
       setOn(heroPassed && !inContact);

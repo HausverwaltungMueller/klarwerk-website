@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useMotion } from '@/motion/useMotion';
 import { layersScene } from '@/motion/scenes/layers';
 import { Section } from '@/design/Section';
@@ -8,7 +9,7 @@ import { CtaBlock } from './CtaBlock';
 import { RoofSectionDrawing } from '@/design/drawings/RoofSectionDrawing';
 import { layers } from '@/content/process';
 import { pvBenefits, legalNote } from '@/content/legal';
-import { bridgeFaq, bridgeText } from '@/content/bridge';
+import { bridgeFaq, bridgeText, bridgeWeiter } from '@/content/bridge';
 import type { RouteMeta } from '@/routes';
 
 /** Die strategisch wichtigste Unterseite. Ein Pin ist erlaubt, hier genügt Ruhe. */
@@ -60,7 +61,7 @@ export function BridgePage({ meta }: { meta: RouteMeta }) {
               <li key={l.index} className="grid grid-cols-[44px_1fr] gap-x-4 border-t border-hair py-4" data-reveal="block">
                 <span className="t-spec pt-1">{l.index}</span>
                 <div>
-                  <h3 className={`text-base font-medium ${l.domain === 'energie' ? 'text-energie' : 'text-text-0'}`}>{l.name}</h3>
+                  <h3 className={`text-base font-medium ${l.domain === 'energie' ? 'text-energie-text' : 'text-text-0'}`}>{l.name}</h3>
                   <p className="mt-1 text-s text-text-2">{l.note}</p>
                 </div>
               </li>
@@ -109,6 +110,16 @@ export function BridgePage({ meta }: { meta: RouteMeta }) {
             </div>
           ))}
         </div>
+      </Section>
+
+      <Section id="weiter" label="Weiter im Detail" rhythm="tight" labelAs="h2">
+        <ul className="flex flex-wrap gap-x-7 gap-y-3" data-reveal>
+          {bridgeWeiter.map((w) => (
+            <li key={w.to}>
+              <Link to={w.to} className="text-s text-text-1 underline decoration-hair hover:text-text-0">{w.label}</Link>
+            </li>
+          ))}
+        </ul>
       </Section>
 
       <CtaBlock first="Lohnt sich das für Ihr Haus?" preset="dach-und-pv" />

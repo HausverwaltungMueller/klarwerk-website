@@ -60,8 +60,8 @@ function BeforeAfter({ before, after, label }: { before: React.ReactNode; after:
     >
       <div className="absolute inset-0">{before}</div>
       <div className="absolute inset-0" style={{ clipPath: `inset(0 0 0 ${(1 - value) * 100}%)` }}>{after}</div>
-      <span className="absolute bottom-3 left-3 z-[3] bg-scrim-tag px-2 py-1 text-label text-text-0">Vorher</span>
-      <span className="absolute bottom-3 right-3 z-[3] bg-scrim-tag px-2 py-1 text-label text-text-0">Nachher</span>
+      <span className="absolute bottom-3 left-3 z-[3] bg-scrim-tag px-2 py-1 text-label text-on-scrim">Vorher</span>
+      <span className="absolute bottom-3 right-3 z-[3] bg-scrim-tag px-2 py-1 text-label text-on-scrim">Nachher</span>
       <span aria-hidden="true" className="absolute inset-y-0 z-[4] w-px bg-energie" style={{ left: `${value * 100}%` }} />
     </div>
   );

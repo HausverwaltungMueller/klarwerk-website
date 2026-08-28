@@ -84,7 +84,7 @@ export function Hero() {
             <p className="t-lead mt-5 max-w-[44ch]">{hero.lead}</p>
             <div className="mt-6 flex flex-wrap gap-4">
               <Button to="/kontakt/" size="lg" arrow event="hero_cta_click">{cta.projekt}</Button>
-              <Button to="/dach/" variant="secondary" size="lg">{cta.leistungen}</Button>
+              <Button to="/#leistungen" variant="secondary" size="lg">{cta.leistungen}</Button>
             </div>
           </div>
 

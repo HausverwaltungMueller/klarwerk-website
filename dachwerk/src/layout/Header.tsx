@@ -53,6 +53,11 @@ export function Header() {
         solid || panel || menu ? 'border-hair bg-scrim-header backdrop-blur' : 'border-transparent'
       }`}
       onMouseLeave={() => setPanel(null)}
+      /* Das Panel oeffnet beim Fokus. Verlaesst der Fokus die Kopfzeile,
+         schliesst es wieder, sonst bleibt es fuer Tastaturnutzer offen stehen. */
+      onBlur={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget as Node | null)) setPanel(null);
+      }}
     >
       <div className="page flex items-center justify-between gap-5 py-4">
         <Link to="/" className="text-s font-semibold tracking-[0.22em]" aria-label="DACHWERK, zur Startseite">
@@ -70,6 +75,12 @@ export function Header() {
                 onMouseEnter={() => setPanel(d)}
                 onFocus={() => setPanel(d)}
                 onClick={() => setPanel(panel === d ? null : d)}
+                /* Wandert der Fokus weiter, ohne in das eigene Panel zu gehen,
+                   schliesst das Panel. Sonst steht es offen, waehrend weitergetabbt wird. */
+                onBlur={(e) => {
+                  const ziel = e.relatedTarget as Node | null;
+                  if (!ziel || !document.getElementById(`panel-${d}`)?.contains(ziel)) setPanel(null);
+                }}
               >
                 {domainMeta[d].label}
                 <Icon name={panel === d ? 'minus' : 'plus'} size={14} />
@@ -117,7 +128,7 @@ export function Header() {
           <div className="page grid grid-cols-[1fr_1fr_260px] gap-7 py-7">
             <div>
               <p className="t-label mb-3">{domainMeta[d].label}</p>
-              <p className={`t-display-s ${d === 'dach' ? 'text-dach-text' : 'text-energie'}`}>
+              <p className={`t-display-s ${d === 'dach' ? 'text-dach-text' : 'text-energie-text'}`}>
                 {domainMeta[d].lines}
               </p>
               <div className="mt-5">

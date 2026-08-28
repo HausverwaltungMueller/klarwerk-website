@@ -27,6 +27,28 @@ const ratio = (a: string, b: string): number => {
   return (x + 0.05) / (y + 0.05);
 };
 
+/**
+ * Halbtransparente Token wie die Haarlinien werden ueber ihrer Flaeche verrechnet,
+ * damit die Grenze eines Bedienelements gegen die tatsaechliche Flaeche geprueft wird.
+ * Schwelle 3:1 nach WCAG 1.4.11 fuer nicht textliche Kontraste.
+ */
+function alphaToken(name: string, block?: 'day'): { rgb: [number, number, number]; a: number } {
+  const scope = block === 'day'
+    ? css.slice(css.indexOf("[data-surface='day']"))
+    : css.slice(0, css.indexOf("[data-surface='day']"));
+  const m = new RegExp(`--${name}:\\s*rgba\\(\\s*(\\d+),\\s*(\\d+),\\s*(\\d+),\\s*([0-9.]+)\\s*\\)`).exec(scope);
+  if (!m) throw new Error(`Token nicht gefunden: ${name}${block ? ' (' + block + ')' : ''}`);
+  return { rgb: [Number(m[1]), Number(m[2]), Number(m[3])], a: Number(m[4]) };
+}
+
+const hex2 = (n: number) => Math.round(n).toString(16).padStart(2, '0');
+
+function over(name: string, bgHex: string, block?: 'day'): string {
+  const { rgb, a } = alphaToken(name, block);
+  const bg = [1, 3, 5].map((i) => parseInt(bgHex.slice(i, i + 2), 16)) as [number, number, number];
+  return '#' + rgb.map((c, i) => hex2(c * a + (bg[i] ?? 0) * (1 - a))).join('');
+}
+
 type Check = { name: string; fg: string; bg: string; min: number };
 const checks: Check[] = [
   { name: 'text-0 auf surface-0 (Nacht)', fg: token('text-0'), bg: token('surface-0'), min: 7 },
@@ -49,6 +71,21 @@ const checks: Check[] = [
   { name: 'text-2 auf surface-1 (Tag)', fg: token('text-2', 'day'), bg: token('surface-1', 'day'), min: 4.5 },
   { name: 'text-2 auf surface-2 (Tag)', fg: token('text-2', 'day'), bg: token('surface-2', 'day'), min: 4.5 },
   { name: 'text-2 auf surface-1 (Nacht)', fg: token('text-2'), bg: token('surface-1'), min: 4.5 },
+
+  { name: 'energie-text auf surface-0 (Nacht)', fg: token('energie-text'), bg: token('surface-0'), min: 4.5 },
+  { name: 'energie-text auf surface-1 (Nacht)', fg: token('energie-text'), bg: token('surface-1'), min: 4.5 },
+  { name: 'energie-text auf surface-0 (Tag)', fg: token('energie-text', 'day'), bg: token('surface-0', 'day'), min: 4.5 },
+  { name: 'energie-text auf surface-1 (Tag)', fg: token('energie-text', 'day'), bg: token('surface-1', 'day'), min: 4.5 },
+  { name: 'energie-text auf surface-2 (Tag)', fg: token('energie-text', 'day'), bg: token('surface-2', 'day'), min: 4.5 },
+  { name: 'dach-text auf surface-1 (Tag)', fg: token('dach-text', 'day'), bg: token('surface-1', 'day'), min: 4.5 },
+
+  /* Grenzen von Bedienelementen, WCAG 1.4.11 */
+  { name: 'hair-1 als Bedienrand auf surface-0 (Nacht)', fg: over('hair-1', token('surface-0')), bg: token('surface-0'), min: 3 },
+  { name: 'hair-1 als Bedienrand auf surface-1 (Nacht)', fg: over('hair-1', token('surface-1')), bg: token('surface-1'), min: 3 },
+  { name: 'hair-1 als Bedienrand auf surface-2 (Nacht)', fg: over('hair-1', token('surface-2')), bg: token('surface-2'), min: 3 },
+  { name: 'hair-1 als Bedienrand auf surface-0 (Tag)', fg: over('hair-1', token('surface-0', 'day'), 'day'), bg: token('surface-0', 'day'), min: 3 },
+  { name: 'hair-1 als Bedienrand auf surface-1 (Tag)', fg: over('hair-1', token('surface-1', 'day'), 'day'), bg: token('surface-1', 'day'), min: 3 },
+  { name: 'hair-1 als Bedienrand auf surface-2 (Tag)', fg: over('hair-1', token('surface-2', 'day'), 'day'), bg: token('surface-2', 'day'), min: 3 },
 ];
 
 let failed = 0;

@@ -26,7 +26,7 @@ export function Aufbau() {
             <li key={l.index} className="grid grid-cols-[44px_1fr] gap-x-4 border-t border-hair py-4" data-reveal="block">
               <span className="t-spec pt-1">{l.index}</span>
               <div>
-                <h3 className={`text-base font-medium ${l.domain === 'energie' ? 'text-energie' : 'text-text-0'}`}>
+                <h3 className={`text-base font-medium ${l.domain === 'energie' ? 'text-energie-text' : 'text-text-0'}`}>
                   {l.name}
                 </h3>
                 <p className="mt-1 text-s text-text-2">{l.note}</p>

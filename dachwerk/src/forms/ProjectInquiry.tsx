@@ -1,15 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { Button } from '@/design/Button';
-import { Icon } from '@/design/Icon';
-import { presets, presetLabel, stepHints, stepTitles, type StepId } from './steps';
+import { presets, stepHints, stepTitles, type StepId } from './steps';
+import { AnliegenChoice } from './AnliegenChoice';
+import { InquiryDetails } from './InquiryDetails';
 import { emptyValues, loadValues, nextStep, prevStep, saveValues, type InquiryValues } from './machine';
 import { outsideArea, validateField, validateStep, type Errors } from './validate';
 import { demoSubmitter } from './submit';
 import type { CtaPreset } from '@/types';
 import { cta } from '@/content/cta';
 import { track } from '@/lib/track';
-import { IS_DEMO } from '@/config';
 
 /**
  * Vier Schritte, ein Feldbereich je Schritt. Label immer sichtbar, kein Floating Label.
@@ -24,6 +24,7 @@ export function ProjectInquiry() {
   const [done, setDone] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const headingRef = useRef<HTMLHeadingElement>(null);
+  const doneRef = useRef<HTMLDivElement>(null);
   const started = useRef(false);
 
   // Vorbelegung aus dem CTA, danach gespeicherter Zustand
@@ -38,6 +39,16 @@ export function ProjectInquiry() {
   }, [params]);
 
   useEffect(() => { saveValues(values); }, [values]);
+
+  /**
+   * Nach dem Absenden steht die Bestaetigung weiter oben als der Sendeknopf.
+   * Ohne diesen Schritt bleibt der Blick am Fussbereich, im Browsertest aufgefallen.
+   */
+  useEffect(() => {
+    if (!done) return;
+    doneRef.current?.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    doneRef.current?.focus();
+  }, [done]);
 
   const set = <K extends keyof InquiryValues>(key: K, value: InquiryValues[K]) => {
     if (!started.current) { started.current = true; track('form_start'); }
@@ -78,7 +89,13 @@ export function ProjectInquiry() {
 
   if (done) {
     return (
-      <div className="border border-hair bg-surface-1 p-6" role="status" aria-live="polite">
+      <div
+        ref={doneRef}
+        tabIndex={-1}
+        className="border border-hair bg-surface-1 p-6 outline-none"
+        role="status"
+        aria-live="polite"
+      >
         <p className="t-label mb-3">Hinweis</p>
         <h3 className="t-display-s mb-4">Vielen Dank.</h3>
         <p className="max-w-measure text-text-1">{done}</p>
@@ -131,24 +148,7 @@ export function ProjectInquiry() {
       <p className="sr-only" aria-live="polite">{`Schritt ${step} von 4: ${stepTitles[step]}`}</p>
 
       <div className="min-h-[248px]">
-      {step === 1 ? (
-        <div className="grid gap-px bg-hair sm:grid-cols-2">
-          {presets.map((p) => {
-            const on = values.anliegen.includes(p);
-            return (
-              <button
-                key={p} type="button" onClick={() => toggle(p)} aria-pressed={on}
-                className={`flex min-h-[64px] items-center justify-between gap-3 border-l-2 bg-surface-1 px-4 text-left transition-colors duration-1 ease-out hover:bg-surface-2 ${
-                  on ? 'border-l-energie bg-surface-2' : 'border-l-transparent'
-                }`}
-              >
-                <span className="text-base">{presetLabel(p)}</span>
-                {on ? <Icon name="check" size={18} className="text-energie" /> : null}
-              </button>
-            );
-          })}
-        </div>
-      ) : null}
+      {step === 1 ? <AnliegenChoice gewaehlt={values.anliegen} toggle={toggle} /> : null}
 
       {step === 2 ? (
         <div className="relative flex max-w-[320px] flex-col gap-2 pb-[42px]">
@@ -213,45 +213,12 @@ export function ProjectInquiry() {
       ) : null}
 
       {step === 4 ? (
-        <div className="flex flex-col gap-5">
-          <div className="flex flex-col gap-2">
-            <label htmlFor="beschreibung" className="t-label">Projektbeschreibung</label>
-            <textarea id="beschreibung" name="beschreibung" rows={5} value={values.beschreibung}
-              onChange={(e) => set('beschreibung', e.target.value)}
-              placeholder="Worum geht es? Ein paar Sätze genügen."
-              className="rounded-t bg-surface-2 p-4 outline-none border-b border-b-hair-1 focus:border-b-2 focus:border-b-energie" />
-          </div>
-
-          <div className="flex flex-col gap-2 opacity-45">
-            <span className="t-label">Foto oder Dokument</span>
-            <div className="flex items-center gap-3 border border-dashed border-hair-1 p-4">
-              <Icon name="upload" size={20} />
-              <span className="text-s">Im Musterprojekt deaktiviert.</span>
-            </div>
-            <p className="text-s text-text-2">
-              Ein echter Upload ohne Verarbeitungsgrundlage und ohne Speicherort wäre datenschutzrechtlich nicht sauber.
-            </p>
-          </div>
-
-          <div className="relative flex flex-col gap-2 pb-[42px]">
-            <label className="flex items-start gap-3 text-s">
-              <input type="checkbox" checked={values.einwilligung}
-                onChange={(e) => set('einwilligung', e.target.checked)}
-                aria-describedby={errors.einwilligung ? 'err-einwilligung' : undefined}
-                className="mt-1 h-[18px] w-[18px] accent-[var(--energie)]" />
-              <span className="text-text-1">
-                Ich habe die <Link to="/datenschutz/" className="underline">Datenschutzhinweise</Link> gelesen und bin damit einverstanden, dass meine Angaben zur Bearbeitung meiner Anfrage verwendet werden.
-              </span>
-            </label>
-            {err('einwilligung')}
-          </div>
-
-          {IS_DEMO ? (
-            <p className="t-spec max-w-[70ch] leading-relaxed">
-              Musterformular. Es wird nichts übermittelt und nichts gespeichert.
-            </p>
-          ) : null}
-        </div>
+        <InquiryDetails
+          values={values}
+          set={set}
+          fehlerEinwilligung={Boolean(errors.einwilligung)}
+          meldung={err('einwilligung')}
+        />
       ) : null}
 
       </div>

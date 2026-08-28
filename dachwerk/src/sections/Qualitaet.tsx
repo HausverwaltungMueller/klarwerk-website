@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { Section } from '@/design/Section';
 import { Figure } from '@/design/Figure';
 import { qualitaet } from '@/content/home';
@@ -17,6 +18,13 @@ export function Qualitaet() {
             ))}
           </ul>
           <p className="t-spec mt-5 max-w-[70ch] leading-relaxed" data-reveal>{qualitaet.note}</p>
+          <p className="mt-4 max-w-[70ch] text-s text-text-1" data-reveal>
+            {qualitaet.guide.text}{' '}
+            <Link to={qualitaet.guide.to} className="underline decoration-hair underline-offset-4 hover:text-text-0">
+              {qualitaet.guide.link}
+            </Link>
+            .
+          </p>
         </div>
       </div>
     </Section>

@@ -15,8 +15,10 @@ export function Leistungen() {
           <div key={d} className={`relative overflow-hidden bg-surface-1 ${d === 'dach' ? 'tex-tile' : 'tex-glass'}`}>
             <div className="relative z-[2] p-6">
               <p className="t-label">{d === 'dach' ? 'Domäne A' : 'Domäne B'}</p>
-              <p className={`t-display-m mt-1 ${d === 'dach' ? 'text-dach-text' : 'text-energie'}`}>
-                {d === 'dach' ? split.dach.title : split.energie.title}
+              <p className={`t-display-m mt-1 ${d === 'dach' ? 'text-dach-text' : 'text-energie-text'}`}>
+                <Link to={d === 'dach' ? '/dach/' : '/photovoltaik/'} className="hover:underline hover:decoration-hair hover:underline-offset-4">
+                  {d === 'dach' ? split.dach.title : split.energie.title}
+                </Link>
               </p>
               <p className="mt-1 text-s text-text-1">
                 {d === 'dach' ? split.dach.lines : split.energie.lines}

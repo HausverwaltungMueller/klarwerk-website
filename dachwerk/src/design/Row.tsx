@@ -10,7 +10,7 @@ export function Row({
       <div className="min-w-0">
         <h3
           className={`text-base font-medium ${
-            accent === 'dach' ? 'text-dach-text' : accent === 'energie' ? 'text-energie' : 'text-text-0'
+            accent === 'dach' ? 'text-dach-text' : accent === 'energie' ? 'text-energie-text' : 'text-text-0'
           }`}
         >
           {title}

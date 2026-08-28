@@ -43,3 +43,10 @@ export const bridgeFaq: Faq[] = [
       'Für bestimmte Photovoltaikanlagen und ihre wesentlichen Komponenten gilt unter den gesetzlichen Voraussetzungen ein Umsatzsteuersatz von 0 Prozent. Dacharbeiten sind davon nicht automatisch erfasst. Wie Ihr Vorhaben im Einzelfall zu beurteilen ist, klärt Ihr Steuerberater, wir stellen die Positionen transparent dar.',
   },
 ];
+
+/** Weiterführende Verweise der Brückenseite, docs/06, Abschnitt 20. */
+export const bridgeWeiter = [
+  { to: '/dach/', label: 'Alle Leistungen am Dach' },
+  { to: '/photovoltaik/', label: 'Alle Leistungen an der Anlage' },
+  { to: '/projekte/', label: 'Ausgeführte Projekte ansehen' },
+];

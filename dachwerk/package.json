@@ -13,6 +13,8 @@
     "seo:emit": "tsx scripts/generate-sitemap.ts",
     "budget": "tsx scripts/check-budget.ts",
     "contrast": "tsx scripts/check-contrast.ts",
+    "links": "tsx scripts/check-links.ts",
+    "verify": "npm run budget && npm run links",
     "fonts": "tsx scripts/copy-fonts.ts",
     "check": "npm run typecheck && npm run lint && npm run content:lint && npm run contrast"
   },

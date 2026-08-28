@@ -62,7 +62,7 @@ export function Figure({ id, ratio, className = '', showMeta = true, fill = fals
           <span className="mat-fill" aria-hidden="true" />
           {showMeta ? (
             <figcaption className="absolute bottom-3 left-4 right-4 z-[2] flex flex-col gap-1">
-              <span className="text-label font-semibold uppercase tracking-[0.2em] text-energie">
+              <span className="text-label font-semibold uppercase tracking-[0.2em] text-energie-text">
                 Bildplatz {s.id}
               </span>
               <span className="text-spec line-clamp-2 max-w-[38ch] text-text-1">{s.motiv}</span>

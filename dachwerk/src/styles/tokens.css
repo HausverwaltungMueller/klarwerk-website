@@ -11,11 +11,12 @@
   --text-1: #c9c1b4;
   --text-2: #928c80;   /* 4,7:1 auf surface-2, damit Meta auch in Feldern lesbar bleibt */
   --hair: rgba(243, 240, 233, 0.1);
-  --hair-1: rgba(243, 240, 233, 0.2);
+  --hair-1: rgba(243, 240, 233, 0.4);
 
   /* Domaenen. Flaechenfarbe und Textfarbe sind getrennt, siehe 05-KOHAERENZPRUEFUNG W10 */
   --dach: #9a6950;        /* 4,0:1 auf Obsidian, Flaechen und Display ab 24px */
-  --dach-text: #c08a6e;   /* 6,4:1, fuer Labels und Textauszeichnung */
+  --dach-text: #c08a6e;
+  --energie-text: #d5b45a;   /* Textfarbe der Domaene Energie, Flaechenfarbe bleibt --energie */
   --energie: #d5b45a;     /* 9,4:1, Primaerakzent */
   --nature: #667060;
   --nature-text: #8fa083;
@@ -63,8 +64,11 @@
 
   /* Abdeckungen. Tailwind kann bei CSS-Variablen kein Alpha einsetzen,
      deshalb liegen die halbtransparenten Flaechen als eigene Token hier. */
-  --scrim-header: rgba(17, 18, 17, 0.94);
+  --scrim-header: rgba(17, 18, 17, 0.985);
   --scrim-tag: rgba(17, 18, 17, 0.72);
+  /* Text auf einer Abdeckung ist immer hell, auch wenn die Sektion die Tagfläche traegt.
+     Deshalb ausserhalb der Flaechenpalette und dort nicht ueberschrieben. */
+  --text-on-scrim: #f3f0e9;
 
   /* Tiefe. Genau ein Schatten im Projekt, fuer die mobile Aktionsleiste */
   --shadow-sticky: 0 -1px 24px rgba(0, 0, 0, 0.5);
@@ -80,8 +84,9 @@
   --text-1: #57534b;
   --text-2: #635d54;   /* 4,8:1 auf surface-2 im Tagmodus */
   --hair: rgba(17, 18, 17, 0.12);
-  --hair-1: rgba(17, 18, 17, 0.22);
-  --dach-text: #8a5c45;
+  --hair-1: rgba(17, 18, 17, 0.5);
+  --dach-text: #85573f;
+  --energie-text: #6f5610;   /* Solar als Text auf der Tagflaeche, dunkel genug fuer 4,5:1 */
   --nature-text: #4f5a4a;
 }
 

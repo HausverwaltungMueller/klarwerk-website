@@ -17,7 +17,7 @@ export const services: Service[] = [
       { question: 'Muss immer das ganze Dach saniert werden?', answer: 'Nein. Wenn Deckung und Unterdeckung tragen, reicht oft eine Teilmaßnahme. Wir sagen offen, wenn eine Reparatur nur Zeit kauft.' },
       { question: 'Lässt sich Photovoltaik später nachrüsten?', answer: 'Ja, wenn die Fläche dafür vorbereitet ist. Deshalb planen wir Befestigungspunkte und Leitungswege schon bei der Sanierung mit.' },
     ],
-    relatedServices: ['neueindeckung', 'daemmung'], relatedGuides: ['dach-vor-pv-pruefen'],
+    relatedServices: ['dachreparatur', 'daemmung'], relatedGuides: ['dach-vor-pv-pruefen'],
   },
   {
     slug: 'neueindeckung', domain: 'dach', order: 2,
@@ -41,7 +41,7 @@ export const services: Service[] = [
     faq: [
       { question: 'Wie schnell können Sie kommen?', answer: 'Das hängt von der Auftragslage ab. Eine belastbare Zusage geben wir am Telefon, nicht auf einer Website.' },
     ],
-    relatedServices: ['dachsanierung', 'flachdach'], relatedGuides: [],
+    relatedServices: ['dachsanierung', 'flachdach'], relatedGuides: ['dach-vor-pv-pruefen'],
   },
   {
     slug: 'daemmung', domain: 'dach', order: 4,

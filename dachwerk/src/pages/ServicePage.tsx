@@ -88,7 +88,7 @@ export function ServicePage({ meta, slug }: { meta: RouteMeta; slug: string }) {
             );
           })}
           <li>
-            <Link to="/dach-und-pv/" className="text-s text-energie underline decoration-hair">Dach und Photovoltaik kombinieren</Link>
+            <Link to="/dach-und-pv/" className="text-s text-energie-text underline decoration-hair">Dach und Photovoltaik kombinieren</Link>
           </li>
         </ul>
       </Section>

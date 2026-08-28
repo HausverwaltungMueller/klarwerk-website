@@ -20,6 +20,7 @@ export default {
       text: { 0: 'var(--text-0)', 1: 'var(--text-1)', 2: 'var(--text-2)' },
       dach: { DEFAULT: 'var(--dach)', text: 'var(--dach-text)' },
       energie: 'var(--energie)',
+      'energie-text': 'var(--energie-text)',
       nature: { DEFAULT: 'var(--nature)', text: 'var(--nature-text)' },
       state: { error: 'var(--state-error)', ok: 'var(--state-ok)' },
       hair: { DEFAULT: 'var(--hair)', 1: 'var(--hair-1)' },

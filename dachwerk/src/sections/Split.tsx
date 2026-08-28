@@ -31,7 +31,7 @@ export function Split() {
               style={{ background: 'linear-gradient(180deg, rgba(184,188,192,0.05), rgba(184,188,192,0.55), rgba(184,188,192,0.05))' }} />
             <div className="absolute bottom-8 right-[12%] z-[3] flex flex-col gap-2 text-right">
               <p className="t-label">Domäne B</p>
-              <p className="t-display-m text-energie">{split.energie.title}</p>
+              <p className="t-display-m text-energie-text">{split.energie.title}</p>
               <p className="text-s text-text-1">{split.energie.lines}</p>
             </div>
           </div>

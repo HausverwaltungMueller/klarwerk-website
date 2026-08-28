@@ -56,7 +56,7 @@ export function DomainPage({ meta, domain }: { meta: RouteMeta; domain: 'dach' |
       </Section>
 
       <Section id="leistungen" label="Leistungen" labelAs="h2">
-        <p className={`t-display-m mb-5 ${domain === 'dach' ? 'text-dach-text' : 'text-energie'}`}>
+        <p className={`t-display-m mb-5 ${domain === 'dach' ? 'text-dach-text' : 'text-energie-text'}`}>
           {domain === 'dach' ? split.dach.lines : split.energie.lines}
         </p>
         <div>
