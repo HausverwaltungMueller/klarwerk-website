@@ -1,0 +1,1369 @@
+<title>DACHWERK Homepage Experience</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --s0:#111211; --s1:#1B1C1A; --s2:#232420;
+    --t0:#F3F0E9; --t1:#C9C1B4; --t2:#8C867B;
+    --hair:rgba(243,240,233,0.10); --hair1:rgba(243,240,233,0.20);
+    --l0:#F3F0E9; --l1:#E9E4D9; --i0:#111211; --i1:#57534B; --i2:#7A7469; --hairl:rgba(17,18,17,0.12);
+    --dach:#9A6950; --energie:#D5B45A; --nature:#667060;
+    --display:"Instrument Serif",Georgia,"Times New Roman",serif;
+    --sans:"Inter","Helvetica Neue",Arial,sans-serif;
+    --eout:cubic-bezier(0.16,1,0.3,1);
+    --maxw:1240px;
+    --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:auto}
+  body{margin:0;background:var(--s0);color:var(--t0);font-family:var(--sans);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;text-wrap:balance}
+  p{margin:0}
+  .lab{font-size:0.6875rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--t2)}
+  .spec{font-size:0.75rem;letter-spacing:0.06em;font-weight:500;color:var(--t2);font-variant-numeric:tabular-nums}
+  .lead{font-size:clamp(1.0625rem,1.3vw,1.3125rem);line-height:1.6;color:var(--t1);max-width:62ch}
+  .bd{color:var(--t1);max-width:68ch}
+  .bd b{color:var(--t0);font-weight:500}
+  .sm{font-size:0.8125rem;line-height:1.55;color:var(--t2)}
+  .grain{position:absolute;inset:0;background-image:var(--grain);opacity:0.035;pointer-events:none;mix-blend-mode:screen}
+
+  /* ---------- specimen chrome ---------- */
+  .chrome{position:fixed;left:0;right:0;top:0;z-index:60;background:rgba(17,18,17,0.9);backdrop-filter:blur(8px);border-bottom:1px solid var(--hair)}
+  .chrome-in{max-width:var(--maxw);margin:0 auto;padding:9px 24px;display:flex;justify-content:space-between;gap:16px;align-items:center;flex-wrap:wrap}
+  .chrome .tag{font-size:0.625rem;font-weight:600;letter-spacing:0.2em;color:var(--energie)}
+  .hud{position:fixed;right:16px;top:104px;z-index:60;background:rgba(17,18,17,0.88);border:1px solid var(--hair1);padding:11px 14px;display:none;flex-direction:column;gap:3px;min-width:232px;backdrop-filter:blur(6px)}
+  .hud b{color:var(--t0);font-weight:500}
+  .hud .row{display:flex;justify-content:space-between;gap:14px;font-size:0.75rem;color:var(--t2);font-variant-numeric:tabular-nums;letter-spacing:0.04em}
+  .hud .track{height:1px;background:var(--hair);margin-top:6px}
+  .hud .fill{height:1px;background:var(--energie);width:0%}
+  @media (min-width:900px){.hud{display:flex}}
+
+  /* ---------- site header ---------- */
+  .site{position:fixed;left:0;right:0;top:37px;z-index:50;transition:background 240ms var(--eout),border-color 240ms var(--eout);border-bottom:1px solid transparent}
+  .site.solid{background:rgba(17,18,17,0.92);backdrop-filter:blur(8px);border-bottom-color:var(--hair)}
+  .site-in{max-width:var(--maxw);margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+  .mark{font-weight:600;letter-spacing:0.22em;font-size:0.8125rem}
+  .nav{display:none;gap:22px}
+  .nav a{color:var(--t1);text-decoration:none;font-size:0.8125rem;border-bottom:1px solid transparent;padding-bottom:2px}
+  .nav a:hover{color:var(--t0);border-bottom-color:var(--hair1)}
+  .site .right{display:flex;align-items:center;gap:18px}
+  .site .tel{font-size:0.8125rem;color:var(--t1);font-variant-numeric:tabular-nums;display:none}
+  @media (min-width:1000px){.nav{display:flex}.site .tel{display:block}}
+
+  /* ---------- buttons ---------- */
+  .btn{font-family:var(--sans);font-size:0.9375rem;font-weight:500;height:48px;padding:0 22px;border-radius:2px;border:none;background:none;color:var(--t0);cursor:pointer;display:inline-flex;align-items:center;gap:10px;text-decoration:none;transition:background 240ms var(--eout),border-color 240ms var(--eout),transform 240ms var(--eout)}
+  .btn svg{transition:transform 240ms var(--eout)}
+  .btn:hover svg{transform:translateX(3px)}
+  .btn-p{background:var(--energie);color:var(--s0)}
+  .btn-p:hover{background:#DFC072}
+  .btn-s{border:1px solid var(--hair1)}
+  .btn-s:hover{border-color:var(--t1);background:var(--s2)}
+  .btn-q{padding:0;height:auto;border-bottom:1px solid var(--hair1)}
+  .btn-q:hover{border-bottom-color:var(--t0)}
+  .btn-sm{height:40px;padding:0 16px;font-size:0.875rem}
+  .btn-l{background:var(--i0);color:var(--l0)}
+  a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--energie);outline-offset:2px}
+
+  /* ---------- HERO ---------- */
+  #hero{height:400vh;position:relative}
+  .hero-stage{position:sticky;top:0;height:100vh;overflow:hidden;background:linear-gradient(180deg,var(--sky-a,#1a2230) 0%,var(--sky-b,#3a3226) 62%,var(--sky-c,#191a18) 100%)}
+  #roof{position:absolute;inset:0;width:100%;height:100%;display:block}
+  .haze{position:absolute;left:0;right:0;bottom:0;height:46%;background:linear-gradient(180deg,transparent,rgba(17,18,17,0.55) 70%,rgba(17,18,17,0.9));pointer-events:none}
+  .scrim{position:absolute;inset:0;background:linear-gradient(100deg,rgba(17,18,17,0.72) 0%,rgba(17,18,17,0.42) 34%,transparent 62%);pointer-events:none}
+  .hero-ui{position:absolute;inset:0;max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  .hero-txt{position:absolute;left:24px;top:50%;transform:translateY(-50%);width:min(58%,640px)}
+  .hero-txt h1{font-size:clamp(2.5rem,7.2vw,6.5rem);line-height:0.95;letter-spacing:-0.02em;margin:14px 0 0}
+  .hero-txt h1 em{font-style:italic;color:var(--t1)}
+  .hero-txt .lead{margin-top:22px;max-width:44ch}
+  .hero-cta{display:flex;gap:14px;margin-top:28px;flex-wrap:wrap}
+  .hero-fade{transition:none}
+  .hero-two{position:absolute;left:24px;top:50%;transform:translateY(-50%);width:min(64%,760px);opacity:0}
+  .hero-two h2{font-size:clamp(2.25rem,6.4vw,5.5rem);line-height:0.96;letter-spacing:-0.02em}
+  .hero-two .hero-cta{margin-top:26px}
+  .mat-label{position:absolute;left:24px;bottom:78px;opacity:0}
+  .measure{position:absolute;right:24px;bottom:78px;text-align:right;opacity:0}
+  .measure .ml{display:flex;align-items:center;gap:10px;justify-content:flex-end;margin-top:6px}
+  .measure .ml i{display:block;width:64px;height:1px;background:var(--t2)}
+  .cont{position:absolute;left:24px;bottom:26px;display:flex;gap:10px;align-items:center}
+  .cont i{display:block;width:40px;height:1px;background:var(--t2)}
+  .eyebrow-hero{position:absolute;left:24px;top:96px}
+  @media (max-width:899px){
+    #hero{height:auto}
+    .hero-stage{position:relative;height:82vh}
+    .hero-txt{width:calc(100% - 48px);top:auto;bottom:96px;transform:none}
+    .hero-two{display:none}
+    .measure{display:none}
+  }
+
+  /* mobile discrete states */
+  #hero-mobile{display:none;border-top:1px solid var(--hair)}
+  @media (max-width:899px){#hero-mobile{display:block}}
+  .mstate{padding:32px 0;border-bottom:1px solid var(--hair)}
+  .mstate .frame{aspect-ratio:4/5;position:relative;overflow:hidden;background:var(--s1);margin-top:14px}
+  .mstate .frame canvas{position:absolute;inset:0;width:100%;height:100%}
+
+  /* reduced motion fallback */
+  #hero-reduced{display:none}
+  .rm-grid{display:grid;gap:1px;background:var(--hair);border:1px solid var(--hair);grid-template-columns:1fr 1fr}
+  .rm-grid > div{background:var(--s1);padding:24px;display:flex;flex-direction:column;gap:10px}
+  .rm-grid .still{aspect-ratio:16/10;position:relative;overflow:hidden}
+  @media (max-width:700px){.rm-grid{grid-template-columns:1fr}}
+
+  /* ---------- generic sections ---------- */
+  section.act{padding:clamp(64px,9vw,140px) 0;border-bottom:1px solid var(--hair);position:relative}
+  .actlab{display:flex;gap:14px;align-items:baseline;margin-bottom:26px}
+  .actlab .no{font-family:var(--display);font-size:2rem;line-height:1;color:var(--t2)}
+  h2.big{font-size:clamp(1.875rem,4.4vw,3.5rem);line-height:1.02;letter-spacing:-0.015em}
+  .grid2{display:grid;grid-template-columns:5fr 7fr;gap:clamp(24px,4vw,64px);align-items:start}
+  @media (max-width:860px){.grid2{grid-template-columns:1fr}}
+
+  .rv{opacity:0;transform:translateY(16px);transition:opacity 640ms var(--eout),transform 640ms var(--eout)}
+  .rv.in{opacity:1;transform:none}
+  .rvm{overflow:hidden}
+  .rvm > *{display:block;transform:translateY(108%);transition:transform 700ms var(--eout)}
+  .rvm.in > *{transform:none}
+
+  /* lifespan drawing */
+  .life{display:flex;flex-direction:column;gap:22px;margin-top:8px}
+  .life .it{display:grid;grid-template-columns:minmax(120px,180px) 1fr;gap:0 22px;align-items:start;border-top:1px solid var(--hair);padding-top:16px}
+  .life .num{font-family:var(--display);font-size:clamp(2.25rem,4.6vw,4rem);line-height:0.9;color:var(--t0)}
+  .life .num small{display:block;font-family:var(--sans);font-size:0.6875rem;letter-spacing:0.18em;color:var(--t2);margin-top:8px}
+  .woodtex{position:absolute;inset:0;background-image:repeating-linear-gradient(93deg,rgba(243,240,233,0.06) 0 1px,transparent 1px 8px);pointer-events:none}
+
+  /* split */
+  #split{height:240vh;position:relative}
+  .split-stage{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;align-items:center;justify-content:center}
+  .sp-half{position:absolute;top:0;bottom:0;width:50.4%;overflow:hidden}
+  .sp-l{left:0}
+  .sp-r{right:0}
+  .sp-fill{position:absolute;inset:0}
+  .sp-l .sp-fill{background:linear-gradient(160deg,#2a1d17,#171512);background-image:repeating-linear-gradient(0deg,rgba(243,240,233,0.10) 0 1px,transparent 1px 16px),repeating-linear-gradient(90deg,rgba(243,240,233,0.07) 0 1px,transparent 1px 26px),linear-gradient(160deg,#33231b,#171512)}
+  .sp-r .sp-fill{background-image:repeating-linear-gradient(90deg,rgba(213,180,90,0.14) 0 1px,transparent 1px 30px),repeating-linear-gradient(0deg,rgba(213,180,90,0.09) 0 1px,transparent 1px 30px),linear-gradient(38deg,rgba(213,180,90,0.13),transparent 58%),linear-gradient(200deg,#1c2026,#141513)}
+  .sp-cap{position:absolute;bottom:40px;display:flex;flex-direction:column;gap:8px;z-index:3}
+  .sp-l .sp-cap{left:14%}
+  .sp-r .sp-cap{right:14%;text-align:right}
+  .sp-cap .dom{font-family:var(--display);font-size:clamp(1.75rem,3.4vw,2.75rem);line-height:1}
+  .sp-l .sp-cap .dom{color:var(--dach)}
+  .sp-r .sp-cap .dom{color:var(--energie)}
+  .sp-zinc{position:absolute;top:0;bottom:0;width:2px;background:linear-gradient(180deg,rgba(184,188,192,0.05),rgba(184,188,192,0.55),rgba(184,188,192,0.05));z-index:4}
+  .sp-l .sp-zinc{right:0}
+  .sp-r .sp-zinc{left:0}
+  .bridge{position:relative;z-index:5;text-align:center;max-width:820px;padding:0 24px;opacity:0}
+  .bridge .word{font-family:var(--display);font-size:clamp(2rem,6.4vw,5.5rem);line-height:1;letter-spacing:-0.02em;background:linear-gradient(96deg,var(--dach),var(--energie));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .bridge h2{margin-top:18px;font-size:clamp(1.25rem,2.4vw,2rem)}
+  .bridge p{margin:16px auto 0;color:var(--t1);max-width:56ch}
+  .bridge .btnwrap{margin-top:24px}
+  @media (max-width:860px){
+    #split{height:auto}
+    .split-stage{position:relative;height:auto;flex-direction:column;padding:0}
+    .sp-half{position:relative;width:100%;height:220px}
+    .bridge{opacity:1;padding:44px 24px}
+  }
+
+  /* choice + services */
+  .choices{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--hair);border:1px solid var(--hair)}
+  .ch{background:var(--s1);padding:26px 22px;display:flex;flex-direction:column;gap:10px;cursor:pointer;border-left:2px solid transparent;transition:background 240ms var(--eout),border-color 240ms var(--eout)}
+  .ch:hover{background:var(--s2);border-left-color:var(--energie)}
+  .ch .q{font-size:0.9375rem;color:var(--t0)}
+  .ch-wide{grid-column:1/-1;background:var(--l0);color:var(--i0);display:flex;flex-direction:row;justify-content:space-between;align-items:center;gap:24px;padding:30px 26px;flex-wrap:wrap;border-left:2px solid transparent}
+  .ch-wide:hover{background:#EDE9E0;border-left-color:var(--i0)}
+  .ch-wide .q{font-family:var(--display);font-size:clamp(1.375rem,2.6vw,2rem);line-height:1.1;color:var(--i0);max-width:22ch}
+  .ch-wide .sub{font-size:0.875rem;color:var(--i1);max-width:34ch}
+  @media (max-width:860px){.choices{grid-template-columns:1fr 1fr}}
+  @media (max-width:560px){.choices{grid-template-columns:1fr}}
+
+  .svc{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--hair);border:1px solid var(--hair)}
+  .svc-col{background:var(--s1);position:relative;overflow:hidden}
+  .svc-col .hd{padding:26px 24px 18px;position:relative;z-index:2;display:flex;flex-direction:column;gap:6px}
+  .svc-col .dom{font-family:var(--display);font-size:clamp(1.5rem,2.6vw,2.125rem);line-height:1}
+  .svc-a .dom{color:var(--dach)}
+  .svc-b .dom{color:var(--energie)}
+  .svc-col .tx{position:absolute;inset:0;opacity:0.5;pointer-events:none}
+  .svc-a .tx{background-image:repeating-linear-gradient(0deg,rgba(243,240,233,0.07) 0 1px,transparent 1px 15px),repeating-linear-gradient(90deg,rgba(243,240,233,0.05) 0 1px,transparent 1px 24px)}
+  .svc-b .tx{background-image:repeating-linear-gradient(90deg,rgba(213,180,90,0.09) 0 1px,transparent 1px 28px),repeating-linear-gradient(0deg,rgba(213,180,90,0.06) 0 1px,transparent 1px 28px)}
+  .srow{display:grid;grid-template-columns:44px 1fr;gap:0 14px;padding:14px 24px;border-top:1px solid var(--hair);position:relative;z-index:2;transition:background 240ms var(--eout)}
+  .srow:hover{background:var(--s2)}
+  .srow .sn{font-size:0.75rem;color:var(--t2);font-variant-numeric:tabular-nums;padding-top:3px}
+  .srow .st{font-size:0.9375rem;color:var(--t0)}
+  .srow .sd{font-size:0.8125rem;color:var(--t2);margin-top:4px}
+  @media (max-width:860px){.svc{grid-template-columns:1fr}}
+
+  /* light arc wedge */
+  .arc{position:relative;height:190px;overflow:hidden}
+  .arc .day{position:absolute;inset:0;background:var(--l0)}
+  .arc .edge{position:absolute;left:0;top:0;width:210px;height:1px;background:linear-gradient(90deg,var(--energie),transparent);transform-origin:0 0}
+  #dayzone{background:var(--l0);color:var(--i0)}
+  #dayzone .lab{color:var(--i2)}
+  #dayzone .bd{color:var(--i1)}
+  #dayzone .bd b{color:var(--i0)}
+  #dayzone .sm{color:var(--i2)}
+  #dayzone .actlab .no{color:var(--i2)}
+  #dayzone section.act{border-bottom-color:var(--hairl)}
+  #dayzone .spec{color:var(--i2)}
+
+  /* layer model */
+  .layerbox{border:1px solid var(--hairl);background:var(--l1);padding:clamp(18px,2.6vw,30px);overflow-x:auto}
+  .layerbox svg{display:block;min-width:560px;width:100%;height:auto}
+
+  /* process */
+  #process{height:260vh;position:relative}
+  .pr-stage{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;justify-content:center;overflow:hidden;padding-top:104px}
+  .pr-stage > .wrap{width:100%}
+  .pr-track{display:flex;gap:1px;will-change:transform}
+  .pr-step{flex:0 0 min(78vw,420px);background:var(--l1);border:1px solid var(--hairl);padding:24px 22px;display:flex;flex-direction:column;gap:10px;min-height:300px}
+  .pr-step .pn{font-family:var(--display);font-size:clamp(2.5rem,5vw,4.5rem);line-height:0.9;color:var(--i0);font-variant-numeric:tabular-nums}
+  .pr-step .pt{font-family:var(--display);font-size:1.5rem;line-height:1.15;color:var(--i0)}
+  .pr-step .pd{font-size:0.875rem;color:var(--i1)}
+  .pr-line{height:1px;background:var(--hairl);margin-top:32px;position:relative}
+  .pr-line i{position:absolute;left:0;top:0;height:1px;background:var(--dach);width:0%}
+  @media (max-width:860px){
+    #process{height:auto}
+    .pr-stage{position:relative;height:auto;padding:0}
+    .pr-track{flex-direction:column;gap:16px;transform:none !important}
+    .pr-step{flex:auto;min-height:0}
+  }
+
+  /* image slot */
+  .slot{position:relative;overflow:hidden;background:var(--s1);border:1px solid var(--hair)}
+  .slot .fill{position:absolute;inset:0}
+  .slot .meta{position:absolute;left:14px;bottom:12px;display:flex;flex-direction:column;gap:2px;z-index:2}
+  .slot .id{font-size:0.625rem;font-weight:600;letter-spacing:0.2em;color:var(--energie)}
+  .slot .mo{font-size:0.75rem;color:var(--t1);max-width:36ch}
+  .slot .cr{position:absolute;right:14px;top:12px;z-index:2}
+  .slot.on-light{border-color:var(--hairl);background:var(--l1)}
+  .slot.on-light .mo{color:var(--i1)}
+  .slot.on-light .cr{color:var(--i2)}
+  .f-tile{background-image:repeating-linear-gradient(0deg,rgba(243,240,233,0.10) 0 1px,transparent 1px 15px),repeating-linear-gradient(90deg,rgba(243,240,233,0.07) 0 1px,transparent 1px 25px),linear-gradient(158deg,#33231b,#191614)}
+  .f-slate{background-image:repeating-linear-gradient(0deg,rgba(243,240,233,0.08) 0 1px,transparent 1px 13px),linear-gradient(158deg,#22262a,#141618)}
+  .f-zinc{background-image:repeating-linear-gradient(90deg,rgba(243,240,233,0.06) 0 1px,transparent 1px 4px),linear-gradient(38deg,rgba(243,240,233,0.12),transparent 62%),linear-gradient(160deg,#2a2d30,#17191a)}
+  .f-mod{background-image:repeating-linear-gradient(90deg,rgba(213,180,90,0.13) 0 1px,transparent 1px 28px),repeating-linear-gradient(0deg,rgba(213,180,90,0.09) 0 1px,transparent 1px 28px),linear-gradient(38deg,rgba(213,180,90,0.12),transparent 56%),linear-gradient(200deg,#1b1f25,#131413)}
+  .f-wood{background-image:repeating-linear-gradient(93deg,rgba(243,240,233,0.07) 0 1px,transparent 1px 7px),linear-gradient(160deg,#2b2620,#17161380)}
+  .f-house{background-image:linear-gradient(38deg,rgba(154,105,80,0.42),transparent 58%),linear-gradient(180deg,#20242b,#15161a)}
+
+  /* projects */
+  .ba{position:relative;overflow:hidden;border:1px solid var(--hairl);aspect-ratio:16/9;cursor:ew-resize;background:var(--l1)}
+  .ba .before,.ba .after{position:absolute;inset:0}
+  .ba .after{clip-path:inset(0 0 0 100%)}
+  .ba .tagl,.ba .tagr{position:absolute;bottom:12px;z-index:3;font-size:0.625rem;font-weight:600;letter-spacing:0.18em;padding:5px 9px;background:rgba(17,18,17,0.72);color:var(--t0)}
+  .ba .tagl{left:12px}
+  .ba .tagr{right:12px}
+  .ba .handle{position:absolute;top:0;bottom:0;width:1px;background:var(--energie);z-index:4;left:100%}
+  .ba .slot .meta{top:12px;bottom:auto;left:14px}
+  .ba [data-after] .meta{left:auto;right:14px;text-align:right;align-items:flex-end}
+  .ba .handle::after{content:"";position:absolute;left:-13px;top:50%;width:26px;height:26px;margin-top:-13px;border:1px solid var(--energie);background:rgba(17,18,17,0.7)}
+  .projgrid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3vw,40px)}
+  @media (max-width:860px){.projgrid{grid-template-columns:1fr}}
+  .demo-note{display:inline-block;font-size:0.625rem;font-weight:600;letter-spacing:0.18em;color:var(--i0);background:rgba(17,18,17,0.10);padding:5px 9px}
+
+  /* statement */
+  #statement{min-height:86vh;display:flex;align-items:center}
+  #statement h2{font-size:clamp(2.25rem,6.4vw,5.5rem);line-height:0.98;letter-spacing:-0.02em}
+  #statement .l1{color:var(--t0)}
+  #statement .l2{color:var(--t0)}
+  #statement .l1 span{color:var(--energie)}
+  #statement .l2 span{color:var(--dach)}
+
+  /* region map */
+  .mapbox{border:1px solid var(--hair);background:var(--s1);padding:clamp(18px,2.6vw,30px);overflow-x:auto;position:relative}
+  .mapbox svg{display:block;min-width:520px;width:100%;height:auto}
+  .places{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:18px}
+  .places a{color:var(--t1);text-decoration:none;font-size:0.875rem;border-bottom:1px solid var(--hair)}
+  .places a:hover{color:var(--t0);border-bottom-color:var(--hair1)}
+
+  /* contact */
+  .contact{background:var(--l0);color:var(--i0);border:1px solid var(--hairl);padding:clamp(26px,4vw,56px);display:grid;grid-template-columns:5fr 7fr;gap:clamp(24px,4vw,56px);position:relative}
+  .contact::before{content:"";position:absolute;left:0;right:0;top:-1px;height:1px;background:linear-gradient(90deg,var(--energie),transparent);transform-origin:0 50%}
+  .contact h2{font-size:clamp(1.75rem,3.6vw,3rem);line-height:1.02;color:var(--i0)}
+  .contact p{color:var(--i1);max-width:52ch}
+  .steps{display:flex;flex-direction:column;gap:16px}
+  .steps .st{display:grid;grid-template-columns:34px 1fr;gap:0 14px;border-top:1px solid var(--hairl);padding-top:12px}
+  .steps .sn{font-size:0.75rem;color:var(--i2);font-variant-numeric:tabular-nums}
+  .steps .sl{font-size:0.9375rem;color:var(--i0)}
+  .steps .sh{font-size:0.8125rem;color:var(--i2)}
+  .choicerow{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+  .choicerow span{font-size:0.8125rem;border:1px solid var(--hairl);padding:6px 12px;color:var(--i1)}
+  @media (max-width:860px){.contact{grid-template-columns:1fr}}
+
+  /* sticky mobile actions */
+  .mact{position:fixed;left:0;right:0;bottom:0;z-index:55;height:62px;background:var(--s2);border-top:1px solid var(--energie);display:none;transform:translateY(100%);transition:transform 480ms var(--eout);box-shadow:0 -1px 24px rgba(0,0,0,0.5)}
+  .mact.on{transform:none}
+  .mact a{flex:1;display:flex;align-items:center;justify-content:center;color:var(--t1);text-decoration:none;font-size:0.75rem;letter-spacing:0.14em;font-weight:600}
+  .mact a+a{border-left:1px solid var(--hair)}
+  @media (max-width:899px){.mact{display:flex}body{padding-bottom:62px}}
+
+  footer{padding:52px 0 76px;color:var(--t2);font-size:0.8125rem;display:flex;flex-direction:column;gap:8px}
+
+  @media (prefers-reduced-motion:reduce){
+    .rv{opacity:1;transform:none;transition:none}
+    .rvm > *{transform:none;transition:none}
+    #hero{display:none}
+    #hero-mobile{display:none}
+    #hero-reduced{display:block}
+    .mact{transition:none}
+  }
+</style>
+
+<div class="chrome">
+  <div class="chrome-in">
+    <span class="tag">SPEZIMEN · PHASE 6</span>
+    <span class="spec">Dramaturgie-Prototyp. Kein Produktionscode. 3D hier als Canvas-Projektion, in Produktion Three.js.</span>
+  </div>
+</div>
+
+<header class="site" id="site">
+  <div class="site-in">
+    <span class="mark">DACHWERK</span>
+    <nav class="nav" aria-label="Hauptnavigation">
+      <a href="#akt2">Dach</a><a href="#akt3">Photovoltaik</a><a href="#akt3">Dach und PV</a><a href="#akt6">Projekte</a><a href="#akt5">Ratgeber</a>
+    </nav>
+    <span class="right">
+      <span class="tel">05121 000 000</span>
+      <a class="btn btn-p btn-sm" href="#akt8">Projekt besprechen</a>
+    </span>
+  </div>
+</header>
+
+<div class="hud" id="hud" aria-hidden="true">
+  <div class="row"><span>AKT</span><b id="hud-act">01 · Aufmerksamkeit</b></div>
+  <div class="row"><span>PHASE</span><b id="hud-phase">1 · Ankunft</b></div>
+  <div class="row"><span>SCROLL p</span><b id="hud-p">0.000</b></div>
+  <div class="row"><span>LABEL</span><b id="hud-label">–</b></div>
+  <div class="track"><div class="fill" id="hud-fill"></div></div>
+</div>
+
+<main>
+  <!-- ============ AKT 01 · HERO ============ -->
+  <section id="hero" aria-label="Hero, Dachfläche wird Energiefläche">
+    <div class="hero-stage" id="hero-stage">
+      <canvas id="roof" aria-hidden="true"></canvas>
+      <div class="haze"></div>
+      <div class="scrim"></div>
+      <div class="grain"></div>
+      <div class="hero-ui">
+        <div class="hero-txt" id="hero-txt">
+          <div class="lab">Hildesheim · Dach &amp; Energie · Meisterbetrieb</div>
+          <h1>Ein Dach<br>muss <em>mehr</em><br>können.</h1>
+          <p class="lead">Dachhandwerk und Photovoltaik für Häuser, die bleiben sollen. Aus Hildesheim, für die Region.</p>
+          <div class="hero-cta">
+            <a class="btn btn-p" href="#akt8">Projekt besprechen
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="butt" stroke-linejoin="miter" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+            </a>
+            <a class="btn btn-s" href="#akt4">Unsere Leistungen</a>
+          </div>
+        </div>
+        <div class="hero-two" id="hero-two">
+          <div class="lab">Dieselbe Fläche, zwei Aufgaben</div>
+          <h2>Aus Dachfläche wird Energiefläche.</h2>
+          <div class="hero-cta">
+            <a class="btn btn-p" href="#akt8">Projekt besprechen
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="butt" stroke-linejoin="miter" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="mat-label" id="mat-label"><span class="lab" id="mat-label-t">Dachfläche</span></div>
+        <div class="measure" id="measure">
+          <span class="spec" id="measure-t">Dachneigung 38°</span>
+          <span class="ml"><i></i><span class="spec">62 m² Dachfläche</span></span>
+        </div>
+        <div class="cont"><i></i><span class="spec">Weiter</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- mobile discrete states -->
+  <section id="hero-mobile" aria-label="Transformation in drei Zuständen">
+    <div class="wrap">
+      <div class="mstate">
+        <span class="lab">Zustand 1 von 3 · Dachfläche</span>
+        <div class="frame"><canvas id="m1" aria-hidden="true"></canvas></div>
+      </div>
+      <div class="mstate">
+        <span class="lab">Zustand 2 von 3 · Unterkonstruktion</span>
+        <div class="frame"><canvas id="m2" aria-hidden="true"></canvas></div>
+      </div>
+      <div class="mstate">
+        <span class="lab">Zustand 3 von 3 · Energiefläche</span>
+        <div class="frame"><canvas id="m3" aria-hidden="true"></canvas></div>
+        <p class="lead" style="margin-top:18px;font-family:var(--display);font-size:1.75rem;line-height:1.05;color:var(--t0)">Aus Dachfläche wird Energiefläche.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- reduced motion -->
+  <section id="hero-reduced" class="act" aria-label="Hero, reduzierte Bewegung">
+    <div class="wrap">
+      <div class="lab">Hildesheim · Dach &amp; Energie</div>
+      <h1 style="font-size:clamp(2.25rem,6vw,4.5rem);line-height:0.98;margin:16px 0 20px">Ein Dach muss mehr können.</h1>
+      <p class="lead">Dachhandwerk und Photovoltaik für Häuser, die bleiben sollen. Aus Hildesheim, für die Region.</p>
+      <div class="rm-grid" style="margin-top:32px">
+        <div><span class="lab">Standbild 1</span><div class="still slot"><span class="fill f-tile"></span><span class="meta"><span class="id">HERO · DACHFLÄCHE</span></span></div><p class="sm">Dachfläche mit Tondachziegeln.</p></div>
+        <div><span class="lab">Standbild 2</span><div class="still slot"><span class="fill f-mod"></span><span class="meta"><span class="id">HERO · ENERGIEFLÄCHE</span></span></div><p class="sm">Dieselbe Fläche mit Photovoltaikanlage.</p></div>
+      </div>
+      <p class="lead" style="margin-top:26px;font-family:var(--display);font-size:2rem;line-height:1.05;color:var(--t0)">Aus Dachfläche wird Energiefläche.</p>
+      <div class="hero-cta" style="margin-top:24px"><a class="btn btn-p" href="#akt8">Projekt besprechen</a><a class="btn btn-s" href="#akt4">Unsere Leistungen</a></div>
+    </div>
+  </section>
+
+  <!-- ============ AKT 02 · PROBLEM ============ -->
+  <section class="act" id="akt2">
+    <div class="woodtex" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="actlab rv"><span class="no">02</span><span class="lab">Problem · Haltung</span></div>
+      <div class="grid2">
+        <h2 class="big rv">Wir denken das Dach ganzheitlich.</h2>
+        <div class="rv" style="display:flex;flex-direction:column;gap:22px">
+          <p class="lead">Reparieren, sanieren oder neu denken? Wir verbinden klassisches Dachhandwerk mit moderner Energietechnik, damit aus einzelnen Maßnahmen eine Lösung wird, die in zehn Jahren noch richtig ist.</p>
+          <p class="sm">Bewusst ohne Bild und ohne Bewegung. Nach der Kamerafahrt ist eine ruhige Fläche das stärkste Mittel, um Aufmerksamkeit auf den Text zu lenken.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="act" id="akt2b">
+    <div class="wrap">
+      <div class="actlab rv"><span class="no">02</span><span class="lab">Problem · Zeithorizont</span></div>
+      <div class="grid2">
+        <h2 class="big rv">Ein Dach ist eine Entscheidung für Jahrzehnte.</h2>
+        <div class="rv">
+          <div class="life">
+            <div class="it"><span class="num">01<small>Dachdeckung</small></span><p class="bd">Eine Dachdeckung begleitet ein Haus über Jahrzehnte. Was darunter liegt, entscheidet, wie lange.</p></div>
+            <div class="it"><span class="num">02<small>Photovoltaik</small></span><p class="bd">Eine Anlage arbeitet über einen langen Zeitraum. Sie sitzt auf der Deckung, nicht daneben.</p></div>
+            <div class="it"><span class="num">03<small>Reihenfolge</small></span><p class="bd">Wer beides getrennt beauftragt, stellt das Gerüst zweimal, öffnet die Fläche zweimal und zahlt zweimal für dieselbe Vorbereitung.</p></div>
+          </div>
+          <p class="lead" style="margin-top:26px">Deshalb sprechen wir über die Reihenfolge, bevor wir über Material sprechen.</p>
+          <p class="sm" style="margin-top:14px">Hinweis für die Umsetzung: Konkrete Lebensdauern in Jahren erscheinen erst, wenn eine belastbare Quelle oder eine Angabe des Betriebs vorliegt.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ AKT 03 · ERKENNTNIS ============ -->
+  <section id="split" aria-label="Dach und Energie">
+    <div class="split-stage" id="split-stage">
+      <div class="sp-half sp-l" id="sp-l">
+        <span class="sp-fill"></span><span class="sp-zinc"></span>
+        <span class="sp-cap"><span class="lab">Domäne A</span><span class="dom">DACH</span><span class="sm">Schützen. Sanieren. Erhalten.</span></span>
+      </div>
+      <div class="sp-half sp-r" id="sp-r">
+        <span class="sp-fill"></span><span class="sp-zinc"></span>
+        <span class="sp-cap"><span class="lab">Domäne B</span><span class="dom">ENERGIE</span><span class="sm">Erzeugen. Speichern. Nutzen.</span></span>
+      </div>
+      <div class="bridge" id="bridge">
+        <div class="word">DACH + ENERGIE</div>
+        <h2>Zwei Gewerke, ein Bauteil.</h2>
+        <p>Wer das Dach öffnet, entscheidet gleichzeitig über die nächsten Jahrzehnte Energie. Deshalb planen wir beides in einem Zug, mit einem Ansprechpartner und einer Baustelle.</p>
+        <div class="btnwrap"><a class="btn btn-q" href="#akt8">Potenzial einschätzen
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="butt" stroke-linejoin="miter" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ AKT 04 · KOMPETENZ ============ -->
+  <section class="act" id="akt4">
+    <div class="wrap">
+      <div class="actlab rv"><span class="no">04</span><span class="lab">Kompetenz · Selbstzuordnung</span></div>
+      <h2 class="big rv" style="margin-bottom:30px">Was braucht Ihr Haus?</h2>
+      <div class="choices rv">
+        <div class="ch"><span class="spec">01</span><span class="q">Mein Dach braucht Aufmerksamkeit.</span><span class="sm">Reparatur</span></div>
+        <div class="ch"><span class="spec">02</span><span class="q">Mein Dach ist in die Jahre gekommen.</span><span class="sm">Sanierung</span></div>
+        <div class="ch"><span class="spec">03</span><span class="q">Ich möchte meinen eigenen Strom erzeugen.</span><span class="sm">Photovoltaik</span></div>
+        <div class="ch"><span class="spec">04</span><span class="q">Wenn wir schon ans Dach gehen.</span><span class="sm">Dach und Photovoltaik</span></div>
+        <div class="ch ch-wide">
+          <span class="q">Ich weiß noch nicht, was sinnvoll ist.</span>
+          <span class="sub">Das ist der häufigste Fall. Wir schauen uns das Dach an und sagen Ihnen, was sinnvoll ist und was warten kann.</span>
+          <span class="btn btn-l btn-sm">Beratung anfragen</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="act" id="akt4b">
+    <div class="wrap">
+      <div class="actlab rv"><span class="no">04</span><span class="lab">Kompetenz · Leistungen</span></div>
+      <div class="svc rv">
+        <div class="svc-col svc-a">
+          <span class="tx" aria-hidden="true"></span>
+          <div class="hd"><span class="lab">Domäne A</span><span class="dom">DACH</span><span class="sm">Schützen. Sanieren. Erhalten.</span></div>
+          <div class="srow"><span class="sn">01</span><span><span class="st">Dachsanierung</span><span class="sd">Deckung, Unterdeckung und Dämmung in einem Zug, ausgelegt für eine spätere Anlage ohne zweiten Eingriff.</span></span></div>
+          <div class="srow"><span class="sn">02</span><span><span class="st">Neueindeckung</span><span class="sd">Ziegel, Schiefer oder Blech. Die Wahl richtet sich nach Neigung, Bauweise und Umgebung, nicht nach Katalog.</span></span></div>
+          <div class="srow"><span class="sn">03</span><span><span class="st">Dachreparatur</span><span class="sd">Erst sichern, dann die Ursache prüfen, dann offen sagen, ob die Reparatur trägt oder nur Zeit kauft.</span></span></div>
+          <div class="srow"><span class="sn">04</span><span><span class="st">Dämmung</span><span class="sd">Ob eine Aufsparrendämmung sinnvoll ist, entscheidet der Dachaufbau, nicht der Prospekt.</span></span></div>
+          <div class="srow"><span class="sn">05</span><span><span class="st">Dachfenster</span><span class="sd">Position, Größe und Anschluss entscheiden über Licht und über Dichtheit. Beides planen wir gemeinsam.</span></span></div>
+          <div class="srow"><span class="sn">06</span><span><span class="st">Flachdach</span><span class="sd">Abdichtung, Gefälle und Anschlüsse sind der eigentliche Aufwand. Daran messen wir die Ausführung.</span></span></div>
+        </div>
+        <div class="svc-col svc-b">
+          <span class="tx" aria-hidden="true"></span>
+          <div class="hd"><span class="lab">Domäne B</span><span class="dom">ENERGIE</span><span class="sm">Erzeugen. Speichern. Nutzen.</span></div>
+          <div class="srow"><span class="sn">01</span><span><span class="st">Photovoltaik</span><span class="sd">Wir prüfen zuerst das Dach, dann planen wir die Anlage. In dieser Reihenfolge, nicht umgekehrt.</span></span></div>
+          <div class="srow"><span class="sn">02</span><span><span class="st">Stromspeicher</span><span class="sd">Ein Speicher lohnt sich nicht immer. Wir rechnen es an Ihrem Verbrauch durch, bevor wir ihn anbieten.</span></span></div>
+          <div class="srow"><span class="sn">03</span><span><span class="st">Energiemanagement</span><span class="sd">Wärmepumpe, Auto, Haushalt. Wer den Verbrauch kennt, legt die Anlage richtig aus.</span></span></div>
+          <div class="srow"><span class="sn">04</span><span><span class="st">PV-Planung</span><span class="sd">Ausrichtung, Verschattung, Belegung, Netzanschluss. Die Planung entscheidet, nicht die Modulmarke.</span></span></div>
+          <div class="srow"><span class="sn">05</span><span><span class="st">Installation</span><span class="sd">Montage, Elektrik und Anmeldung laufen über einen Betrieb und einen Ansprechpartner.</span></span></div>
+          <div class="srow"><span class="sn">06</span><span><span class="st">Wartung</span><span class="sd">Dach und Anlage nach Absprache prüfen, Zustand dokumentieren, melden wenn etwas zu tun ist.</span></span></div>
+        </div>
+      </div>
+      <div style="margin-top:30px" class="rv"><a class="btn btn-s" href="#akt8">Dach und PV planen
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="butt" stroke-linejoin="miter" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
+    </div>
+  </section>
+
+  <!-- ============ FLÄCHENWECHSEL NACHT ZU TAG ============ -->
+  <div class="arc" id="arc1" aria-hidden="true"><div class="day" id="arc1-day"></div><div class="edge" id="arc1-edge"></div></div>
+
+  <div id="dayzone">
+    <!-- ============ AKT 05 · PROZESS ============ -->
+    <section class="act" id="akt5">
+      <div class="wrap">
+        <div class="actlab rv"><span class="no">05</span><span class="lab">Prozess · Das System</span></div>
+        <div class="grid2" style="margin-bottom:34px">
+          <h2 class="big rv" style="color:var(--i0)">Ein Dach ist ein System aus sieben Schichten.</h2>
+          <p class="lead rv" style="color:var(--i1)">Schicht 06 und 07 gehören zum Dachaufbau. Deshalb prüfen wir die Schichten 01 bis 05, bevor wir sie belegen. Beim Scrollen fahren die Schichten auseinander und danach zu einem geschlossenen Aufbau zusammen.</p>
+        </div>
+        <div class="layerbox rv" id="layerbox">
+          <svg viewBox="0 0 720 320" role="img" aria-label="Dachaufbau im Schnitt mit sieben Schichten, Maßlinie und Bezugslinien">
+            <defs>
+              <pattern id="pw" width="10" height="6" patternUnits="userSpaceOnUse"><path d="M0 1h10M0 4h10" stroke="#7A7469" stroke-width="0.6"/></pattern>
+              <pattern id="pi" width="16" height="10" patternUnits="userSpaceOnUse"><path d="M0 5q4 -5 8 0t8 0" fill="none" stroke="#7A7469" stroke-width="0.7"/></pattern>
+              <pattern id="pb" width="24" height="8" patternUnits="userSpaceOnUse"><rect x="1" y="1" width="12" height="6" fill="none" stroke="#7A7469" stroke-width="0.7"/></pattern>
+              <pattern id="pt" width="26" height="12" patternUnits="userSpaceOnUse"><path d="M0 11q6 -9 13 0t13 0" fill="none" stroke="#9A6950" stroke-width="1"/></pattern>
+              <pattern id="pg" width="18" height="10" patternUnits="userSpaceOnUse"><path d="M0 0v10" stroke="#B08C2E" stroke-width="0.7"/></pattern>
+            </defs>
+            <g font-family="Inter, Arial, sans-serif" font-size="11" fill="#7A7469" letter-spacing="0.6">
+              <path d="M62 46v220" stroke="#7A7469" stroke-width="1"/>
+              <path d="M54 46h16M54 266h16" stroke="#7A7469" stroke-width="1"/>
+              <text x="48" y="152" text-anchor="end">Aufbau</text>
+              <g id="ly-1"><rect x="92" y="244" width="300" height="22" fill="url(#pw)" stroke="#7A7469"/></g>
+              <g id="ly-2"><rect x="92" y="200" width="300" height="42" fill="url(#pi)" stroke="#7A7469"/></g>
+              <g id="ly-3"><rect x="92" y="188" width="300" height="10" fill="none" stroke="#7A7469"/></g>
+              <g id="ly-4"><rect x="92" y="170" width="300" height="16" fill="url(#pb)" stroke="#7A7469"/></g>
+              <g id="ly-5"><rect x="92" y="144" width="300" height="24" fill="url(#pt)" stroke="#9A6950"/></g>
+              <g id="ly-6"><rect x="92" y="124" width="300" height="18" fill="none" stroke="#7A7469"/></g>
+              <g id="ly-7"><rect x="92" y="104" width="300" height="18" fill="url(#pg)" stroke="#B08C2E"/></g>
+              <g stroke="#7A7469" stroke-width="0.8" fill="none">
+                <path id="bz-1" d="M392 255h96l14-14h54"/><path id="bz-2" d="M392 221h116l14-14h34"/>
+                <path id="bz-3" d="M392 193h136l14-14h14"/><path id="bz-4" d="M392 178h150l14-14"/>
+                <path id="bz-5" d="M392 156h106l14-14h44"/><path id="bz-6" d="M392 133h86l14-14h64"/>
+                <path id="bz-7" d="M392 113h66l14-14h84"/>
+              </g>
+              <g fill="#111211" font-size="11.5">
+                <text id="lb-1" x="562" y="244">01 Sparren</text><text id="lb-2" x="552" y="210">02 Dämmung</text>
+                <text id="lb-3" x="542" y="182">03 Unterdeckung</text><text id="lb-4" x="562" y="167">04 Lattung</text>
+                <text id="lb-5" x="562" y="145">05 Dachziegel</text><text id="lb-6" x="562" y="122">06 Unterkonstruktion</text>
+                <text id="lb-7" x="562" y="102">07 PV-Module</text>
+              </g>
+              <text x="92" y="296">Explosionsfaktor folgt dem Scroll. Signaturen: Holz als Faser, Dämmung als Welle, Ziegel als Profil, Modulglas als Zellteilung.</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <section id="process" aria-label="Prozess in fünf Schritten">
+      <div class="pr-stage">
+        <div class="wrap">
+          <div class="actlab"><span class="no">05</span><span class="lab">Prozess · Ablauf</span></div>
+          <h2 class="big" style="color:var(--i0);margin-bottom:28px">So wird aus einer Idee ein fertiges Projekt.</h2>
+        </div>
+        <div style="overflow:hidden">
+          <div class="pr-track" id="pr-track">
+            <div class="pr-step"><span class="pn">01</span><span class="pt">Wir schauen hin.</span><span class="pd">Ortstermin und Bestandsaufnahme, auch der Bereiche, die man von der Straße nicht sieht.</span><span class="slot on-light" style="aspect-ratio:16/10;margin-top:auto"><span class="fill f-wood"></span><span class="meta"><span class="id">SLOT PRO-02</span><span class="mo">Prüfung im Dachraum, Messgerät am Sparren</span></span></span></div>
+            <div class="pr-step"><span class="pn">02</span><span class="pt">Wir denken voraus.</span><span class="pd">Dach, Energie und Ihre Anforderungen betrachten wir gemeinsam, nicht nacheinander.</span><span class="slot on-light" style="aspect-ratio:16/10;margin-top:auto"><span class="fill f-slate"></span><span class="meta"><span class="id">SLOT MAT-03</span><span class="mo">Blechanschluss, Falzkante</span></span></span></div>
+            <div class="pr-step"><span class="pn">03</span><span class="pt">Wir planen sauber.</span><span class="pd">Sie erhalten eine nachvollziehbare Planung und ein Angebot, das Positionen benennt.</span><span class="slot on-light" style="aspect-ratio:16/10;margin-top:auto"><span class="fill f-house"></span><span class="meta"><span class="id">SLOT PRO-03</span><span class="mo">Dachaufsicht als Zeichnung, Hand mit Stift</span></span></span></div>
+            <div class="pr-step"><span class="pn">04</span><span class="pt">Wir setzen um.</span><span class="pd">Ein Ansprechpartner koordiniert Gewerke, Termine und Material.</span><span class="slot on-light" style="aspect-ratio:16/10;margin-top:auto"><span class="fill f-mod"></span><span class="meta"><span class="id">SLOT PRO-04</span><span class="mo">Modulmontage auf der Schiene</span></span></span></div>
+            <div class="pr-step"><span class="pn">05</span><span class="pt">Wir bleiben erreichbar.</span><span class="pd">Nach der Übergabe erreichen Sie dieselbe Person wie am ersten Tag.</span><span class="slot on-light" style="aspect-ratio:16/10;margin-top:auto"><span class="fill f-tile"></span><span class="meta"><span class="id">SLOT PRO-01</span><span class="mo">Hände am Ziegel</span></span></span></div>
+          </div>
+        </div>
+        <div class="wrap">
+          <div class="pr-line"><i id="pr-fill"></i></div>
+          <div style="margin-top:26px"><a class="btn btn-l" href="#akt8">Dach prüfen lassen
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="butt" stroke-linejoin="miter" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ AKT 06 · BEWEIS ============ -->
+    <section class="act" id="akt6">
+      <div class="wrap">
+        <div class="actlab rv"><span class="no">06</span><span class="lab">Beweis · Projekte</span></div>
+        <div class="grid2" style="margin-bottom:30px">
+          <h2 class="big rv" style="color:var(--i0)">Gute Arbeit sieht man.</h2>
+          <p class="lead rv" style="color:var(--i1)">Vorher und nachher aus identischer Kameraachse. Der Regler läuft beim Scrollen einmal durch und bleibt danach zum Ziehen bedienbar.</p>
+        </div>
+        <div class="projgrid">
+          <div class="rv">
+            <div class="ba" data-ba tabindex="0" role="slider" aria-label="Vorher und nachher, Beispielprojekt 01" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+              <span class="before slot on-light" style="border:none"><span class="fill f-tile" style="opacity:0.85"></span><span class="meta"><span class="id">SLOT OBJ-01</span><span class="mo">Bestand, altes Dach</span></span></span>
+              <span class="after slot on-light" data-after style="border:none"><span class="fill f-mod"></span><span class="meta"><span class="id">SLOT OBJ-03</span><span class="mo">Nachher, neues Dach mit Anlage</span></span></span>
+              <span class="tagl">VORHER</span><span class="tagr">NACHHER</span>
+              <span class="handle" data-handle></span>
+            </div>
+            <div style="margin-top:14px;display:flex;flex-direction:column;gap:6px">
+              <span class="lab" style="color:var(--i2)">Beispielprojekt 01</span>
+              <span style="font-family:var(--display);font-size:1.5rem;color:var(--i0)">Dachsanierung und Photovoltaik</span>
+              <span class="sm" style="color:var(--i2)">Hildesheim · Beispielprojekt</span>
+              <span class="demo-note" style="align-self:flex-start;margin-top:6px">MUSTERPROJEKT</span>
+            </div>
+          </div>
+          <div class="rv">
+            <div class="ba" data-ba tabindex="0" role="slider" aria-label="Vorher und nachher, Beispielprojekt 02" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+              <span class="before slot on-light" style="border:none"><span class="fill f-wood" style="opacity:0.9"></span><span class="meta"><span class="id">SLOT OBJ-02</span><span class="mo">Bestand, Dachfläche</span></span></span>
+              <span class="after slot on-light" data-after style="border:none"><span class="fill f-slate"></span><span class="meta"><span class="id">SLOT MAT-03</span><span class="mo">Nachher, Neueindeckung Schiefer</span></span></span>
+              <span class="tagl">VORHER</span><span class="tagr">NACHHER</span>
+              <span class="handle" data-handle></span>
+            </div>
+            <div style="margin-top:14px;display:flex;flex-direction:column;gap:6px">
+              <span class="lab" style="color:var(--i2)">Beispielprojekt 02</span>
+              <span style="font-family:var(--display);font-size:1.5rem;color:var(--i0)">Neueindeckung mit Schiefer</span>
+              <span class="sm" style="color:var(--i2)">Landkreis Hildesheim · Beispielprojekt</span>
+              <span class="demo-note" style="align-self:flex-start;margin-top:6px">MUSTERPROJEKT</span>
+            </div>
+          </div>
+        </div>
+        <p class="sm rv" style="margin-top:26px;color:var(--i2)">Musterprojekt. Die gezeigten Projekte dienen der Darstellung von Leistungen und sind keine realen Referenzen. Keine Kundennamen, keine Bewertungen, keine Ertragsangaben.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============ FLÄCHENWECHSEL TAG ZU NACHT ============ -->
+  <div class="arc" id="arc2" aria-hidden="true"><div class="day" id="arc2-day"></div><div class="edge" id="arc2-edge"></div></div>
+
+  <!-- ============ AKT 06b · QUALITÄT ============ -->
+  <section class="act" id="akt6b">
+    <div class="wrap">
+      <div class="actlab rv"><span class="no">06</span><span class="lab">Beweis · Qualität und Menschen</span></div>
+      <div class="grid2">
+        <div class="rv">
+          <div class="slot" style="aspect-ratio:3/2" id="qual-slot">
+            <span class="fill f-tile"></span>
+            <span class="cr spec">3:2 · Desktop · 4:5 mobil</span>
+            <span class="meta"><span class="id">SLOT PRO-01</span><span class="mo">Hände legen einen Ziegel in die Lattung ein, Werkzeug daneben. Kein Blick in die Kamera.</span></span>
+          </div>
+        </div>
+        <div class="rv" style="display:flex;flex-direction:column;gap:22px">
+          <h2 class="big">Gute Arbeit endet nicht mit der Montage.</h2>
+          <div class="life" style="gap:0">
+            <div class="it" style="grid-template-columns:1fr"><p class="bd">Ein Ansprechpartner begleitet Ihr Projekt von der ersten Bestandsaufnahme bis zur Übergabe.</p></div>
+            <div class="it" style="grid-template-columns:1fr"><p class="bd">Wir dokumentieren, was unter der Deckung liegt, damit auch in zehn Jahren nachvollziehbar ist, wie das Dach aufgebaut wurde.</p></div>
+            <div class="it" style="grid-template-columns:1fr"><p class="bd">Nach der Fertigstellung erreichen Sie uns unter derselben Nummer.</p></div>
+            <div class="it" style="grid-template-columns:1fr"><p class="bd">Wartung und Kontrolle vereinbaren wir auf Wunsch, nicht automatisch.</p></div>
+          </div>
+          <p class="sm">Keine erfundenen Garantien, keine Zertifikate, keine Mitgliedschaften. Was hier steht, muss der Betrieb bestätigen können.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ AKT 07 · ENTSCHEIDUNG ============ -->
+  <section class="act" id="statement">
+    <div class="wrap">
+      <div class="actlab rv"><span class="no">07</span><span class="lab">Entscheidung</span></div>
+      <h2 class="rvm l1" style="margin-bottom:6px"><span>Modern</span> in der Technik.</h2>
+      <h2 class="rvm l2" id="st2"><span>Traditionell</span> im Handwerk.</h2>
+      <p class="lead rv" style="margin-top:30px">Wir verbinden Erfahrung und moderne Technik, ohne das Wesentliche aus den Augen zu verlieren: saubere Arbeit, klare Kommunikation und Lösungen, die langfristig funktionieren.</p>
+      <div class="rv" style="margin-top:28px"><a class="btn btn-s" href="#akt8">Beratung anfragen
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="butt" stroke-linejoin="miter" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
+    </div>
+  </section>
+
+  <section class="act" id="akt7b">
+    <div class="wrap">
+      <div class="actlab rv"><span class="no">07</span><span class="lab">Entscheidung · Region</span></div>
+      <div class="grid2" style="margin-bottom:28px">
+        <h2 class="big rv">70 Kilometer rund um Hildesheim.</h2>
+        <p class="lead rv">Unser Arbeitsgebiet ist der Landkreis Hildesheim und die Region ringsum. Wir kennen die Bauweisen zwischen Leinebergland und Börde, die typischen Dachformen der Siedlungen der Nachkriegsjahre und die Anforderungen der Netzbetreiber vor Ort. Kurze Wege bedeuten, dass ein Ortstermin keine Tagesreise ist.</p>
+      </div>
+      <div class="mapbox rv" id="mapbox">
+        <svg viewBox="0 0 720 380" role="img" aria-label="Stilisierte Karte des Arbeitsgebiets mit Hildesheim im Zentrum und einem Radius von etwa 70 Kilometern">
+          <g fill="none" stroke="#8C867B">
+            <circle id="mp-r1" cx="360" cy="190" r="72" stroke-width="1" stroke-dasharray="452" stroke-dashoffset="452"/>
+            <circle id="mp-r2" cx="360" cy="190" r="126" stroke-width="1" stroke-opacity="0.6" stroke-dasharray="792" stroke-dashoffset="792"/>
+            <circle id="mp-r3" cx="360" cy="190" r="172" stroke-width="1" stroke-opacity="0.35" stroke-dasharray="1081" stroke-dashoffset="1081"/>
+          </g>
+          <g stroke="#667060" stroke-width="1" stroke-opacity="0.5" fill="none" id="mp-lines" stroke-dasharray="200" stroke-dashoffset="200">
+            <path d="M360 190L296 108M360 190L452 132M360 190L300 268M360 190L446 254M360 190L232 176M360 190L494 196"/>
+          </g>
+          <g font-family="Inter, Arial, sans-serif" font-size="11" fill="#C9C1B4" letter-spacing="0.8">
+            <g class="mp-pt" data-i="0"><circle cx="360" cy="190" r="4" fill="#D5B45A"/><text x="372" y="194" fill="#F3F0E9" font-size="13">Hildesheim</text></g>
+            <g class="mp-pt" data-i="1"><circle cx="296" cy="108" r="2.4" fill="#C9C1B4"/><text x="306" y="112">Sarstedt</text></g>
+            <g class="mp-pt" data-i="2"><circle cx="452" cy="132" r="2.4" fill="#C9C1B4"/><text x="462" y="136">Bad Salzdetfurth</text></g>
+            <g class="mp-pt" data-i="3"><circle cx="300" cy="268" r="2.4" fill="#C9C1B4"/><text x="240" y="286">Alfeld</text></g>
+            <g class="mp-pt" data-i="4"><circle cx="446" cy="254" r="2.4" fill="#C9C1B4"/><text x="456" y="258">Bockenem</text></g>
+            <g class="mp-pt" data-i="5"><circle cx="232" cy="176" r="2.4" fill="#C9C1B4"/><text x="176" y="168">Elze</text></g>
+            <g class="mp-pt" data-i="6"><circle cx="494" cy="196" r="2.4" fill="#C9C1B4"/><text x="504" y="200">Holle</text></g>
+            <text x="360" y="352" text-anchor="middle" fill="#8C867B" font-size="10.5">Radius etwa 70 km · stilisierte Darstellung, keine Karteneinbettung</text>
+          </g>
+        </svg>
+      </div>
+      <div class="places rv">
+        <a href="#akt7b">Hildesheim</a><a href="#akt7b">Sarstedt</a><a href="#akt7b">Alfeld</a><a href="#akt7b">Bad Salzdetfurth</a><a href="#akt7b">Bockenem</a><a href="#akt7b">Elze</a><a href="#akt7b">Gronau</a><a href="#akt7b">Holle</a><a href="#akt7b">Diekholzen</a><a href="#akt7b">Nordstemmen</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ AKT 08 · CONVERSION ============ -->
+  <section class="act" id="akt8" style="border-bottom:none">
+    <div class="wrap">
+      <div class="actlab rv"><span class="no">08</span><span class="lab">Conversion</span></div>
+      <div class="contact rv" id="contact">
+        <div style="display:flex;flex-direction:column;gap:20px">
+          <h2>Vielleicht beginnt Ihr Projekt genau hier.</h2>
+          <p>Sie wissen noch nicht, ob Ihr Dach repariert, saniert oder neu gedacht werden sollte? Erzählen Sie uns einfach, worum es geht. Alles Weitere klären wir am Telefon oder vor Ort.</p>
+          <p class="sm" style="color:var(--i2)">Ab hier keine Choreografie mehr. Am Conversion-Punkt wäre jede Bewegung ein Risiko.</p>
+        </div>
+        <div class="steps">
+          <div class="st"><span class="sn">01</span><span><span class="sl">Was können wir für Sie tun?</span>
+            <span class="choicerow"><span>Dachreparatur</span><span>Dachsanierung</span><span>Neueindeckung</span><span>Photovoltaik</span><span>Dach und PV</span><span>Speicher</span><span>Beratung</span><span>Sonstiges</span></span></span></div>
+          <div class="st"><span class="sn">02</span><span><span class="sl">Wo befindet sich das Gebäude?</span><span class="sh">Postleitzahl. Außerhalb des Gebiets keine Ablehnung, sondern ein Hinweis.</span></span></div>
+          <div class="st"><span class="sn">03</span><span><span class="sl">Kontakt</span><span class="sh">Name, Telefon, E-Mail. Telefon oder E-Mail genügt, nicht beides.</span></span></div>
+          <div class="st"><span class="sn">04</span><span><span class="sl">Projektbeschreibung</span><span class="sh">Freitext, Datei optional. Im Musterprojekt deaktiviert.</span></span></div>
+          <div style="margin-top:8px;display:flex;gap:14px;flex-wrap:wrap;align-items:center">
+            <span class="btn btn-l">Projektanfrage senden
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="butt" stroke-linejoin="miter" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></span>
+            <span class="sm" style="color:var(--i2)">Musterformular. Es wird nichts übermittelt und nichts gespeichert.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <footer>
+      <div>Spezimen zu <span style="color:var(--t1)">dachwerk/docs/04-HOMEPAGE-EXPERIENCE.md</span>. Dramaturgie in acht Akten, Hero in acht Phasen.</div>
+      <div>DACHWERK ist ein fiktiver Betrieb. Musterprojekt ohne reale Referenzen, Zertifikate oder Bewertungen. Steuerliche Angaben mit Stand 28.08.2026, keine Steuer- oder Rechtsberatung.</div>
+    </footer>
+  </div>
+</main>
+
+<div class="mact" id="mact">
+  <a href="#akt8">ANRUFEN</a><a href="#akt8">PROJEKT BESPRECHEN</a>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------------- helpers ---------------- */
+  function clamp(v, a, b) { return v < a ? a : (v > b ? b : v); }
+  function lerp(a, b, t) { return a + (b - a) * t; }
+  function easeInOut(t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+  function prog(rect, vh, span) { return clamp((vh - rect.top) / (vh + span), 0, 1); }
+
+  /* ---------------- 3D: minimal perspective painter ---------------- */
+  var DEG = Math.PI / 180;
+  var PITCH = 38 * DEG;
+  var W = 9, D = 7, HW = 5.5, OVER = 0.4;
+  var EAVE_Z = D / 2 + OVER;
+  var EAVE_Y = HW - OVER * Math.tan(PITCH);
+  var RIDGE_Y = HW + (D / 2) * Math.tan(PITCH);
+  var SLOPE = { x: 0, y: RIDGE_Y - EAVE_Y, z: -EAVE_Z };
+  var SLOPE_LEN = Math.sqrt(SLOPE.y * SLOPE.y + SLOPE.z * SLOPE.z);
+  var S = { x: 0, y: SLOPE.y / SLOPE_LEN, z: SLOPE.z / SLOPE_LEN };
+  var N = { x: 0, y: -S.z, z: S.y };               // outward roof normal
+  var ROOF_W = W + 0.6;
+  var ROWS = 12, COLS = 16;
+  var MROWS = 4, MCOLS = 6;
+  var M_W = ROOF_W * 0.74, M_U0 = (ROOF_W - M_W) / 2;
+  var M_L = SLOPE_LEN * 0.62, M_V0 = SLOPE_LEN * 0.18;
+
+  var KEYS = [
+    { p: 0.00, dist: 34, height: 1.6, tgt: [0, 4.0, 0], az: 40, sunAz: 96, sun: [255, 226, 189], skyA: "#1b2431", skyB: "#3b3325", skyC: "#181917" },
+    { p: 0.25, dist: 22, height: 2.4, tgt: [0, 6.4, 1.4], az: 40, sunAz: 104, sun: [255, 224, 186], skyA: "#1d2733", skyB: "#3f3628", skyC: "#181917" },
+    { p: 0.38, dist: 17.5, height: 8.4, tgt: [0, 6.5, 1.7], az: 38, sunAz: 112, sun: [255, 221, 180], skyA: "#222b35", skyB: "#443a2b", skyC: "#181917" },
+    { p: 0.50, dist: 13.5, height: 10.2, tgt: [-0.3, 6.5, 1.9], az: 34, sunAz: 124, sun: [255, 216, 172], skyA: "#262d35", skyB: "#493d2d", skyC: "#181917" },
+    { p: 0.62, dist: 13.5, height: 10.8, tgt: [0.4, 6.5, 1.9], az: 44, sunAz: 140, sun: [255, 209, 162], skyA: "#272d33", skyB: "#4c3e2c", skyC: "#181917" },
+    { p: 0.78, dist: 16.5, height: 9.6, tgt: [0.2, 6.5, 1.7], az: 42, sunAz: 168, sun: [255, 198, 148], skyA: "#2a2c30", skyB: "#513f2a", skyC: "#181917" },
+    { p: 1.00, dist: 30, height: 1.9, tgt: [0, 4.2, 0], az: 40, sunAz: 214, sun: [255, 186, 133], skyA: "#2c2b2c", skyB: "#553f26", skyC: "#181917" }
+  ];
+
+  function camAt(p) {
+    var i = 0;
+    while (i < KEYS.length - 2 && p > KEYS[i + 1].p) { i++; }
+    var a = KEYS[i], b = KEYS[i + 1];
+    var t = easeInOut(clamp((p - a.p) / (b.p - a.p), 0, 1));
+    return {
+      dist: lerp(a.dist, b.dist, t),
+      height: lerp(a.height, b.height, t),
+      tgt: [lerp(a.tgt[0], b.tgt[0], t), lerp(a.tgt[1], b.tgt[1], t), lerp(a.tgt[2], b.tgt[2], t)],
+      az: lerp(a.az, b.az, t),
+      sunAz: lerp(a.sunAz, b.sunAz, t),
+      sun: [lerp(a.sun[0], b.sun[0], t), lerp(a.sun[1], b.sun[1], t), lerp(a.sun[2], b.sun[2], t)],
+      skyA: t < 0.5 ? a.skyA : b.skyA, skyB: t < 0.5 ? a.skyB : b.skyB, skyC: a.skyC
+    };
+  }
+
+  function Renderer(canvas) {
+    var ctx = canvas.getContext("2d");
+    var w = 1, h = 1, dpr = 1;
+    var shiftX = 0, shiftY = 0, baseShiftX = 0, baseShiftY = 0;
+    var cam = { pos: [0, 0, 0], fwd: [0, 0, -1], right: [1, 0, 0], up: [0, 1, 0], focal: 1 };
+    var light = [0.4, 0.6, 0.7], lightCol = [255, 220, 180];
+
+    function resize() {
+      var r = canvas.getBoundingClientRect();
+      dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      w = Math.max(1, Math.round(r.width));
+      h = Math.max(1, Math.round(r.height));
+      canvas.width = Math.round(w * dpr);
+      canvas.height = Math.round(h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      baseShiftX = w > 900 ? w * 0.15 : 0;            // Haus rechts, Text links auf freiem Himmel
+      baseShiftY = w > 900 ? h * 0.03 : -h * 0.15;    // mobil sitzt das Haus oben, der Text darunter
+    }
+
+    function setCamera(c, mouse) {
+      var azr = (c.az + (mouse ? mouse.x * 1.5 : 0)) * DEG;
+      var pos = [Math.sin(azr) * c.dist, c.height + (mouse ? mouse.y * 0.4 : 0), Math.cos(azr) * c.dist];
+      var f = [c.tgt[0] - pos[0], c.tgt[1] - pos[1], c.tgt[2] - pos[2]];
+      var fl = Math.sqrt(f[0] * f[0] + f[1] * f[1] + f[2] * f[2]);
+      f = [f[0] / fl, f[1] / fl, f[2] / fl];
+      var r = [-f[2], 0, f[0]];                       // right = normalize(cross(forward, worldUp))
+      var rl = Math.sqrt(r[0] * r[0] + r[2] * r[2]) || 1;
+      r = [r[0] / rl, 0, r[2] / rl];
+      var u = [r[1] * f[2] - r[2] * f[1], r[2] * f[0] - r[0] * f[2], r[0] * f[1] - r[1] * f[0]];
+      cam.pos = pos; cam.fwd = f; cam.right = r; cam.up = u;
+      // 34 Grad vertikal, auf schmalen Flaechen ueber die Breite begrenzt, damit das Haus im Bild bleibt
+      cam.focal = Math.min((h / 2) / Math.tan(17 * DEG), (w / 2) / Math.tan(22 * DEG));
+      var sa = c.sunAz * DEG, se = 26 * DEG;
+      light = [Math.cos(sa) * Math.cos(se), Math.sin(se), Math.sin(sa) * Math.cos(se)];
+      lightCol = c.sun;
+    }
+
+    function proj(P) {
+      var v = [P[0] - cam.pos[0], P[1] - cam.pos[1], P[2] - cam.pos[2]];
+      var z = v[0] * cam.fwd[0] + v[1] * cam.fwd[1] + v[2] * cam.fwd[2];
+      if (z < 0.15) { return null; }
+      var x = v[0] * cam.right[0] + v[1] * cam.right[1] + v[2] * cam.right[2];
+      var y = v[0] * cam.up[0] + v[1] * cam.up[1] + v[2] * cam.up[2];
+      return [w / 2 + shiftX + (x / z) * cam.focal, h / 2 + shiftY - (y / z) * cam.focal, z];
+    }
+
+    function shade(col, nrm, amb) {
+      var d = nrm[0] * light[0] + nrm[1] * light[1] + nrm[2] * light[2];
+      d = Math.max(0, d);
+      var k = (amb === undefined ? 0.30 : amb) + 0.85 * d;
+      return "rgb(" + Math.round(Math.min(255, col[0] * k * (lightCol[0] / 255 * 0.35 + 0.65))) + "," +
+        Math.round(Math.min(255, col[1] * k * (lightCol[1] / 255 * 0.35 + 0.65))) + "," +
+        Math.round(Math.min(255, col[2] * k * (lightCol[2] / 255 * 0.35 + 0.65))) + ")";
+    }
+
+    function poly(pts, fill, stroke) {
+      var sp = [], i;
+      for (i = 0; i < pts.length; i++) {
+        var q = proj(pts[i]);
+        if (!q) { return; }
+        sp.push(q);
+      }
+      ctx.beginPath();
+      ctx.moveTo(sp[0][0], sp[0][1]);
+      for (i = 1; i < sp.length; i++) { ctx.lineTo(sp[i][0], sp[i][1]); }
+      ctx.closePath();
+      if (fill) { ctx.fillStyle = fill; ctx.fill(); }
+      if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = 1; ctx.stroke(); }
+    }
+
+    function line(a, b, col, wid) {
+      var p1 = proj(a), p2 = proj(b);
+      if (!p1 || !p2) { return; }
+      ctx.beginPath(); ctx.moveTo(p1[0], p1[1]); ctx.lineTo(p2[0], p2[1]);
+      ctx.strokeStyle = col; ctx.lineWidth = wid || 1; ctx.stroke();
+    }
+
+    function pt(u, v, lift) {
+      return [
+        -ROOF_W / 2 + u,
+        EAVE_Y + S.y * v + N.y * (lift || 0),
+        EAVE_Z + S.z * v + N.z * (lift || 0)
+      ];
+    }
+
+    function draw(p, mouse) {
+      var c = camAt(p);
+      var back = clamp((p - 0.86) / 0.12, 0, 1);
+      var away = clamp((p - 0.14) / 0.18, 0, 1) * (1 - back);
+      shiftX = baseShiftX * (1 - away);
+      shiftY = baseShiftY * (1 - away);
+      setCamera(c, mouse);
+      ctx.clearRect(0, 0, w, h);
+
+      // ground: als Horizontfläche gezeichnet, weil ein Bodenquad hinter der Kamera abgeschnitten würde
+      var far = 500;
+      var fc = [cam.pos[0] + cam.fwd[0] * far, 0, cam.pos[2] + cam.fwd[2] * far];
+      var hl = proj([fc[0] - cam.right[0] * far, 0, fc[2] - cam.right[2] * far]);
+      var hr = proj([fc[0] + cam.right[0] * far, 0, fc[2] + cam.right[2] * far]);
+      if (hl && hr) {
+        var gy = Math.min(hl[1], hr[1]);
+        var g = ctx.createLinearGradient(0, gy, 0, h);
+        g.addColorStop(0, "rgba(46,45,40,0.95)");
+        g.addColorStop(0.35, "rgba(31,32,29,1)");
+        g.addColorStop(1, "rgba(20,21,19,1)");
+        ctx.beginPath();
+        ctx.moveTo(hl[0], hl[1]); ctx.lineTo(hr[0], hr[1]); ctx.lineTo(w + 40, h + 40); ctx.lineTo(-40, h + 40);
+        ctx.closePath(); ctx.fillStyle = g; ctx.fill();
+      }
+
+      // back slope
+      poly([pt(0, SLOPE_LEN), pt(ROOF_W, SLOPE_LEN),
+        [ROOF_W - ROOF_W / 2, EAVE_Y, -EAVE_Z], [-ROOF_W / 2, EAVE_Y, -EAVE_Z]],
+        shade([74, 48, 39], [0, 0.62, -0.79], 0.18));
+
+      // walls
+      poly([[-W / 2, 0, D / 2], [W / 2, 0, D / 2], [W / 2, HW, D / 2], [-W / 2, HW, D / 2]], shade([196, 190, 178], [0, 0, 1], 0.26));
+      poly([[W / 2, 0, D / 2], [W / 2, 0, -D / 2], [W / 2, HW, -D / 2], [W / 2, HW, D / 2]], shade([196, 190, 178], [1, 0, 0], 0.26));
+      // gable (wood)
+      poly([[W / 2, HW, D / 2], [W / 2, HW, -D / 2], [W / 2, RIDGE_Y, 0]], shade([108, 100, 88], [1, 0, 0], 0.24));
+      // windows
+      poly([[-2.9, 1.5, D / 2 + 0.01], [-1.3, 1.5, D / 2 + 0.01], [-1.3, 3.3, D / 2 + 0.01], [-2.9, 3.3, D / 2 + 0.01]], "rgba(28,32,38,0.92)");
+      poly([[1.2, 1.5, D / 2 + 0.01], [2.8, 1.5, D / 2 + 0.01], [2.8, 3.3, D / 2 + 0.01], [1.2, 3.3, D / 2 + 0.01]], "rgba(28,32,38,0.92)");
+      poly([[-0.75, 0, D / 2 + 0.01], [0.75, 0, D / 2 + 0.01], [0.75, 2.6, D / 2 + 0.01], [-0.75, 2.6, D / 2 + 0.01]], shade([90, 76, 64], [0, 0, 1], 0.3));
+
+      // chimney
+      (function () {
+        var cx0 = 2.1, cx1 = 2.9, cz0 = -0.45, cz1 = 0.35, ctop = RIDGE_Y + 0.9, cbot = HW + 0.4;
+        poly([[cx0, cbot, cz1], [cx1, cbot, cz1], [cx1, ctop, cz1], [cx0, ctop, cz1]], shade([120, 84, 70], [0, 0, 1], 0.24));
+        poly([[cx1, cbot, cz1], [cx1, cbot, cz0], [cx1, ctop, cz0], [cx1, ctop, cz1]], shade([120, 84, 70], [1, 0, 0], 0.24));
+        poly([[cx0, ctop, cz1], [cx1, ctop, cz1], [cx1, ctop, cz0], [cx0, ctop, cz0]], shade([86, 88, 90], [0, 1, 0], 0.3));
+      })();
+
+      // roof deck (visible when tiles lift)
+      var deckAmt = clamp((p - 0.47) / 0.06, 0, 1) * (1 - clamp((p - 0.66) / 0.06, 0, 1));
+      if (deckAmt > 0) {
+        poly([pt(0, 0), pt(ROOF_W, 0), pt(ROOF_W, SLOPE_LEN), pt(0, SLOPE_LEN)], shade([52, 49, 44], [N.x, N.y, N.z], 0.2));
+        // battens
+        var bi;
+        for (bi = 1; bi < ROWS; bi++) {
+          var bv = (bi / ROWS) * SLOPE_LEN;
+          poly([pt(0.2, bv, 0.04), pt(ROOF_W - 0.2, bv, 0.04), pt(ROOF_W - 0.2, bv + 0.10, 0.04), pt(0.2, bv + 0.10, 0.04)],
+            shade([150, 132, 100], [N.x, N.y, N.z], 0.24));
+        }
+      }
+
+      // tiles, drawn ridge to eave
+      var tw = ROOF_W / COLS, tl = SLOPE_LEN / ROWS;
+      var r, cc;
+      for (r = ROWS - 1; r >= 0; r--) {
+        // Reihen im Belegungsfeld oeffnen von der Traufe zum First und klappen danach zurueck,
+        // weil die Anlage auf der Deckung sitzt und nicht an ihrer Stelle
+        var rowMid = (r + 0.5) * (SLOPE_LEN / ROWS);
+        var inBand = rowMid > M_V0 - 0.35 && rowMid < M_V0 + M_L + 0.35;
+        var op = clamp((p - 0.495 - r * 0.008) / 0.055, 0, 1);
+        var cl = clamp((p - 0.600 - r * 0.008) / 0.055, 0, 1);
+        var rowT = inBand ? (easeInOut(op) - easeInOut(cl)) : 0;
+        var ang = clamp(rowT, 0, 1) * 46 * DEG;
+        var ca = Math.cos(ang), sa2 = Math.sin(ang);
+        var hingeV = (r + 1) * tl;
+        var nrm = [N.x * ca + S.x * sa2, N.y * ca + S.y * sa2, N.z * ca + S.z * sa2];
+        var fill = shade([146, 82, 62], nrm, 0.26);
+        for (cc = 0; cc < COLS; cc++) {
+          var u0 = cc * tw + 0.02, u1 = (cc + 1) * tw - 0.02;
+          var hi0 = pt(u0, hingeV, 0.07), hi1 = pt(u1, hingeV, 0.07);
+          var dv = tl;
+          var offY = (-S.y * ca + N.y * sa2) * dv, offZ = (-S.z * ca + N.z * sa2) * dv;
+          var lo0 = [hi0[0], hi0[1] + offY, hi0[2] + offZ];
+          var lo1 = [hi1[0], hi1[1] + offY, hi1[2] + offZ];
+          poly([hi0, hi1, lo1, lo0], fill);
+          line(lo0, lo1, "rgba(28,16,12,0.45)", 1);   // Profilschatten an der Unterkante
+        }
+      }
+
+      // rails
+      var railAmt = clamp((p - 0.585) / 0.05, 0, 1);
+      if (railAmt > 0) {
+        var mW = M_W, mU0 = M_U0, mL = M_L, mV0 = M_V0;
+        var ri;
+        ctx.globalAlpha = railAmt;
+        for (ri = 0; ri <= MROWS; ri++) {
+          var rv = mV0 + (ri / MROWS) * mL;
+          poly([pt(mU0 + 0.15, rv, 0.13), pt(mU0 + mW - 0.15, rv, 0.13), pt(mU0 + mW - 0.15, rv + 0.045, 0.13), pt(mU0 + 0.15, rv + 0.045, 0.13)],
+            shade([148, 154, 158], [N.x, N.y, N.z], 0.26));
+        }
+        ctx.globalAlpha = 1;
+        // modules
+        var mw = mW / MCOLS, ml = mL / MROWS;
+        var mr, mc;
+        for (mr = MROWS - 1; mr >= 0; mr--) {
+          var mt = clamp((p - 0.625 - mr * 0.026) / 0.07, 0, 1);
+          if (mt <= 0) { continue; }
+          var e = easeInOut(mt);
+          var lift = 0.185 + (1 - e) * 0.5;
+          var glassN = [N.x, N.y, N.z];
+          var base = shade([26, 30, 38], glassN, 0.30);
+          var sheenAmt = Math.max(0, glassN[0] * light[0] + glassN[1] * light[1] + glassN[2] * light[2]);
+          for (mc = 0; mc < MCOLS; mc++) {
+            var a0 = mU0 + mc * mw + 0.03, a1 = mU0 + (mc + 1) * mw - 0.03;
+            var b0 = mV0 + mr * ml + 0.03, b1 = mV0 + (mr + 1) * ml - 0.03;
+            ctx.globalAlpha = e;
+            poly([pt(a0, b0, lift), pt(a1, b0, lift), pt(a1, b1, lift), pt(a0, b1, lift)], base, "rgba(190,196,204,0.42)");
+            // cell grid
+            var k;
+            for (k = 1; k < 3; k++) {
+              line(pt(a0 + (a1 - a0) * k / 3, b0, lift + 0.001), pt(a0 + (a1 - a0) * k / 3, b1, lift + 0.001), "rgba(190,196,204,0.16)");
+            }
+            line(pt(a0, (b0 + b1) / 2, lift + 0.001), pt(a1, (b0 + b1) / 2, lift + 0.001), "rgba(190,196,204,0.16)");
+            // glass sheen, sehr zurueckhaltend
+            poly([pt(a0, b1, lift + 0.002), pt(a0 + (a1 - a0) * 0.5, b1, lift + 0.002), pt(a0, b0 + (b1 - b0) * 0.45, lift + 0.002)],
+              "rgba(226,232,240," + (0.03 + 0.06 * sheenAmt).toFixed(3) + ")");
+            ctx.globalAlpha = 1;
+          }
+        }
+        // energy pulse
+        var pulse = clamp((p - 0.78) / 0.10, 0, 1);
+        if (pulse > 0 && pulse < 1) {
+          var py = mV0 + mL * (1 - Math.abs(Math.sin(pulse * Math.PI)));
+          ctx.globalAlpha = 0.35 * Math.sin(pulse * Math.PI);
+          line(pt(mU0, py, 0.24), pt(mU0 + mW, py, 0.24), "rgba(213,180,90,1)", 2);
+          ctx.globalAlpha = 1;
+        }
+      }
+
+      // ridge light edge
+      line(pt(0.1, SLOPE_LEN, 0.10), pt(ROOF_W - 0.1, SLOPE_LEN, 0.10), "rgba(213,180,90,0.30)", 1);
+      return c;
+    }
+
+    return { resize: resize, draw: draw, get size() { return [w, h]; } };
+  }
+
+  /* ---------------- hero driver ---------------- */
+  var stage = document.getElementById("hero-stage");
+  var heroSec = document.getElementById("hero");
+  var canvas = document.getElementById("roof");
+  var heroTxt = document.getElementById("hero-txt");
+  var heroTwo = document.getElementById("hero-two");
+  var matLabel = document.getElementById("mat-label");
+  var matLabelT = document.getElementById("mat-label-t");
+  var measure = document.getElementById("measure");
+  var measureT = document.getElementById("measure-t");
+  var renderer = null, mouse = { x: 0, y: 0 }, dirty = true, lastP = -1;
+
+  var PHASES = [
+    [0.00, "1 · Ankunft", ""],
+    [0.10, "2 · Annäherung", ""],
+    [0.25, "3 · Die Fläche", "Dachfläche"],
+    [0.38, "4 · Material", "Tondachziegel, Doppelmuldenfalz"],
+    [0.50, "5 · Öffnung", "Unterkonstruktion"],
+    [0.62, "6 · Die Wendung", "Energiefläche"],
+    [0.78, "7 · Ertrag", "Energiefläche"],
+    [0.88, "8 · Rückzug", ""]
+  ];
+  var ACTS = [
+    ["hero", "01 · Aufmerksamkeit"], ["akt2", "02 · Problem"], ["akt2b", "02 · Problem"],
+    ["split", "03 · Erkenntnis"], ["akt4", "04 · Kompetenz"], ["akt4b", "04 · Kompetenz"],
+    ["akt5", "05 · Prozess"], ["process", "05 · Prozess"], ["akt6", "06 · Beweis"],
+    ["akt6b", "06 · Beweis"], ["statement", "07 · Entscheidung"], ["akt7b", "07 · Entscheidung"],
+    ["akt8", "08 · Conversion"]
+  ];
+
+  var hudAct = document.getElementById("hud-act"), hudPhase = document.getElementById("hud-phase"),
+    hudP = document.getElementById("hud-p"), hudLabel = document.getElementById("hud-label"),
+    hudFill = document.getElementById("hud-fill");
+
+  function setHeroUI(p, c) {
+    var fade = clamp((p - 0.08) / 0.10, 0, 1);
+    heroTxt.style.opacity = String(1 - fade);
+    heroTxt.style.transform = "translateY(calc(-50% - " + (fade * 46).toFixed(1) + "px))";
+    heroTxt.style.pointerEvents = fade > 0.6 ? "none" : "auto";
+
+    var two = clamp((p - 0.885) / 0.07, 0, 1);
+    heroTwo.style.opacity = String(two);
+    heroTwo.style.transform = "translateY(calc(-50% + " + ((1 - two) * 22).toFixed(1) + "px))";
+    heroTwo.style.pointerEvents = two > 0.6 ? "auto" : "none";
+
+    var ph = 0, i;
+    for (i = 0; i < PHASES.length; i++) { if (p >= PHASES[i][0]) { ph = i; } }
+    var labTxt = PHASES[ph][2];
+    var labOn = labTxt !== "" && p < 0.885 ? 1 : 0;
+    matLabel.style.opacity = String(labOn);
+    if (labTxt && matLabelT.textContent !== labTxt) { matLabelT.textContent = labTxt; }
+    measure.style.opacity = String(clamp((p - 0.22) / 0.08, 0, 1) * (p < 0.885 ? 1 : 0));
+    var mtxt = p > 0.60 ? "24 Module · Belegung 74 %" : "Dachneigung 38°";
+    if (measureT.textContent !== mtxt) { measureT.textContent = mtxt; }
+
+    if (c) {
+      stage.style.setProperty("--sky-a", c.skyA);
+      stage.style.setProperty("--sky-b", c.skyB);
+      stage.style.setProperty("--sky-c", c.skyC);
+    }
+    if (hudPhase) {
+      hudPhase.textContent = PHASES[ph][1];
+      hudP.textContent = p.toFixed(3);
+      hudLabel.textContent = labTxt || "–";
+      hudFill.style.width = (p * 100).toFixed(1) + "%";
+    }
+  }
+
+  function heroProgress() {
+    if (!heroSec || window.innerWidth < 900) { return null; }
+    var r = heroSec.getBoundingClientRect();
+    var span = r.height - window.innerHeight;
+    if (span <= 0) { return null; }
+    return clamp(-r.top / span, 0, 1);
+  }
+
+  /* ---------------- mobile stills ---------------- */
+  function paintStill(id, p) {
+    var cv = document.getElementById(id);
+    if (!cv) { return; }
+    var rr = Renderer(cv);
+    rr.resize();
+    rr.draw(p, null);
+  }
+
+  /* ---------------- section drivers ---------------- */
+  var splitSec = document.getElementById("split");
+  var spL = document.getElementById("sp-l"), spR = document.getElementById("sp-r"), bridge = document.getElementById("bridge");
+  var arc1 = document.getElementById("arc1"), arc1day = document.getElementById("arc1-day"), arc1edge = document.getElementById("arc1-edge");
+  var arc2 = document.getElementById("arc2"), arc2day = document.getElementById("arc2-day"), arc2edge = document.getElementById("arc2-edge");
+  var layerbox = document.getElementById("layerbox");
+  var processSec = document.getElementById("process"), prTrack = document.getElementById("pr-track"), prFill = document.getElementById("pr-fill");
+  var site = document.getElementById("site"), mact = document.getElementById("mact");
+
+  function driveSplit() {
+    if (!splitSec || window.innerWidth < 861) { return; }
+    var r = splitSec.getBoundingClientRect();
+    var span = r.height - window.innerHeight;
+    if (span <= 0) { return; }
+    var p = clamp(-r.top / span, 0, 1);
+    var open = easeInOut(clamp(p / 0.62, 0, 1));
+    var close = easeInOut(clamp((p - 0.72) / 0.28, 0, 1));
+    var amt = open * (1 - close * 0.92);
+    spL.style.transform = "translateX(" + (-amt * 8.5).toFixed(2) + "%)";
+    spR.style.transform = "translateX(" + (amt * 8.5).toFixed(2) + "%)";
+    var b = clamp((p - 0.30) / 0.22, 0, 1);
+    bridge.style.opacity = String(b);
+    bridge.style.transform = "translateY(" + ((1 - b) * 14).toFixed(1) + "px)";
+  }
+
+  function driveArc(sec, day, edge, invert) {
+    if (!sec) { return; }
+    var r = sec.getBoundingClientRect();
+    var vh = window.innerHeight;
+    var p = clamp((vh - r.top) / (vh + r.height), 0, 1);
+    var t = easeInOut(clamp((p - 0.18) / 0.5, 0, 1));
+    var h = r.height;
+    var run = h / Math.tan(38 * DEG);
+    var topY = (1 - t) * 100;
+    if (!invert) {
+      day.style.clipPath = "polygon(0% 100%, 0% " + topY.toFixed(1) + "%, " + run.toFixed(0) + "px 0%, 100% 0%, 100% 100%)";
+      day.style.opacity = t > 0.02 ? "1" : "0";
+    } else {
+      day.style.clipPath = "polygon(0% 0%, 100% 0%, 100% " + (100 - topY).toFixed(1) + "%, " + run.toFixed(0) + "px 100%, 0% 100%)";
+      day.style.opacity = t < 0.98 ? "1" : "0";
+    }
+    edge.style.transform = "translateY(" + (topY / 100 * h).toFixed(1) + "px) rotate(-38deg)";
+    edge.style.opacity = String(clamp(t * 2, 0, 1) * (1 - clamp((t - 0.85) / 0.15, 0, 1)));
+  }
+
+  function driveLayers() {
+    if (!layerbox) { return; }
+    var r = layerbox.getBoundingClientRect();
+    var vh = window.innerHeight;
+    var p = clamp((vh - r.top) / (vh + r.height * 0.6), 0, 1);
+    var e = Math.sin(clamp((p - 0.12) / 0.7, 0, 1) * Math.PI);
+    var offs = [0, -10, -18, -26, -38, -52, -66];
+    var i;
+    for (i = 1; i <= 7; i++) {
+      var g = document.getElementById("ly-" + i);
+      var bz = document.getElementById("bz-" + i);
+      var lb = document.getElementById("lb-" + i);
+      if (g) { g.setAttribute("transform", "translate(0," + (offs[i - 1] * e).toFixed(1) + ")"); }
+      if (lb) { lb.setAttribute("transform", "translate(0," + (offs[i - 1] * e * 0.5).toFixed(1) + ")"); }
+      if (bz) {
+        bz.setAttribute("transform", "translate(0," + (offs[i - 1] * e * 0.5).toFixed(1) + ")");
+        bz.style.strokeDasharray = "260";
+        bz.style.strokeDashoffset = String(260 * (1 - clamp((e - 0.1) * 1.6, 0, 1)));
+      }
+    }
+  }
+
+  function driveProcess() {
+    if (!processSec || window.innerWidth < 861) { if (prTrack) { prTrack.style.transform = ""; } return; }
+    var r = processSec.getBoundingClientRect();
+    var span = r.height - window.innerHeight;
+    if (span <= 0) { return; }
+    var p = clamp(-r.top / span, 0, 1);
+    var total = prTrack.scrollWidth - prTrack.parentElement.clientWidth;
+    prTrack.style.transform = "translateX(" + (-Math.max(0, total) * p).toFixed(1) + "px)";
+    prFill.style.width = (p * 100).toFixed(1) + "%";
+  }
+
+  var bas = [];
+  function initBA() {
+    var nodes = document.querySelectorAll("[data-ba]");
+    var i;
+    for (i = 0; i < nodes.length; i++) {
+      (function (node) {
+        var after = node.querySelector("[data-after]");
+        var handle = node.querySelector("[data-handle]");
+        var manual = false;
+        function set(v) {
+          v = clamp(v, 0, 1);
+          after.style.clipPath = "inset(0 0 0 " + ((1 - v) * 100).toFixed(1) + "%)";
+          handle.style.left = (v * 100).toFixed(1) + "%";
+          node.setAttribute("aria-valuenow", String(Math.round(v * 100)));
+        }
+        function fromEvent(ev) {
+          var r = node.getBoundingClientRect();
+          var x = (ev.touches ? ev.touches[0].clientX : ev.clientX) - r.left;
+          manual = true;
+          set(x / r.width);
+        }
+        node.addEventListener("pointerdown", function (ev) { fromEvent(ev); node.setPointerCapture(ev.pointerId); });
+        node.addEventListener("pointermove", function (ev) { if (ev.pressure > 0 || ev.buttons) { fromEvent(ev); } });
+        node.addEventListener("keydown", function (ev) {
+          var cur = parseFloat(node.getAttribute("aria-valuenow")) / 100;
+          if (ev.key === "ArrowRight") { manual = true; set(cur + 0.06); ev.preventDefault(); }
+          if (ev.key === "ArrowLeft") { manual = true; set(cur - 0.06); ev.preventDefault(); }
+        });
+        set(0);
+        bas.push({ node: node, set: set, isManual: function () { return manual; } });
+      })(nodes[i]);
+    }
+  }
+  function driveBA() {
+    var i;
+    for (i = 0; i < bas.length; i++) {
+      if (bas[i].isManual()) { continue; }
+      var r = bas[i].node.getBoundingClientRect();
+      var vh = window.innerHeight;
+      var p = clamp((vh * 0.86 - r.top) / (vh * 0.5), 0, 1);
+      bas[i].set(easeInOut(p));
+    }
+  }
+
+  var mapDone = false;
+  function driveMap() {
+    if (mapDone) { return; }
+    var box = document.getElementById("mapbox");
+    if (!box) { return; }
+    var r = box.getBoundingClientRect();
+    if (r.top > window.innerHeight * 0.82) { return; }
+    mapDone = true;
+    var ids = ["mp-r1", "mp-r2", "mp-r3"];
+    ids.forEach(function (id, i) {
+      var el = document.getElementById(id);
+      if (!el) { return; }
+      el.style.transition = "stroke-dashoffset 1400ms cubic-bezier(0.65,0,0.35,1) " + (i * 220) + "ms";
+      el.style.strokeDashoffset = "0";
+    });
+    var ml = document.getElementById("mp-lines");
+    if (ml) { ml.style.transition = "stroke-dashoffset 1200ms cubic-bezier(0.65,0,0.35,1) 500ms"; ml.style.strokeDashoffset = "0"; }
+    var pts = document.querySelectorAll(".mp-pt");
+    var j;
+    for (j = 0; j < pts.length; j++) {
+      pts[j].style.opacity = "0";
+      pts[j].style.transition = "opacity 520ms cubic-bezier(0.16,1,0.3,1) " + (400 + j * 110) + "ms";
+    }
+    requestAnimationFrame(function () {
+      var k;
+      for (k = 0; k < pts.length; k++) { pts[k].style.opacity = "1"; }
+    });
+  }
+
+  function driveChrome() {
+    var y = window.scrollY || window.pageYOffset;
+    if (site) { site.classList.toggle("solid", y > 40); }
+    if (mact) {
+      var heroBottom = heroSec ? heroSec.getBoundingClientRect().bottom : 0;
+      var inContact = document.getElementById("akt8").getBoundingClientRect().top < window.innerHeight * 0.7;
+      mact.classList.toggle("on", heroBottom < 80 && !inContact);
+    }
+    if (hudPhase && heroSec) {
+      var hb = heroSec.getBoundingClientRect().bottom;
+      if (hb < 40) { hudPhase.textContent = "–"; hudP.textContent = "–"; hudLabel.textContent = "–"; }
+    }
+    if (hudAct) {
+      var cur = ACTS[0][1], i;
+      for (i = 0; i < ACTS.length; i++) {
+        var el = document.getElementById(ACTS[i][0]);
+        if (el && el.getBoundingClientRect().top < window.innerHeight * 0.55) { cur = ACTS[i][1]; }
+      }
+      if (hudAct.textContent !== cur) { hudAct.textContent = cur; }
+    }
+  }
+
+  /* ---------------- reveals ---------------- */
+  function initReveals() {
+    var els = document.querySelectorAll(".rv, .rvm");
+    if (reduce || !("IntersectionObserver" in window)) {
+      var i;
+      for (i = 0; i < els.length; i++) { els[i].classList.add("in"); }
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          var el = e.target;
+          var d = el.classList.contains("l2") ? 260 : 0;
+          setTimeout(function () { el.classList.add("in"); }, d);
+          io.unobserve(el);
+        }
+      });
+    }, { rootMargin: "0px 0px -14% 0px", threshold: 0.06 });
+    var j;
+    for (j = 0; j < els.length; j++) { io.observe(els[j]); }
+  }
+
+  /* ---------------- loop ---------------- */
+  function frame() {
+    if (dirty) {
+      dirty = false;
+      driveChrome();
+      driveSplit();
+      driveArc(arc1, arc1day, arc1edge, false);
+      driveArc(arc2, arc2day, arc2edge, true);
+      driveLayers();
+      driveProcess();
+      driveBA();
+      driveMap();
+      if (renderer) {
+        var p = heroProgress();
+        if (p !== null && Math.abs(p - lastP) > 0.0008) {
+          lastP = p;
+          var c = renderer.draw(p, mouse);
+          setHeroUI(p, c);
+        }
+      }
+    }
+    requestAnimationFrame(frame);
+  }
+
+  function boot() {
+    initReveals();
+    initBA();
+    if (!reduce) {
+      if (window.innerWidth >= 900 && canvas) {
+        renderer = Renderer(canvas);
+        renderer.resize();
+        var c0 = renderer.draw(0, mouse);
+        setHeroUI(0, c0);
+        canvas.addEventListener("pointermove", function (ev) {
+          var r = canvas.getBoundingClientRect();
+          mouse.x = ((ev.clientX - r.left) / r.width - 0.5) * 2;
+          mouse.y = ((ev.clientY - r.top) / r.height - 0.5) * -2;
+          dirty = true;
+          lastP = -1;
+        });
+      } else {
+        paintStill("roof", 0.03);            // statisches Eroeffnungsbild, kein Pin auf Mobil
+        paintStill("m1", 0.42);
+        paintStill("m2", 0.56);
+        paintStill("m3", 1.0);
+      }
+    }
+    window.addEventListener("scroll", function () { dirty = true; }, { passive: true });
+    window.addEventListener("resize", function () {
+      if (renderer) { renderer.resize(); lastP = -1; }
+      dirty = true;
+    });
+    dirty = true;
+    frame();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", boot);
+  } else {
+    boot();
+  }
+})();
+</script>
