@@ -19,9 +19,9 @@ Die Startseite ist eine geführte Sequenz mit acht Akten. Sie hat einen Anfang, 
 |---|---|---|---|---|---|---|
 | 01 Aufmerksamkeit | DACHWERK und die zentrale Idee | S01 Hero | Nacht | Tondachziegel zu Modul | Kamera | Projekt besprechen · Unsere Leistungen |
 | 02 Problem | Ein Dach ist eine langfristige Entscheidung | S02 Haltung, S03 Lebensdauer | Nacht | Holz, Konstruktion | Konstruktion | keiner, bewusst |
-| 03 Erkenntnis | Dach und Energie gehören zusammen | S04 Split Screen, S05 Brückenwort | Nacht | Titanzink als Kante | Kamera | Potenzial einschätzen |
+| 03 Erkenntnis | Dach und Energie gehören zusammen | S04 Split Screen, S05 Brückenwort | Nacht | Titanzink als Kante | Kamera | Potenzialcheck anfragen |
 | 04 Kompetenz | DACHWERK verbindet beides | S06 Was braucht Ihr Haus, S07 Leistungen | Nacht | Modul, Ziegel | Konstruktion | Dach und PV planen |
-| 05 Prozess | Analyse bis Betreuung | S08 Schichtmodell, S09 Prozess | Tag | Holz, Dämmung, Ziegel | Kamera plus Konstruktion | Dach prüfen lassen |
+| 05 Prozess | Analyse bis Betreuung | S08 Schichtmodell, S09 Prozess | Tag | Holz, Dämmung, Ziegel | Kamera plus Konstruktion | Potenzialcheck anfragen |
 | 06 Beweis | Material, Projekte, Ergebnis | S10 Projekte, S11 Qualität und Menschen | Tag zu Nacht | Schiefer, Ziegel | Konstruktion | Projekte ansehen |
 | 07 Entscheidung | Warum nicht der billigste Anbieter | S12 Brand Statement, S13 Region | Nacht | alle fünf | Kamera | Beratung anfragen |
 | 08 Conversion | Der erste Schritt | S14 Kontakt und Formular | Nacht | keines, Ruhe | Konstruktion | Projektanfrage senden |
@@ -433,16 +433,20 @@ Feste Seitenverhältnisse an jedem Bildslot gegen Layoutsprünge, `content-visib
 | 01 | Projekt besprechen | mittel | Formular, ohne Vorbelegung | „besprechen“ verspricht ein Gespräch, keinen Vertrag |
 | 01 | Unsere Leistungen | keine | `/dach/` und `/photovoltaik/` | Ausweg für Nutzer, die noch nicht reden wollen |
 | 02 | keiner | keine | keiner | An der Problemstelle nicht verkaufen, sonst kippt die Glaubwürdigkeit |
-| 03 | Potenzial einschätzen | niedrig | Formular, Anliegen „Dach und Photovoltaik“ | „einschätzen“ ist eine Einschätzung, keine Berechnung, und behauptet keine Zahl |
+| 03 | Potenzialcheck anfragen | niedrig | Formular, Anliegen „Dach und Photovoltaik“ | benennt das Angebot, ohne eine Zahl zu behaupten |
 | 04 | Dach und PV planen | mittel | `/dach-und-pv/` | benennt die Kombination, die Kernkompetenz |
-| 05 | Dach prüfen lassen | niedrig | Formular, Anliegen „Beratung“ | konkretester und niedrigschwelligster Einstieg der Seite |
+| 05 | Potenzialcheck anfragen | niedrig, Hauptangebot | Formular, Anliegen „Potenzialcheck“ | benennt beide Domänen und ist der niedrigschwelligste Einstieg der Seite |
 | 06 | Projekte ansehen | keine | `/projekte/` | Beweis, kein Verkauf |
 | 07 | Beratung anfragen | mittel | Formular, Anliegen „Beratung“ | passt zur Wertfrage, nicht zum Preis |
 | 08 | Projektanfrage senden | hoch | Absenden | einzige hohe Verbindlichkeit der Seite, am Ende |
 
 Nicht verwendet: „Jetzt Angebot anfordern“, „Kostenlos“, „Unverbindlich“ als Schlagwort, „Sichern“, „Sparen“, Zeitdruck jeder Art.
 
-**Offener Punkt:** Ob der Dachcheck kostenfrei angeboten wird, ist eine Aussage des Betriebs und keine Designentscheidung. Bis zu einer Bestätigung steht auf der Seite „Dach prüfen lassen“ ohne Preisangabe. Ohne Bestätigung wird nicht „kostenlos“ geschrieben.
+**Entschieden am 28.08.2026:** Der Check ist kostenfrei und heißt **Kostenfreier Dach- und PV-Potenzialcheck.** Dosierung nach `05-KOHAERENZPRUEFUNG.md`, W09: Der Button trägt die Handlung („Potenzialcheck anfragen“), die Kostenfreiheit steht im Fließtext daneben, höchstens zweimal auf der Startseite, nie in Versalien, nie als Störer oder Badge.
+
+Begleittext, verbindlicher Wortlaut: „Der Dach- und PV-Potenzialcheck ist kostenfrei und unverbindlich. Wir prüfen Dachzustand, Ausrichtung, Verschattung und die grundsätzliche Eignung für eine Photovoltaikanlage.“
+
+Journey: **Potenzialcheck, Beratung, Planung, Angebot, Umsetzung.** Der Check ist der Einstieg, nicht der Abschluss.
 
 ---
 
@@ -462,10 +466,13 @@ Schlusszeile: Aus Dachfläche wird Energiefläche.
 H2: Wir denken das Dach ganzheitlich.
 Text: Reparieren, sanieren oder neu denken? Wir verbinden klassisches Dachhandwerk mit moderner Energietechnik, damit aus einzelnen Maßnahmen eine Lösung wird, die in zehn Jahren noch richtig ist.
 
-**S03 Lebensdauer**
+**S03 Was ein Dach entscheidet** (neu gefasst, siehe `05-KOHAERENZPRUEFUNG.md`, Teil D)
 H2: Ein Dach ist eine Entscheidung für Jahrzehnte.
-Text: Eine Dachdeckung begleitet ein Haus über Jahrzehnte, eine Photovoltaikanlage über einen langen Zeitraum. Wer beides getrennt beauftragt, baut das Gerüst zweimal auf, öffnet die Fläche zweimal und zahlt zweimal für dieselbe Vorbereitung.
-Abschluss: Deshalb sprechen wir über die Reihenfolge, bevor wir über Material sprechen.
+Lead: Ob ein Dach saniert werden muss oder noch Jahre trägt, entscheidet niemand aus der Ferne. Wir beurteilen es an acht Punkten, vor Ort und am Bauteil.
+Prüfpunkte 01 bis 08: Alter des Daches und der letzten Eingriffe · Zustand der Dachfläche, der Deckung, der Kehlen und der Anschlüsse · Material und Ausführungsqualität · bisherige Instandhaltung und dokumentierte Reparaturen · erwartbare Restnutzungsdauer der Deckung · notwendige Sanierungsmaßnahmen und ihre Reihenfolge · technische Eignung für Photovoltaik, Statik, Ausrichtung, Verschattung · langfristige Kombination aus Dach und Energie.
+Abschluss: Erst danach reden wir über Material und Kosten. Nicht vorher.
+Regionaler Satz: Viele Häuser im Landkreis Hildesheim stammen aus den Siedlungsjahren der Nachkriegszeit. Wir kennen die Dachaufbauten dieser Baujahre und wissen, worauf bei ihnen zu achten ist.
+Keine Jahreszahl, keine Lebensdauerangabe, keine Prozentzahl.
 
 **S04 Split Screen**
 Links: DACH · Schützen. Sanieren. Erhalten.
@@ -505,19 +512,19 @@ H2: Ein Dach ist ein System aus sieben Schichten.
 01 Sparren, das Tragwerk. 02 Dämmung zwischen den Sparren. 03 Unterdeckung als zweite Ebene. 04 Konterlattung und Traglattung. 05 Dachziegel als Dachhaut. 06 Unterkonstruktion der Anlage. 07 Photovoltaikmodule.
 Abschluss: Schicht 06 und 07 gehören zum Dachaufbau. Deshalb prüfen wir die Schichten 01 bis 05, bevor wir sie belegen.
 
-**S09 Prozess**
+**S09 Ablauf**
 H2: So wird aus einer Idee ein fertiges Projekt.
 01 Wir schauen hin. Ortstermin und Bestandsaufnahme, auch der Bereiche, die man von der Straße nicht sieht.
 02 Wir denken voraus. Dach, Energie und Ihre Anforderungen betrachten wir gemeinsam, nicht nacheinander.
 03 Wir planen sauber. Sie erhalten eine nachvollziehbare Planung und ein Angebot, das Positionen benennt.
 04 Wir setzen um. Ein Ansprechpartner koordiniert Gewerke, Termine und Material.
 05 Wir bleiben erreichbar. Nach der Übergabe erreichen Sie dieselbe Person wie am ersten Tag.
-CTA: Dach prüfen lassen
+CTA: Potenzialcheck anfragen, mit dem Begleittext aus Teil H
 
 **S10 Projekte**
 H2: Gute Arbeit sieht man.
 Beispielprojekt 01 · Dachsanierung und Photovoltaik · Hildesheim · Beispielprojekt
-Beispielprojekt 02 · Neueindeckung mit Schiefer · Landkreis Hildesheim · Beispielprojekt
+Beispielprojekt 02 · Photovoltaik mit Speicher auf geprüftem Bestandsdach · Landkreis Hildesheim · Beispielprojekt
 Hinweis: Musterprojekt. Die gezeigten Projekte dienen der Darstellung von Leistungen und sind keine realen Referenzen.
 
 **S11 Qualität und Menschen**
@@ -532,9 +539,9 @@ Display: Modern in der Technik. Traditionell im Handwerk.
 Text: Wir verbinden Erfahrung und moderne Technik, ohne das Wesentliche aus den Augen zu verlieren: saubere Arbeit, klare Kommunikation und Lösungen, die langfristig funktionieren.
 CTA: Beratung anfragen
 
-**S13 Region**
+**S13 Arbeitsgebiet**
 H2: 70 Kilometer rund um Hildesheim.
-Text: Unser Arbeitsgebiet ist der Landkreis Hildesheim und die Region ringsum. Wir kennen die Bauweisen zwischen Leinebergland und Börde, die typischen Dachformen der Siedlungen der Nachkriegsjahre und die Anforderungen der Netzbetreiber vor Ort. Kurze Wege bedeuten, dass ein Ortstermin keine Tagesreise ist.
+Text: Zuhause im Landkreis Hildesheim, im Einsatz bis etwa 70 Kilometer. Wir kennen die Bauweisen zwischen Leinebergland und Börde, die typischen Dachformen der Siedlungen der Nachkriegsjahre und die Anforderungen der Netzbetreiber vor Ort. Kurze Wege bedeuten, dass ein Ortstermin keine Tagesreise ist.
 Orte: Hildesheim, Sarstedt, Alfeld, Bad Salzdetfurth, Bockenem, Elze, Gronau, Holle, Diekholzen, Nordstemmen
 
 **S14 Kontakt**
@@ -548,8 +555,8 @@ Hinweis: Musterformular. In diesem Musterprojekt wird keine Anfrage übermittelt
 
 ## TEIL J · WAS ZUR FREIGABE OFFEN IST
 
-1. **Zahlen in S03.** Für die Lebensdaueraussagen brauche ich entweder Angaben des Betriebs oder ich formuliere weiterhin qualitativ ohne Jahreszahlen. Erfundene Werte kommen nicht auf die Seite.
-2. **Dachcheck.** Ist die Dachprüfung kostenfrei? Ohne Bestätigung steht dort kein „kostenlos“.
+1. ~~Zahlen in S03.~~ Entschieden am 28.08.2026: keine Jahreszahlen, stattdessen die acht Prüfpunkte aus `05`, Teil D.
+2. ~~Dachcheck.~~ Entschieden am 28.08.2026: kostenfrei, Wortlaut und Dosierung siehe Teil H.
 3. **Drei Pins auf der Startseite.** Hero, Split und Prozess sind gepinnt. Wenn du den Scroll ruhiger willst, streiche ich den Pin am Prozess und löse ihn vertikal auf. Empfehlung: drei Pins beibehalten, sie liegen weit auseinander.
 4. **Länge der Startseite.** Vierzehn Sektionen sind bewusst viel, weil die Dramaturgie acht Akte braucht. Wenn du kürzen willst, empfehle ich, S03 in S02 zu integrieren und S13 in den Footerbereich zu verschieben. Damit bleiben zwölf Sektionen und die Dramaturgie steht weiterhin.
 
@@ -594,3 +601,17 @@ Vier Fehler wurden dabei gefunden und behoben: eine falsch aufgebaute Kamerabasi
 - Der mobile Bildausschnitt des Eröffnungsbildes ist noch nicht endgültig, Haus und Headline berühren sich am Rand.
 - Die Materialflächen ersetzen Fotografie. Sobald die Slots gefüllt sind, ändert sich die Bildwirkung der Akte 05 und 06 deutlich, die Komposition bleibt.
 - Der Energieimpuls in Phase 7 ist im Spezimen als einzelne Linie angelegt. In der Produktion läuft er entlang der Modulkanten zum Anschlusspunkt.
+
+
+---
+
+## TEIL L · NACHTRÄGE AUS DER KOHÄRENZPRÜFUNG
+
+Die folgenden Punkte aus `05-KOHAERENZPRUEFUNG.md` ändern diese Datei und gelten vorrangig:
+
+1. **Keine Aktnamen im Interface, W01.** Sichtbare Sektionslabels sind inhaltlich: Unsere Haltung, Was ein Dach entscheidet, Dach und Energie, Ihr Anliegen, Leistungen, Der Dachaufbau, Ablauf, Beispielprojekte, Qualität, Haltung, Arbeitsgebiet, Kontakt.
+2. **Keine Sektionsnummern, W02.** Nummern nur bei echter Reihenfolge: Prozessschritte, Dachschichten, Leistungen, Beispielprojekte, Prüfpunkte. Die Kontinuität tragen die zwölf definierten Nähte.
+3. **Gleichgewicht Dach und Energie, W03.** Beispielprojekt 02 ist ein Energieprojekt, der Potenzialcheck trägt beide Domänen im Namen, Solar bleibt Primärakzent.
+4. **Hero auf 320 Prozent Viewporthöhe verkürzt, W07.** Der Strich mit „Weiter“ ist ein tastaturbedienbarer Ankerlink zur nächsten Sektion.
+5. **Content-erst-Schalter, W11.** Startzustände hängen an `html.motion-ready`. Im Spezimen geprüft: ohne JavaScript sind null Reveal-Elemente unsichtbar, der DOM enthält 1244 Wörter.
+6. **Experience-Budget, W06.** Die Startseite behält drei Pins, Unterseiten deutlich weniger. Tabelle in `05`, W06.

@@ -1,0 +1,319 @@
+<title>DACHWERK Systemprüfung</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --s0:#111211; --s1:#1B1C1A; --s2:#232420;
+    --t0:#F3F0E9; --t1:#C9C1B4; --t2:#8C867B;
+    --hair:rgba(243,240,233,0.10); --hair1:rgba(243,240,233,0.20);
+    --dach:#9A6950; --dach-text:#C08A6E; --energie:#D5B45A; --nature:#667060;
+    --err:#E08B76; --ok:#8FA083;
+    --display:"Instrument Serif",Georgia,"Times New Roman",serif;
+    --sans:"Inter","Helvetica Neue",Arial,sans-serif;
+    --eout:cubic-bezier(.16,1,.3,1);
+    --maxw:1180px; --rail:170px;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--s0);color:var(--t0);font-family:var(--sans);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;text-wrap:balance}
+  h1{font-size:clamp(2.75rem,7.5vw,6rem);line-height:0.95;letter-spacing:-0.02em}
+  h2{font-size:clamp(1.75rem,3.8vw,2.875rem);line-height:1.03;letter-spacing:-0.015em}
+  h3{font-family:var(--sans);font-size:0.9375rem;font-weight:600}
+  p{margin:0}
+  a{color:var(--energie);text-decoration:none;border-bottom:1px solid rgba(213,180,90,.35)}
+  a:focus-visible{outline:2px solid var(--energie);outline-offset:3px}
+  .lab{font-size:0.6875rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--t2)}
+  .lead{font-size:clamp(1.0625rem,1.25vw,1.25rem);line-height:1.6;color:var(--t1);max-width:62ch}
+  .bd{color:var(--t1);max-width:68ch}
+  .bd b,.lead b{color:var(--t0);font-weight:500}
+  .sm{font-size:0.8125rem;line-height:1.55;color:var(--t2)}
+  .num{font-variant-numeric:tabular-nums}
+
+  header.mast{border-bottom:1px solid var(--hair);padding:20px 0;position:sticky;top:0;background:rgba(17,18,17,.93);backdrop-filter:blur(8px);z-index:10}
+  .mast-in{display:flex;justify-content:space-between;gap:20px;align-items:baseline;flex-wrap:wrap}
+  .mark{font-weight:600;letter-spacing:0.22em;font-size:0.8125rem}
+  .mark span{color:var(--t2);font-weight:400}
+
+  .hero{padding:clamp(56px,9vw,120px) 0 clamp(40px,6vw,72px);border-bottom:1px solid var(--hair)}
+  .hero h1{margin:20px 0 26px}
+  .hero h1 em{font-style:italic;color:var(--t1)}
+
+  section.blk{padding:clamp(52px,7vw,92px) 0;border-bottom:1px solid var(--hair)}
+  .grid{display:grid;grid-template-columns:var(--rail) 1fr;gap:0 48px;align-items:start}
+  .rail{position:sticky;top:92px}
+  .col{display:flex;flex-direction:column;gap:30px;min-width:0}
+  .grid > *{min-width:0}
+  @media (max-width:860px){.grid{grid-template-columns:1fr;gap:18px}.rail{position:static}}
+
+  /* verdict */
+  .verdict{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1px;background:var(--hair);border:1px solid var(--hair)}
+  .vt{background:var(--s1);padding:22px}
+  .vt .n{font-family:var(--display);font-size:clamp(2.25rem,4.4vw,3.25rem);line-height:0.9;font-variant-numeric:tabular-nums}
+  .vt .n.ok{color:var(--ok)}
+  .vt .n.warn{color:var(--err)}
+  .vt .k{margin-top:10px;font-size:0.8125rem;color:var(--t2);line-height:1.45}
+
+  /* findings */
+  .find{display:flex;flex-direction:column;gap:1px;background:var(--hair);border:1px solid var(--hair)}
+  .fi{background:var(--s1);padding:24px clamp(18px,2.4vw,28px);display:grid;grid-template-columns:64px 1fr;gap:0 20px}
+  .fi .id{font-family:var(--display);font-size:1.25rem;color:var(--t2)}
+  .fi h3{margin-bottom:8px}
+  .fi .why{color:var(--t1);font-size:0.9375rem;margin-bottom:12px}
+  .fi .fix{font-size:0.9375rem;color:var(--t0);border-left:2px solid var(--energie);padding-left:16px}
+  .chip{display:inline-block;font-size:0.625rem;font-weight:600;letter-spacing:0.16em;padding:4px 9px;border:1px solid var(--hair1);color:var(--t2);margin-bottom:10px}
+  .chip.hard{border-color:rgba(224,139,118,.5);color:var(--err)}
+  .chip.err{border-color:rgba(224,139,118,.5);color:var(--err)}
+  .chip.mid{border-color:rgba(201,193,180,.35);color:var(--t1)}
+  @media (max-width:640px){.fi{grid-template-columns:1fr;gap:8px}}
+
+  /* tables */
+  .tw{overflow-x:auto;border:1px solid var(--hair)}
+  table{border-collapse:collapse;width:100%;min-width:560px;font-size:0.875rem}
+  caption{text-align:left;padding:14px 16px;border-bottom:1px solid var(--hair);color:var(--t2);font-size:0.6875rem;letter-spacing:0.14em;text-transform:uppercase;font-weight:600}
+  th{text-align:left;font-size:0.6875rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--t2);font-weight:600;padding:12px 16px;border-bottom:1px solid var(--hair);vertical-align:bottom}
+  td{padding:12px 16px;border-bottom:1px solid var(--hair);color:var(--t1);vertical-align:top}
+  tbody tr:last-child td{border-bottom:none}
+  td.k{color:var(--t0);white-space:nowrap}
+  td.r{text-align:right;font-variant-numeric:tabular-nums;color:var(--t0)}
+
+  /* dumbbell */
+  .scale{display:grid;grid-template-columns:190px 1fr 34px 34px;gap:0 18px;align-items:center;padding:9px 0;border-bottom:1px solid var(--hair)}
+  .scale:last-of-type{border-bottom:none}
+  .scale .dim{font-size:0.875rem;color:var(--t0)}
+  .track{position:relative;height:16px}
+  .track .base{position:absolute;left:0;right:0;top:7.5px;height:1px;background:var(--hair)}
+  .track .link{position:absolute;top:7px;height:2px;background:var(--energie);border-radius:0 2px 2px 0}
+  .track .was{position:absolute;top:1px;width:2px;height:14px;background:var(--t2)}
+  .track .now{position:absolute;top:3px;width:10px;height:10px;border-radius:50%;background:var(--energie);box-shadow:0 0 0 2px var(--s0)}
+  .scale .v1{font-size:0.8125rem;color:var(--t2);text-align:right;font-variant-numeric:tabular-nums}
+  .scale .v2{font-size:0.875rem;color:var(--t0);text-align:right;font-variant-numeric:tabular-nums;font-weight:500}
+  .scale.head{border-bottom:1px solid var(--hair1);padding-bottom:10px}
+  .scale.head span{font-size:0.6875rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--t2);font-weight:600}
+  .scale.head .v1,.scale.head .v2{letter-spacing:0.08em}
+  .axis{display:flex;justify-content:space-between;font-size:0.6875rem;color:var(--t2);font-variant-numeric:tabular-nums;padding-top:6px}
+  .legend{display:flex;gap:22px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+  .legend span{display:flex;align-items:center;gap:9px;font-size:0.8125rem;color:var(--t1)}
+  .legend i.was{display:block;width:2px;height:14px;background:var(--t2)}
+  .legend i.now{display:block;width:10px;height:10px;border-radius:50%;background:var(--energie)}
+  @media (max-width:720px){
+    .scale{grid-template-columns:1fr 34px 34px;gap:4px 14px}
+    .scale .dim{grid-column:1/-1}
+    .scale .track{grid-column:1}
+    .scale.head .dim{display:none}
+  }
+
+  ul.pl{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:11px}
+  ul.pl li{padding-left:18px;position:relative;color:var(--t1);font-size:0.9375rem}
+  ul.pl li::before{content:"";position:absolute;left:0;top:.72em;width:7px;height:1px;background:var(--t2)}
+  ul.pl li b{color:var(--t0);font-weight:500}
+  .note{border-left:2px solid var(--energie);padding:4px 0 4px 20px;color:var(--t1);font-size:0.9375rem;max-width:70ch}
+  .note.tc{border-left-color:var(--dach)}
+  footer{padding:52px 0 76px;color:var(--t2);font-size:0.8125rem;display:flex;flex-direction:column;gap:8px}
+  .rv{opacity:1}
+</style>
+
+<header class="mast">
+  <div class="wrap mast-in">
+    <div class="mark">DACHWERK <span>· Systemprüfung</span></div>
+    <div class="lab">Phase 7 · Stand 28.08.2026</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <section class="hero">
+      <div class="lab">Strategie · Positionierung · Art Direction · Bildsprache · Hero · Scroll Story · 3D · Content · SEO · Conversion</div>
+      <h1>Zwölf Konflikte, <em>vier</em> davon echte Fehler.</h1>
+      <p class="lead">Prüfung des Gesamtsystems vor dem ersten Produktionscode. Ergebnis: <b>keine grundlegenden Widersprüche.</b> Die Kette hält. Vier Funde waren aber keine Feinjustierung, sondern Fehler, die bis in die Umsetzung durchgeschlagen wären. Alle zwölf sind mit Beschluss geschlossen, Phase 7 ist dokumentiert.</p>
+      <div class="verdict" style="margin-top:40px">
+        <div class="vt"><div class="n ok">12</div><div class="k">Konflikte gefunden und geschlossen</div></div>
+        <div class="vt"><div class="n warn">4</div><div class="k">echte Fehler, nicht nur Feinjustierung</div></div>
+        <div class="vt"><div class="n">0</div><div class="k">grundlegende Widersprüche</div></div>
+        <div class="vt"><div class="n">1244</div><div class="k">Wörter im DOM der Startseite, ohne JavaScript gemessen</div></div>
+      </div>
+    </section>
+
+    <!-- FUNDE -->
+    <section class="blk">
+      <div class="grid">
+        <div class="rail"><span class="lab">Die vier schweren Funde</span></div>
+        <div class="col">
+          <div class="find">
+            <div class="fi">
+              <span class="id">W01<br>W02</span>
+              <div>
+                <span class="chip err">Fehler · Agentursprache im Interface</span>
+                <h3>Die Dramaturgie stand sichtbar auf der Seite.</h3>
+                <p class="why">Der Prototyp zeigte Sektionslabels wie „02 · Problem“, „06 · Beweis“ und „08 · Conversion“. Das ist internes Regievokabular, sichtbar gemacht im Frontend. Ein Hausbesitzer liest dort die Sprache einer Marketingabteilung. Zusätzlich betonten die Sektionsnummern 01 bis 08 genau das, was vermieden werden soll: die Aneinanderreihung.</p>
+                <p class="fix">Die Akt-Struktur ist ein Regieinstrument und erscheint nie im Interface. Sichtbare Labels sind inhaltlich: Unsere Haltung, Was ein Dach entscheidet, Dach und Energie, Ihr Anliegen, Leistungen, Der Dachaufbau, Ablauf, Beispielprojekte, Qualität, Haltung, Arbeitsgebiet, Kontakt. Nummern bleiben nur, wo sie echte Reihenfolge tragen: Prozessschritte, Dachschichten, Leistungen, Prüfpunkte. Die Kontinuität tragen stattdessen <b>zwölf definierte Nähte</b>, je Naht ein festgelegter Übergangstyp: Satzfortsetzung, Materialkontinuität, Frage, Flächenwechsel.</p>
+              </div>
+            </div>
+            <div class="fi">
+              <span class="id">W03</span>
+              <div>
+                <span class="chip hard">Schwer · Positionierung</span>
+                <h3>Photovoltaik war visuell nachgeordnet, nicht gleichwertig.</h3>
+                <p class="why">Die Summe der Signale ergab eine Schieflage: Die Marke heißt DACHWERK, der Hero beginnt mit dem Dach, im Split steht DACH auf der ersten Leseposition, die Leistungsspalte DACH kommt zuerst, beide Beispielprojekte hatten eine Dachmaßnahme als Hauptthema. Inhaltlich ist die Reihenfolge richtig, weil das Dach zuerst geprüft werden muss. Als Bild war Energie aber die zweite Stimme.</p>
+                <p class="fix">Vier Maßnahmen. Der Potenzialcheck heißt <b>Dach- und PV-Potenzialcheck</b> und trägt beide Domänen im Namen, er wird das prominenteste Angebot der Journey. Der Hero endet auf „Energiefläche“, Energie hat das letzte Wort. Beispielprojekt 02 wird ein reines Energieprojekt, Photovoltaik mit Speicher auf geprüftem Bestandsdach. Solar bleibt Primärakzent für Buttons, Fokusring und Lichtkante.</p>
+              </div>
+            </div>
+            <div class="fi">
+              <span class="id">W06</span>
+              <div>
+                <span class="chip hard">Schwer · Experience gegen SEO</span>
+                <h3>Die Experience stand der Sichtbarkeit im Weg.</h3>
+                <p class="why">Der Hero belegte 400 Prozent Viewporthöhe, die Startseite rund 17.000 Pixel, im ersten Bildschirm standen etwa 25 Wörter. Für ein lokales Hauptkeyword konkurriert diese Seite mit textreichen Wettbewerbern. Für Unterseiten war das Verhältnis von Inszenierung zu Inhalt überhaupt nicht geregelt.</p>
+                <p class="fix">Ein <b>Experience-Budget je Seitentyp</b>, technisch erzwungen über das Feld <span class="num">experience</span> in der Routenliste: Startseite 3 Pins und rund 900 Wörter, Domänenseite 1 Pin, Leistungsseite 0 Pins und 800 Wörter, Brückenseite 1 Pin und 1000 Wörter, Regionsseite 0 Pins mit 300 ortsspezifischen Wörtern, Ratgeber 0 Pins. Die Startseite ist die Markenseite, die Suchintentionen tragen die Unterseiten. Gemessen im Prototyp: 1244 Wörter im DOM, Budget erfüllt.</p>
+              </div>
+            </div>
+            <div class="fi">
+              <span class="id">W11</span>
+              <div>
+                <span class="chip err">Fehler · gegen das eigene Prinzip</span>
+                <h3>Der Prototyp verletzte die Regel, die er beweisen sollte.</h3>
+                <p class="why">Die Dokumentation verlangt, dass der CSS-Grundzustand der sichtbare Endzustand ist. Im Specimen stand <span class="num">.rv { opacity: 0 }</span>. Ohne JavaScript wären große Teile der Seite unsichtbar gewesen, für Besucher wie für Suchmaschinen. Genau der Fehler, den die Regel verhindern soll.</p>
+                <p class="fix">Alle Startzustände hängen jetzt an einer Klasse, die JavaScript erst setzt, nachdem die Motion-Schicht läuft: <span class="num">html.motion-ready</span>. Ohne Skript, bei Skriptfehler, bei Bewegungsreduktion und für Crawler ist die Seite vollständig sichtbar. Im Prototyp nachgemessen: <b>null unsichtbare Elemente ohne JavaScript.</b></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ALLE KONFLIKTE -->
+    <section class="blk">
+      <div class="grid">
+        <div class="rail"><span class="lab">Vollständige Liste</span></div>
+        <div class="col">
+          <h2>Acht weitere Konflikte, alle geschlossen.</h2>
+          <div class="tw">
+            <table>
+              <caption>Konflikt und Beschluss</caption>
+              <thead><tr><th>Nr</th><th>Konflikt</th><th>Beschluss</th></tr></thead>
+              <tbody>
+                <tr><td class="k">W04</td><td>Fachsprache gegen Verständlichkeit. Doppelmuldenfalz, Aufsparrendämmung, Konterlattung schließen Laien aus</td><td>Regel „Fachwort plus Funktion“: höchstens zwei unerklärte Fachbegriffe je Absatz, sonst Auflösung im selben Satz. Automatisch geprüft durch den Content-Linter</td></tr>
+                <tr><td class="k">W05</td><td>70 Kilometer klingen nach Vertriebsgebiet, nicht nach Nachbarschaft. Der Ortsbezug erschien erst spät auf der Seite</td><td>Kern und Radius sprachlich getrennt: „Zuhause im Landkreis Hildesheim. Im Einsatz bis etwa 70 Kilometer.“ Dreifache Verankerung, unter anderem über die Bauwirklichkeit der Nachkriegsbaujahre</td></tr>
+                <tr><td class="k">W07</td><td>Drei Bildschirmhöhen Hero, bevor Inhalt kommt. Zwischen p 0,18 und 0,885 kein bedienbarer CTA. Der Notfallkunde will telefonieren</td><td>Hero von 400 auf 320 Prozent verkürzt, der Strich mit „Weiter“ wird ein tastaturbedienbarer Ankerlink, Telefonnummer und Button bleiben durchgehend erreichbar</td></tr>
+                <tr><td class="k">W08</td><td>Der kostenfreie Potenzialcheck ist eine verbindliche Zusage, der Betrieb ist fiktiv</td><td>Formulierung bleibt, Musterhinweis nennt ausdrücklich, dass Leistungen und Konditionen der Darstellung dienen. Bestätigung steht auf der Freigabeliste vor einem Livegang</td></tr>
+                <tr><td class="k">W09</td><td>„Kostenfrei“ ist Preiskommunikation und widerspricht der Qualitätsargumentation</td><td>Dosierung: der Button trägt die Handlung „Potenzialcheck anfragen“, die Kostenfreiheit steht als ruhiger Satz daneben. Höchstens zweimal auf der Startseite, nie in Versalien, kein Badge, kein Störer</td></tr>
+                <tr><td class="k">W10</td><td>Terracotta als Domänenfarbe hat nur 4,0:1 Kontrast, die Regel „nur Flächen“ war in der Praxis nicht haltbar</td><td>Zwei Token statt Disziplin: <span class="num">--dach</span> für Flächen, neu <span class="num">--dach-text</span> #C08A6E mit gemessenen 6,4:1 für Labels und Textauszeichnungen</td></tr>
+                <tr><td class="k">W12</td><td>Materialflächen statt Fotografie lassen die Seite abstrakt und agenturhaft wirken</td><td>Platzhalter geben sich als Platzhalter zu erkennen, mit Slot-Kennung und Motivtext. Die Slot-Registry hält Seitenverhältnis, Crop und Bewegung, damit echte Bilder eins zu eins eintreten</td></tr>
+                <tr><td class="k">Effekt</td><td>Zwei Stellen, an denen der visuelle Effekt vor der Information stand: der Energieimpuls im Hero und dekorative Zeitangaben im Zeithorizont</td><td>Impuls bleibt als Andeutung ohne Zahl und ohne Wiederholung. Die Zeitangaben werden durch <b>acht echte Prüfpunkte</b> ersetzt, die zeigen, was tatsächlich beurteilt wird</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="note tc">Der wichtigste inhaltliche Gewinn steckt im letzten Punkt. Statt „ein Dach hält 50 Jahre“ steht dort jetzt, woran ein Meisterbetrieb den Zustand beurteilt: Alter, Zustand der Fläche, Material und Ausführung, bisherige Instandhaltung, erwartbare Restnutzungsdauer, notwendige Maßnahmen und ihre Reihenfolge, Eignung für Photovoltaik, langfristige Kombination. Das braucht keine Quelle, ist fachlich belastbar und wirkt kompetenter als jede Zahl.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- BEWERTUNG -->
+    <section class="blk">
+      <div class="grid">
+        <div class="rail"><span class="lab">Selbstbewertung</span></div>
+        <div class="col">
+          <h2>Wirkung der Beschlüsse, Skala 1 bis 10.</h2>
+          <p class="bd">Bewertung vor der Prüfung gegen Bewertung nach den Beschlüssen. Der Strich markiert den Ausgangswert, der Punkt den Wert danach. Kein Bereich liegt jetzt unter 8.</p>
+          <div>
+            <div class="legend">
+              <span><i class="was"></i> vor der Prüfung</span>
+              <span><i class="now"></i> nach den Beschlüssen</span>
+            </div>
+            <div class="scale head"><span class="dim">Dimension</span><span>Skala 1 bis 10</span><span class="v1">vor</span><span class="v2">nach</span></div>
+
+            <div class="scale"><span class="dim">Gleichgewicht Dach und Energie</span><span class="track"><i class="base"></i><i class="link" style="left:60%;width:30%"></i><i class="was" style="left:60%"></i><i class="now" style="left:calc(90% - 5px)"></i></span><span class="v1">6</span><span class="v2">9</span></div>
+            <div class="scale"><span class="dim">UX</span><span class="track"><i class="base"></i><i class="link" style="left:70%;width:20%"></i><i class="was" style="left:70%"></i><i class="now" style="left:calc(90% - 5px)"></i></span><span class="v1">7</span><span class="v2">9</span></div>
+            <div class="scale"><span class="dim">SEO</span><span class="track"><i class="base"></i><i class="link" style="left:70%;width:20%"></i><i class="was" style="left:70%"></i><i class="now" style="left:calc(90% - 5px)"></i></span><span class="v1">7</span><span class="v2">9</span></div>
+            <div class="scale"><span class="dim">Content</span><span class="track"><i class="base"></i><i class="link" style="left:70%;width:20%"></i><i class="was" style="left:70%"></i><i class="now" style="left:calc(90% - 5px)"></i></span><span class="v1">7</span><span class="v2">9</span></div>
+            <div class="scale"><span class="dim">Brand Identity</span><span class="track"><i class="base"></i><i class="link" style="left:80%;width:10%"></i><i class="was" style="left:80%"></i><i class="now" style="left:calc(90% - 5px)"></i></span><span class="v1">8</span><span class="v2">9</span></div>
+            <div class="scale"><span class="dim">Storytelling</span><span class="track"><i class="base"></i><i class="link" style="left:80%;width:10%"></i><i class="was" style="left:80%"></i><i class="now" style="left:calc(90% - 5px)"></i></span><span class="v1">8</span><span class="v2">9</span></div>
+            <div class="scale"><span class="dim">Conversion</span><span class="track"><i class="base"></i><i class="link" style="left:80%;width:10%"></i><i class="was" style="left:80%"></i><i class="now" style="left:calc(90% - 5px)"></i></span><span class="v1">8</span><span class="v2">9</span></div>
+            <div class="scale"><span class="dim">Performance</span><span class="track"><i class="base"></i><i class="link" style="left:80%;width:10%"></i><i class="was" style="left:80%"></i><i class="now" style="left:calc(90% - 5px)"></i></span><span class="v1">8</span><span class="v2">9</span></div>
+            <div class="scale"><span class="dim">Accessibility</span><span class="track"><i class="base"></i><i class="link" style="left:80%;width:10%"></i><i class="was" style="left:80%"></i><i class="now" style="left:calc(90% - 5px)"></i></span><span class="v1">8</span><span class="v2">9</span></div>
+            <div class="scale"><span class="dim">Vertrauenswürdigkeit</span><span class="track"><i class="base"></i><i class="link" style="left:80%;width:10%"></i><i class="was" style="left:80%"></i><i class="now" style="left:calc(90% - 5px)"></i></span><span class="v1">8</span><span class="v2">9</span></div>
+            <div class="scale"><span class="dim">Art Direction</span><span class="track"><i class="base"></i><i class="was" style="left:90%"></i><i class="now" style="left:calc(90% - 5px)"></i></span><span class="v1">9</span><span class="v2">9</span></div>
+            <div class="scale"><span class="dim">Hero</span><span class="track"><i class="base"></i><i class="was" style="left:90%"></i><i class="now" style="left:calc(90% - 5px)"></i></span><span class="v1">9</span><span class="v2">9</span></div>
+            <div class="scale"><span class="dim">Motion Design</span><span class="track"><i class="base"></i><i class="was" style="left:90%"></i><i class="now" style="left:calc(90% - 5px)"></i></span><span class="v1">9</span><span class="v2">9</span></div>
+            <div class="scale"><span class="dim">3D</span><span class="track"><i class="base"></i><i class="was" style="left:90%"></i><i class="now" style="left:calc(90% - 5px)"></i></span><span class="v1">9</span><span class="v2">9</span></div>
+            <div class="scale"><span class="dim">Mobil</span><span class="track"><i class="base"></i><i class="was" style="left:80%"></i><i class="now" style="left:calc(80% - 5px)"></i></span><span class="v1">8</span><span class="v2">8</span></div>
+            <div class="axis"><span>1</span><span>5</span><span>10</span></div>
+          </div>
+          <p class="sm">Mobil bleibt bei 8. Der Bildausschnitt des mobilen Eröffnungsbildes ist noch nicht endgültig, Haus und Headline berühren sich am Rand. Das wird in der Implementierung gelöst, nicht im Konzept.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="blk">
+      <div class="grid">
+        <div class="rail"><span class="lab">Conversion</span></div>
+        <div class="col">
+          <h2>Der Potenzialcheck wird der Einstieg, nicht der Abschluss.</h2>
+          <p class="bd">Journey: <b>Potenzialcheck, Beratung, Planung, Angebot, Umsetzung.</b> Neun Handlungsangebote, gestaffelt nach Verbindlichkeit. Am Problem wird nicht verkauft, das bleibt.</p>
+          <div class="tw">
+            <table>
+              <caption>CTA-Matrix, überarbeitet</caption>
+              <thead><tr><th>Ort</th><th>Button</th><th>Verbindlichkeit</th></tr></thead>
+              <tbody>
+                <tr><td class="k">Kopfzeile, dauerhaft</td><td>Projekt besprechen, Telefonnummer daneben</td><td>mittel</td></tr>
+                <tr><td class="k">Hero, Anfang und Ende</td><td>Projekt besprechen · Unsere Leistungen</td><td>mittel, keine</td></tr>
+                <tr><td class="k">Haltung, Zeithorizont</td><td>keiner, bewusst</td><td>keine</td></tr>
+                <tr><td class="k">Brückenwort Dach und Energie</td><td>Potenzialcheck anfragen</td><td>niedrig</td></tr>
+                <tr><td class="k">Leistungen</td><td>Dach und PV planen</td><td>mittel</td></tr>
+                <tr><td class="k">Ablauf, nach Schritt 01</td><td>Potenzialcheck anfragen, mit dem Satz zur Kostenfreiheit daneben</td><td>niedrig, Hauptangebot</td></tr>
+                <tr><td class="k">Beispielprojekte</td><td>Projekte ansehen</td><td>keine</td></tr>
+                <tr><td class="k">Haltung, Statement</td><td>Beratung anfragen</td><td>mittel</td></tr>
+                <tr><td class="k">Kontakt</td><td>Projektanfrage senden</td><td>hoch, die einzige</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="note">Verbindlicher Wortlaut: „Der Dach- und PV-Potenzialcheck ist kostenfrei und unverbindlich. Wir prüfen Dachzustand, Ausrichtung, Verschattung und die grundsätzliche Eignung für eine Photovoltaikanlage.“ Nicht verwendet: Jetzt Angebot anfordern, Gratis, Sichern, Sparen, Nur heute, jede Form von Verknappung.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ARCHITEKTUR -->
+    <section class="blk">
+      <div class="grid">
+        <div class="rail"><span class="lab">Phase 7</span></div>
+        <div class="col">
+          <h2>Zehn Entscheidungen, die die Qualität erzwingen.</h2>
+          <p class="bd">Die vollständige Architektur steht in <span class="num">06-PRODUCTION-ARCHITECTURE.md</span> und deckt alle zwanzig geforderten Punkte ab. Das sind die Entscheidungen, die verhindern, dass die Qualität später von Disziplin abhängt.</p>
+          <ul class="pl">
+            <li><b>Eine Quelle für Routing.</b> <span class="num">routes.ts</span> speist Sitemap, Prerender, Brotkrume, Navigation und das Experience-Budget. Ein Feld <span class="num">experience</span> entscheidet, wie viel Inszenierung eine Seite überhaupt laden darf.</li>
+            <li><b>Statisches Vorrendern je Route.</b> Jede URL liefert echtes HTML mit finalen Metadaten, danach Hydrierung. Kein Server nötig.</li>
+            <li><b>Unbestätigte Angaben können nicht in strukturierte Daten geraten.</b> Jede Firmenangabe trägt ein Feld <span class="num">confirmed</span>, der Schema-Generator gibt nur bestätigte Felder aus. Keine Bewertungen, keine Auszeichnungen, keine Preise im Markup.</li>
+            <li><b>Ein Content-Linter bricht den Build.</b> Bei Floskeln, bei Zahlen ohne Quelle, bei mehr als zwei unerklärten Fachbegriffen je Absatz, bei steuerlichem Text ohne Standdatum, bei Ortsseiten ohne drei ortsspezifische Aussagen, bei Gedankenstrichen im deutschen Text.</li>
+            <li><b>Kontrast als Token, nicht als Regel.</b> <span class="num">--dach-text</span> und <span class="num">--nature-text</span> lösen den Konflikt technisch. Ein Skript prüft alle Token-Paare gegen die WCAG-Formel.</li>
+            <li><b>Content erst, Motion danach.</b> Startzustände hängen an <span class="num">html.motion-ready</span>. Ohne JavaScript ist alles sichtbar, geprüft und gemessen.</li>
+            <li><b>3D hinter einem Vertrag.</b> Ein <span class="num">SceneController</span> mit mount, setProgress, setProfile, resize, dispose. Geladen nur bei Annäherung und nur in den Profilen full und mobile, nie bei reduzierter Bewegung. Budget: 25 Drawcalls, 60.000 Dreiecke, keine externen Modelldateien.</li>
+            <li><b>Das LCP-Element ist immer eine Überschrift.</b> Niemals ein Canvas, niemals ein Video. Der Hero ist lesbar und bedienbar, bevor die Szene existiert.</li>
+            <li><b>Die sechzehn Bildslots sind eine Datenstruktur.</b> Seitenverhältnis, Crops, Bewegungsprofil und alt-Text liegen in der Registry. Fehlt die Datei, erscheint die Materialfläche mit Kennung. Layout und Animation sind in beiden Fällen identisch.</li>
+            <li><b>Tracking als leerer Adapter.</b> Feste Ereignisnamen, No-Op-Implementierung, Consent-Gate, keine Freitexte und keine vollständige Postleitzahl im Payload. Später auswertbar, heute ohne Skript von Dritten.</li>
+          </ul>
+          <p class="note">Zäsur in der Umsetzung: Erst wenn die Startseite <b>ohne Motion und ohne 3D</b> vollständig funktioniert, wird animiert. Das ist Schritt 6 von 12 in der Reihenfolge für Phase 8.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- OFFEN -->
+    <section class="blk" style="border-bottom:none">
+      <div class="grid">
+        <div class="rail"><span class="lab">Offen</span></div>
+        <div class="col">
+          <h2>Zwei Punkte, sonst ist der Weg frei.</h2>
+          <ul class="pl">
+            <li><b>Mobiler Bildausschnitt des Eröffnungsbildes.</b> Wird in der Implementierung gelöst, keine Konzeptfrage.</li>
+            <li><b>Freigabeliste vor einem echten Livegang.</b> Kostenfreiheit des Potenzialchecks, Gewährleistung, Mitgliedschaften, Team, Erreichbarkeitszeiten, reale Anschrift und Registerdaten. Bis dahin bleibt alles davon aus der Seite heraus, die Seite läuft auf noindex und trägt den Musterhinweis.</li>
+          </ul>
+          <p class="bd">Nicht mehr offen: Dachcheck entschieden, Lebensdauerzahlen entschieden, Seitenumfang entschieden, drei Pins bestätigt.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div>Dokumente im Repository: <span style="color:var(--t1)">dachwerk/docs/01 bis 06</span>, dazu die beiden Spezimen. Branch <span style="color:var(--t1)">claude/dachwerk-premium-website-59akq1</span>.</div>
+      <div>DACHWERK ist ein fiktiver Betrieb. Musterprojekt ohne reale Referenzen, Zertifikate oder Bewertungen. Steuerliche Angaben mit Stand 28.08.2026, keine Steuer- oder Rechtsberatung.</div>
+    </footer>
+  </div>
+</main>
