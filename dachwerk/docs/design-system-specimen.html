@@ -1,0 +1,786 @@
+<title>DACHWERK Design System</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --surface-0:#111211; --surface-1:#1B1C1A; --surface-2:#232420;
+    --text-0:#F3F0E9; --text-1:#C9C1B4; --text-2:#8C867B;
+    --hair:rgba(243,240,233,0.10); --hair-1:rgba(243,240,233,0.20);
+    --surface-l0:#F3F0E9; --surface-l1:#E9E4D9;
+    --ink-0:#111211; --ink-1:#57534B; --ink-2:#7A7469; --hair-l:rgba(17,18,17,0.12);
+    --dach:#9A6950; --energie:#D5B45A; --nature:#667060;
+    --state-error:#E08B76; --state-ok:#8FA083;
+
+    --display:"Instrument Serif",Georgia,"Times New Roman",serif;
+    --sans:"Inter","Helvetica Neue",Arial,sans-serif;
+
+    --s-2:8px; --s-3:12px; --s-4:16px; --s-5:24px; --s-6:32px; --s-7:48px; --s-8:64px; --s-9:96px; --s-10:128px;
+    --r-1:2px;
+    --dur-1:240ms; --dur-2:480ms; --dur-3:640ms; --dur-4:900ms;
+    --ease-out:cubic-bezier(0.16,1,0.3,1); --ease-inout:cubic-bezier(0.65,0,0.35,1);
+    --rail:170px; --maxw:1240px;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--surface-0);color:var(--text-0);font-family:var(--sans);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+
+  h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;text-wrap:balance}
+  h1{font-size:clamp(2.75rem,7.5vw,6.5rem);line-height:0.95;letter-spacing:-0.02em}
+  h2{font-size:clamp(1.875rem,4vw,3.125rem);line-height:1.02;letter-spacing:-0.015em}
+  h3{font-family:var(--sans);font-size:0.9375rem;font-weight:600;letter-spacing:0.01em;margin:0}
+  p{margin:0}
+  a{color:var(--energie);text-decoration:none;border-bottom:1px solid rgba(213,180,90,0.35)}
+  a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--energie);outline-offset:2px}
+
+  .lab{font-size:0.6875rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-2)}
+  .spec{font-size:0.75rem;letter-spacing:0.06em;font-weight:500;color:var(--text-2);font-variant-numeric:tabular-nums}
+  .lead{font-size:clamp(1.0625rem,1.25vw,1.25rem);line-height:1.6;color:var(--text-1);max-width:62ch}
+  .bd{color:var(--text-1);max-width:68ch}
+  .bd b,.lead b{color:var(--text-0);font-weight:500}
+  .sm{font-size:0.8125rem;line-height:1.55;color:var(--text-2)}
+
+  header.mast{border-bottom:1px solid var(--hair);padding:20px 0;position:sticky;top:0;background:rgba(17,18,17,0.93);backdrop-filter:blur(8px);z-index:20}
+  .mast-in{display:flex;align-items:baseline;justify-content:space-between;gap:20px;flex-wrap:wrap}
+  .mark{font-weight:600;letter-spacing:0.22em;font-size:0.8125rem}
+  .mark span{color:var(--text-2);font-weight:400}
+
+  .hero{padding:clamp(56px,9vw,120px) 0 clamp(40px,6vw,80px);border-bottom:1px solid var(--hair)}
+  .hero h1{margin:22px 0 26px}
+  .hero h1 em{font-style:italic;color:var(--text-1)}
+
+  section.blk{padding:clamp(52px,7vw,96px) 0;border-bottom:1px solid var(--hair)}
+  .grid{display:grid;grid-template-columns:var(--rail) 1fr;gap:0 48px;align-items:start}
+  .rail{position:sticky;top:92px}
+  .rail .n{font-family:var(--display);font-size:2.25rem;line-height:1;color:var(--text-2);display:block;margin-bottom:8px}
+  .col{display:flex;flex-direction:column;gap:var(--s-6)}
+  @media (max-width:860px){
+    .grid{grid-template-columns:1fr;gap:18px}
+    .rail{position:static}
+    .rail .n{display:inline;font-size:1.5rem;margin-right:10px}
+  }
+
+  /* angle demo */
+  .angle{position:relative;height:230px;border:1px solid var(--hair);overflow:hidden;background:var(--surface-0)}
+  .angle .day{position:absolute;inset:0;background:var(--surface-l0);clip-path:polygon(0% 100%,0% 62%,169px 0%,100% 0%,100% 100%)}
+  .angle .n-txt{position:absolute;left:24px;top:22px;z-index:2}
+  .angle .d-txt{position:absolute;right:24px;bottom:22px;z-index:2;text-align:right}
+  .angle .d-txt .lab{color:var(--ink-2)}
+  .angle .edge{position:absolute;left:0;top:62%;width:180px;height:1px;background:var(--energie);transform-origin:0 0;transform:rotate(-38.6deg);opacity:0.9;z-index:3}
+
+  /* palette */
+  .pal{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1px;background:var(--hair);border:1px solid var(--hair)}
+  .sw{background:var(--surface-1)}
+  .sw .chip{height:78px;border-bottom:1px solid var(--hair)}
+  .sw .t{padding:12px 14px 16px;display:flex;flex-direction:column;gap:2px}
+  .sw .nm{font-size:0.8125rem;font-weight:600}
+  .sw .hx{font-size:0.75rem;color:var(--text-2);font-variant-numeric:tabular-nums}
+  .sw .ct{font-size:0.75rem;color:var(--text-1);font-variant-numeric:tabular-nums;margin-top:4px}
+  .sw .ct.warn{color:var(--dach)}
+  .sw .us{font-size:0.75rem;color:var(--text-2);line-height:1.4}
+
+  /* light band */
+  .band-light{background:var(--surface-l0);color:var(--ink-0);border:1px solid var(--hair-l);padding:clamp(24px,3vw,40px);display:flex;flex-direction:column;gap:var(--s-5)}
+  .band-light .lab{color:var(--ink-2)}
+  .band-light .bd{color:var(--ink-1)}
+  .band-light .bd b{color:var(--ink-0)}
+  .band-light h2{color:var(--ink-0)}
+  .band-light .dachtext{color:var(--dach);font-weight:500}
+  .band-light .btn-onlight{background:var(--ink-0);color:var(--surface-l0);border:none}
+
+  /* type specimen */
+  .tp{border:1px solid var(--hair);background:var(--surface-1);padding:clamp(22px,3vw,40px);display:flex;flex-direction:column;gap:var(--s-6)}
+  .tp .r{display:flex;flex-direction:column;gap:6px}
+  .t-xl{font-family:var(--display);font-size:clamp(2.25rem,5.5vw,4.25rem);line-height:0.96;letter-spacing:-0.02em}
+  .t-l{font-family:var(--display);font-size:clamp(1.625rem,3.2vw,2.5rem);line-height:1.02}
+  .t-num{font-family:var(--display);font-size:clamp(2.75rem,6.5vw,5rem);line-height:0.88;letter-spacing:-0.03em;color:var(--energie);font-variant-numeric:tabular-nums}
+  .t-bd{font-size:1.0625rem;line-height:1.6;color:var(--text-1);max-width:62ch}
+
+  /* scale bars */
+  .bars{display:flex;flex-direction:column;gap:10px}
+  .bar{display:grid;grid-template-columns:80px 1fr;gap:16px;align-items:center}
+  .bar .v{height:10px;background:var(--surface-2);border-left:1px solid var(--energie)}
+
+  /* grid demo */
+  .gd{border:1px solid var(--hair);padding:16px;display:grid;grid-template-columns:var(--rail) repeat(12,1fr);gap:0 8px;background:var(--surface-1)}
+  .gd .c{height:56px;background:var(--surface-2)}
+  .gd .c.rl{background:rgba(213,180,90,0.14);border:1px solid rgba(213,180,90,0.3)}
+  .gd .c.tx{grid-column:span 7;background:rgba(243,240,233,0.07)}
+  .gd .c.im{grid-column:span 5;background:rgba(154,105,80,0.22)}
+  @media (max-width:860px){.gd{grid-template-columns:repeat(4,1fr)}.gd .c.rl{display:none}.gd .c.tx{grid-column:span 4}.gd .c.im{grid-column:span 4}}
+
+  /* buttons */
+  .btnrow{display:flex;flex-wrap:wrap;gap:var(--s-4);align-items:center}
+  .btn{font-family:var(--sans);font-size:0.9375rem;font-weight:500;letter-spacing:0.01em;height:48px;padding:0 24px;border-radius:var(--r-1);border:none;background:none;color:var(--text-0);cursor:pointer;display:inline-flex;align-items:center;gap:10px;transition:background var(--dur-1) var(--ease-out),color var(--dur-1) var(--ease-out),border-color var(--dur-1) var(--ease-out),transform var(--dur-1) var(--ease-out)}
+  .btn svg{transition:transform var(--dur-1) var(--ease-out)}
+  .btn:hover svg{transform:translateX(3px)}
+  .btn-primary{background:var(--energie);color:var(--surface-0)}
+  .btn-primary:hover{background:#DFC072}
+  .btn-primary:active{background:#C9A94F;transform:translateY(1px)}
+  .btn-secondary{border:1px solid var(--hair-1)}
+  .btn-secondary:hover{border-color:var(--text-1);background:var(--surface-2)}
+  .btn-quiet{padding:0;height:auto;border-bottom:1px solid var(--hair-1)}
+  .btn-quiet:hover{border-bottom-color:var(--text-0)}
+  .btn[disabled]{opacity:0.4;cursor:not-allowed}
+  .btn-loading{position:relative;overflow:hidden}
+  .btn-loading::after{content:"";position:absolute;left:0;bottom:0;height:1px;width:40%;background:var(--surface-0);animation:load 1.6s var(--ease-inout) infinite}
+  @keyframes load{0%{transform:translateX(-100%)}100%{transform:translateX(250%)}}
+
+  /* fields */
+  .fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;background:var(--hair);border:1px solid var(--hair)}
+  .fld{background:var(--surface-1);padding:var(--s-6);display:flex;flex-direction:column;gap:10px;transition:background var(--dur-1) var(--ease-out),transform var(--dur-3) var(--ease-out)}
+  .fld:hover{background:var(--surface-2);transform:translateY(-2px)}
+  .fld .ttl{font-family:var(--display);font-size:1.375rem;line-height:1.15}
+  .fld-choice{background:var(--surface-1);padding:var(--s-6);border-left:2px solid transparent;display:flex;flex-direction:column;gap:8px;cursor:pointer;transition:background var(--dur-1) var(--ease-out),border-color var(--dur-1) var(--ease-out)}
+  .fld-choice:hover{background:var(--surface-2)}
+  .fld-choice.sel{border-left-color:var(--energie);background:var(--surface-2)}
+  .rows{border-top:1px solid var(--hair)}
+  .row{display:grid;grid-template-columns:56px 1fr 1.4fr;gap:0 24px;padding:16px 12px;border-bottom:1px solid var(--hair);transition:background var(--dur-1) var(--ease-out)}
+  .row:hover{background:var(--surface-2)}
+  .row .rn{font-family:var(--display);font-size:1.25rem;color:var(--text-2);font-variant-numeric:tabular-nums}
+  .row .rt{color:var(--text-0);font-size:0.9375rem}
+  .row .rd{color:var(--text-2);font-size:0.875rem}
+  @media (max-width:700px){.row{grid-template-columns:40px 1fr;gap:2px 14px}.row .rd{grid-column:2}}
+
+  /* form */
+  .form{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-6);border:1px solid var(--hair);background:var(--surface-1);padding:clamp(22px,3vw,40px)}
+  @media (max-width:700px){.form{grid-template-columns:1fr}}
+  .fgroup{display:flex;flex-direction:column;gap:8px}
+  .fgroup label{font-size:0.6875rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-2)}
+  .fgroup input,.fgroup textarea{font-family:var(--sans);font-size:1rem;color:var(--text-0);background:var(--surface-2);border:none;border-bottom:1px solid var(--hair-1);height:56px;padding:0 14px;border-radius:var(--r-1) var(--r-1) 0 0;transition:border-color var(--dur-1) var(--ease-out)}
+  .fgroup textarea{height:auto;padding:14px;min-height:96px;resize:vertical}
+  .fgroup input:hover{border-bottom-color:var(--text-1)}
+  .fgroup input:focus{border-bottom:2px solid var(--energie);outline-offset:2px}
+  .fgroup.err input{border-bottom-color:var(--state-error)}
+  .fgroup .msg{font-size:0.8125rem;color:var(--state-error)}
+  .fgroup .hint{font-size:0.8125rem;color:var(--text-2)}
+  .prog{grid-column:1/-1;display:flex;flex-direction:column;gap:10px}
+  .prog .track{height:1px;background:var(--hair)}
+  .prog .fill{height:1px;background:var(--energie);width:50%}
+  .prog .st{display:flex;justify-content:space-between}
+
+  /* icons */
+  .icons{display:grid;grid-template-columns:repeat(auto-fit,minmax(104px,1fr));gap:1px;background:var(--hair);border:1px solid var(--hair)}
+  .ic{background:var(--surface-1);padding:18px 12px;display:flex;flex-direction:column;align-items:center;gap:10px}
+  .ic svg{color:var(--text-0)}
+  .ic span{font-size:0.6875rem;color:var(--text-2);text-align:center;letter-spacing:0.04em}
+
+  /* drawing */
+  .draw{border:1px solid var(--hair);background:var(--surface-1);padding:clamp(20px,2.6vw,32px);overflow-x:auto}
+  .draw svg{display:block;min-width:560px;width:100%;height:auto}
+
+  /* textures */
+  .tex{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:var(--hair);border:1px solid var(--hair)}
+  .tx{background:var(--surface-1);height:150px;position:relative;overflow:hidden}
+  .tx .cap{position:absolute;left:12px;bottom:10px;z-index:2}
+  .tx .fillx{position:absolute;inset:0}
+  .tx-tile .fillx{background-image:repeating-linear-gradient(0deg,rgba(243,240,233,0.14) 0 1px,transparent 1px 14px),repeating-linear-gradient(90deg,rgba(243,240,233,0.10) 0 1px,transparent 1px 22px);opacity:0.5}
+  .tx-zinc .fillx{background:linear-gradient(38deg,rgba(243,240,233,0.10),transparent 60%),repeating-linear-gradient(90deg,rgba(243,240,233,0.05) 0 1px,transparent 1px 3px)}
+  .tx-glass .fillx{background-image:repeating-linear-gradient(90deg,rgba(213,180,90,0.16) 0 1px,transparent 1px 26px),repeating-linear-gradient(0deg,rgba(213,180,90,0.10) 0 1px,transparent 1px 26px),linear-gradient(38deg,rgba(213,180,90,0.10),transparent 55%)}
+  .tx-wood .fillx{background-image:repeating-linear-gradient(93deg,rgba(243,240,233,0.07) 0 1px,transparent 1px 7px)}
+  .tx-edge .fillx{background:linear-gradient(180deg,rgba(213,180,90,0.22),transparent 30%)}
+  .tx-edge::before{content:"";position:absolute;left:0;top:0;width:100%;height:1px;background:linear-gradient(90deg,var(--energie),transparent);z-index:1}
+
+  /* motion */
+  .mo{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:var(--s-5)}
+  .curve{border:1px solid var(--hair);background:var(--surface-1);padding:16px;display:flex;flex-direction:column;gap:10px}
+  .curve svg{width:100%;height:auto;display:block}
+  .demo{border:1px solid var(--hair);background:var(--surface-1);padding:clamp(20px,2.6vw,32px);display:flex;flex-direction:column;gap:var(--s-5)}
+  .mask{overflow:hidden}
+  .mask > *{display:block;transform:translateY(0);opacity:1;transition:transform var(--dur-3) var(--ease-out),opacity var(--dur-3) var(--ease-out)}
+  .demo.run .mask > *{transform:translateY(110%);opacity:0;transition:none}
+  .demo .m1{transition-delay:0ms}.demo .m2{transition-delay:80ms}.demo .m3{transition-delay:160ms}
+
+  /* hero layers */
+  .layers{display:flex;flex-direction:column;border:1px solid var(--hair)}
+  .lay{display:grid;grid-template-columns:44px 210px 1fr;gap:0 20px;align-items:center;padding:13px 18px;border-bottom:1px solid var(--hair);background:var(--surface-1)}
+  .lay:last-child{border-bottom:none}
+  .lay .i{font-size:0.75rem;color:var(--text-2);font-variant-numeric:tabular-nums}
+  .lay .nm{font-size:0.9375rem;color:var(--text-0)}
+  .lay .ds{font-size:0.8125rem;color:var(--text-2)}
+  .lay.t3 .nm{color:var(--energie)}
+  .lay.t1 .nm{color:var(--dach)}
+  @media (max-width:700px){.lay{grid-template-columns:36px 1fr;gap:2px 14px}.lay .ds{grid-column:2}}
+
+  /* wireframe */
+  .wire{border:1px solid var(--hair);background:linear-gradient(180deg,#1a1b19,#111211);aspect-ratio:16/9;position:relative;padding:18px;overflow:hidden}
+  .wire .top{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--hair);padding-bottom:12px}
+  .wire .roof{position:absolute;right:-6%;bottom:-14%;width:78%;height:74%;background:linear-gradient(38deg,rgba(154,105,80,0.5),rgba(154,105,80,0.12));clip-path:polygon(0% 100%,58% 6%,100% 46%,100% 100%);border-top:1px solid rgba(213,180,90,0.5)}
+  .wire .txt{position:absolute;left:18px;top:36%;width:52%;z-index:2}
+  .wire .h{font-family:var(--display);font-size:clamp(1.25rem,3.4vw,2.5rem);line-height:0.98}
+  .wire .h em{font-style:italic;color:var(--text-1)}
+  .wire .cta{display:flex;gap:10px;margin-top:14px}
+  .wire .cta span{font-size:0.75rem;padding:7px 12px;border:1px solid var(--hair-1)}
+  .wire .cta span.p{background:var(--energie);color:var(--surface-0);border-color:var(--energie)}
+  .wire .measure{position:absolute;right:18px;bottom:44px;z-index:2;text-align:right}
+  .wire .cont{position:absolute;left:18px;bottom:16px;display:flex;gap:10px;align-items:center;z-index:2}
+  .wire .cont i{display:block;width:40px;height:1px;background:var(--text-2)}
+
+  /* mobile */
+  .phones{display:flex;gap:var(--s-6);flex-wrap:wrap}
+  .phone{width:200px;border:1px solid var(--hair-1);border-radius:14px;background:var(--surface-1);padding:10px;display:flex;flex-direction:column;gap:8px;position:relative;min-height:380px}
+  .phone .bar{height:26px;border-bottom:1px solid var(--hair);display:flex;align-items:center;justify-content:space-between;font-size:0.625rem;color:var(--text-2);letter-spacing:0.1em;padding-bottom:6px}
+  .phone .hh{font-family:var(--display);font-size:1.5rem;line-height:0.98;margin-top:6px}
+  .phone .img{height:120px;background:linear-gradient(38deg,rgba(154,105,80,0.4),rgba(27,28,26,0.9))}
+  .phone .txtl{height:8px;background:var(--surface-2)}
+  .phone .sticky{position:absolute;left:10px;right:10px;bottom:10px;height:44px;background:var(--surface-2);border-top:1px solid var(--energie);display:flex}
+  .phone .sticky span{flex:1;display:flex;align-items:center;justify-content:center;font-size:0.625rem;color:var(--text-1);letter-spacing:0.08em}
+
+  /* tables */
+  .tw{overflow-x:auto;border:1px solid var(--hair)}
+  table{border-collapse:collapse;width:100%;min-width:520px;font-size:0.875rem}
+  th{text-align:left;font-size:0.6875rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-2);font-weight:600;padding:12px 16px;border-bottom:1px solid var(--hair)}
+  td{padding:12px 16px;border-bottom:1px solid var(--hair);color:var(--text-1);vertical-align:top}
+  tbody tr:last-child td{border-bottom:none}
+  td.k{color:var(--text-0);white-space:nowrap}
+  td.n{text-align:right;font-variant-numeric:tabular-nums;color:var(--text-0)}
+
+  ul.pl{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px}
+  ul.pl li{padding-left:18px;position:relative;color:var(--text-1);font-size:0.9375rem}
+  ul.pl li::before{content:"";position:absolute;left:0;top:0.72em;width:7px;height:1px;background:var(--text-2)}
+  ul.pl li b{color:var(--text-0);font-weight:500}
+
+  .note{border-left:2px solid var(--energie);padding:4px 0 4px 20px;color:var(--text-1);font-size:0.9375rem;max-width:70ch}
+  .note.tc{border-left-color:var(--dach)}
+  footer{padding:52px 0 76px;color:var(--text-2);font-size:0.8125rem;display:flex;flex-direction:column;gap:8px}
+
+  .rv{opacity:0;transform:translateY(14px);transition:opacity 0.7s var(--ease-out),transform 0.7s var(--ease-out)}
+  .rv.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){
+    .rv{opacity:1;transform:none;transition:none}
+    header.mast{position:static}
+    .btn-loading::after{animation:none}
+    .demo.run .mask > *{transform:none;opacity:1}
+  }
+</style>
+
+<header class="mast">
+  <div class="wrap mast-in">
+    <div class="mark">DACHWERK <span>· Design System</span></div>
+    <div class="lab">Phase 5 · Stand 28.08.2026 · Spezimen, keine Website</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <section class="hero">
+      <div class="lab">Art Direction und Design System</div>
+      <h1>Fläche. Kante. <em>Licht.</em></h1>
+      <p class="lead">Dieses Dokument zeigt die gestalterischen Bausteine der Marke im echten Zustand, nicht als Beschreibung: Farben mit gemessenen Kontrasten, Typografie im Satz, Buttons und Felder mit ihren Zuständen, den eigenen Zeichensatz, die Materialflächen und die Bewegungssprache. <b>Es ist ein Spezimen zur Abnahme, kein Website-Code.</b></p>
+    </section>
+
+    <!-- 01 PHILOSOPHY -->
+    <section class="blk">
+      <div class="grid">
+        <div class="rail"><span class="n">01</span><span class="lab">Philosophie</span></div>
+        <div class="col rv">
+          <h2>Ein Winkel, zwei Flächenmodi, eine Lichtrichtung.</h2>
+          <ul class="pl">
+            <li><b>Ein Winkel.</b> Der Bezugswinkel ist die Dachneigung des Leitmotivhauses, 38 Grad. Er erscheint als Maskenkante, als Flächenübergang und als Richtung des Lichtverlaufs. Nie in Textausrichtung, nie in Buttons. Genau ein Winkel im System, sonst wird die Seite unruhig.</li>
+            <li><b>Material trägt Farbe, Interface trägt keine.</b> Farbe kommt aus Ton, Holz, Zink, Glas und Licht. Keine farbigen Badges, keine bunten Kategorien, kein Verlauf als Dekoration.</li>
+            <li><b>Präzision ist die Botschaft.</b> Deshalb trägt die Seite eine technische Beschriftungsebene wie eine Bauzeichnung: Maßangaben, Neigung, Materialbezeichnung, Schichtnummer. Klein, exakt gesetzt und immer echt.</li>
+          </ul>
+          <div class="angle">
+            <div class="day"></div>
+            <div class="edge"></div>
+            <div class="n-txt"><span class="lab">Nachtfläche</span><br><span class="spec">Obsidian · Hero, Leistungen, Kontakt</span></div>
+            <div class="d-txt"><span class="lab">Tagfläche</span><br><span class="spec" style="color:var(--ink-2)">Warm White · Prozess, Ratgeber, Projekte</span></div>
+          </div>
+          <p class="sm">Der Flächenwechsel folgt einem Tageslauf und erfolgt auf der Startseite genau zweimal, jeweils an einer inhaltlichen Zäsur, geführt über die 38-Grad-Kante mit Lichtlinie. Zwei Wechsel sind eine Dramaturgie, sechs sind ein Flickenteppich.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 FARBE -->
+    <section class="blk">
+      <div class="grid">
+        <div class="rail"><span class="n">02</span><span class="lab">Farbe</span></div>
+        <div class="col rv">
+          <h2>Jede Farbe hat eine Rolle und einen gemessenen Kontrast.</h2>
+          <span class="lab">Nachtmodus</span>
+          <div class="pal">
+            <div class="sw"><div class="chip" style="background:#111211"></div><div class="t"><span class="nm">surface-0</span><span class="hx">#111211</span><span class="us">Grundfläche</span></div></div>
+            <div class="sw"><div class="chip" style="background:#1B1C1A"></div><div class="t"><span class="nm">surface-1</span><span class="hx">#1B1C1A</span><span class="us">Felder, Panels</span></div></div>
+            <div class="sw"><div class="chip" style="background:#232420"></div><div class="t"><span class="nm">surface-2</span><span class="hx">#232420</span><span class="us">Hover, Eingabefeld</span></div></div>
+            <div class="sw"><div class="chip" style="background:#F3F0E9"></div><div class="t"><span class="nm">text-0</span><span class="hx">#F3F0E9</span><span class="us">Primärtext</span><span class="ct">16,6:1</span></div></div>
+            <div class="sw"><div class="chip" style="background:#C9C1B4"></div><div class="t"><span class="nm">text-1</span><span class="hx">#C9C1B4</span><span class="us">Fließtext, sekundär</span><span class="ct">10,6:1</span></div></div>
+            <div class="sw"><div class="chip" style="background:#8C867B"></div><div class="t"><span class="nm">text-2</span><span class="hx">#8C867B</span><span class="us">technische Beschriftung</span><span class="ct">5,0:1</span></div></div>
+          </div>
+          <span class="lab">Domäne und Zustand</span>
+          <div class="pal">
+            <div class="sw"><div class="chip" style="background:#9A6950"></div><div class="t"><span class="nm">dach</span><span class="hx">#9A6950</span><span class="us">Domäne DACH</span><span class="ct warn">4,0:1 · kein Fließtext</span></div></div>
+            <div class="sw"><div class="chip" style="background:#D5B45A"></div><div class="t"><span class="nm">energie</span><span class="hx">#D5B45A</span><span class="us">Domäne ENERGIE, Akzent, Fokus</span><span class="ct">9,4:1</span></div></div>
+            <div class="sw"><div class="chip" style="background:#667060"></div><div class="t"><span class="nm">nature</span><span class="hx">#667060</span><span class="us">Karte, Region</span><span class="ct warn">3,6:1 · nur Fläche</span></div></div>
+            <div class="sw"><div class="chip" style="background:#E08B76"></div><div class="t"><span class="nm">state-error</span><span class="hx">#E08B76</span><span class="us">Formularfehler</span><span class="ct">7,3:1</span></div></div>
+            <div class="sw"><div class="chip" style="background:#8FA083"></div><div class="t"><span class="nm">state-ok</span><span class="hx">#8FA083</span><span class="us">Bestätigung</span><span class="ct">6,8:1</span></div></div>
+          </div>
+          <div class="band-light">
+            <span class="lab">Tagmodus, echte Darstellung</span>
+            <h2>Im Tagmodus kehrt sich die Regel um.</h2>
+            <p class="bd">Auf Warm White ist <b>ink-0 #111211</b> Primärtext mit 16,6:1, <b>ink-1 #57534B</b> Sekundärtext mit 6,7:1 und <span class="dachtext">Terracotta als Text zulässig</span>, weil der Kontrast hier 5,0:1 erreicht. Solar wird auf hellem Grund nur als Fläche oder Linie verwendet, nie als Text, weil der Kontrast unter 2:1 fällt.</p>
+            <div class="btnrow">
+              <button class="btn btn-onlight">Projekt besprechen
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="butt" stroke-linejoin="miter" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+              </button>
+              <span class="spec" style="color:var(--ink-2)">Variante on-light</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 TYPO -->
+    <section class="blk">
+      <div class="grid">
+        <div class="rail"><span class="n">03</span><span class="lab">Typografie</span></div>
+        <div class="col rv">
+          <h2>Instrument Serif trägt die Aussage, Inter die Information.</h2>
+          <div class="tp">
+            <div class="r"><span class="lab">display-xl · Hero, Brand Statement</span><span class="t-xl">Aus Dachfläche wird <em style="font-style:italic;color:var(--text-1)">Energiefläche.</em></span></div>
+            <div class="r"><span class="lab">display-l · Section Headline</span><span class="t-l">70 Kilometer rund um Hildesheim.</span></div>
+            <div class="r"><span class="lab">numeral · Prozess, Kennzahl, tabellarische Ziffern</span><span class="t-num">03</span></div>
+            <div class="r"><span class="lab">body · Fließtext, maximal 68 Zeichen je Zeile</span><span class="t-bd">Ein Ansprechpartner begleitet Ihr Projekt von der ersten Bestandsaufnahme bis zur Übergabe. Dach und Energie werden gemeinsam geplant, nicht nacheinander beauftragt.</span></div>
+            <div class="r"><span class="lab">label · Eyebrow, versal, Laufweite 0,18em</span><span class="lab" style="color:var(--text-1)">Hildesheim · Dach &amp; Energie</span></div>
+            <div class="r"><span class="lab">spec · Maßangabe, Laufweite 0,06em, tabular</span><span class="spec" style="color:var(--text-1)">Dachneigung 38° · Belegbare Fläche 62 m² · Sparrenabstand 70 cm</span></div>
+          </div>
+          <ul class="pl">
+            <li>Beide Familien <b>selbst gehostet</b> als subsettete woff2, kein Google-Fonts-CDN. Ladezeit, Renderstabilität und Datenschutz.</li>
+            <li>Keine dritte Familie und <b>keine Monospace.</b> Die technische Ebene entsteht durch Laufweite, Versalien und Tabellenziffern. Monospace wirkt hier nach Software, nicht nach Bauzeichnung.</li>
+            <li><code style="color:var(--text-0)">lang="de"</code> und <code style="color:var(--text-0)">hyphens: auto</code> nur in Spalten unter 40 Zeichen. Deutsche Komposita wie Dachflächenfenster brechen sonst das Layout.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 SPACING + GRID -->
+    <section class="blk">
+      <div class="grid">
+        <div class="rail"><span class="n">04</span><span class="lab">Raster</span></div>
+        <div class="col rv">
+          <h2>Basis 8, geometrisch statt linear.</h2>
+          <div class="bars">
+            <div class="bar"><span class="spec">s-2 · 8</span><span class="v" style="width:8px"></span></div>
+            <div class="bar"><span class="spec">s-4 · 16</span><span class="v" style="width:16px"></span></div>
+            <div class="bar"><span class="spec">s-5 · 24</span><span class="v" style="width:24px"></span></div>
+            <div class="bar"><span class="spec">s-6 · 32</span><span class="v" style="width:32px"></span></div>
+            <div class="bar"><span class="spec">s-7 · 48</span><span class="v" style="width:48px"></span></div>
+            <div class="bar"><span class="spec">s-8 · 64</span><span class="v" style="width:64px"></span></div>
+            <div class="bar"><span class="spec">s-9 · 96</span><span class="v" style="width:96px"></span></div>
+            <div class="bar"><span class="spec">s-10 · 128</span><span class="v" style="width:128px"></span></div>
+            <div class="bar"><span class="spec">s-11 · 192</span><span class="v" style="width:192px"></span></div>
+          </div>
+          <span class="lab">Layout: Randspalte 170px, Textspalte 7 von 12, Bild 5 von 12, keine Symmetrie</span>
+          <div class="gd">
+            <div class="c rl"></div>
+            <div class="c tx"></div>
+            <div class="c im"></div>
+          </div>
+          <ul class="pl">
+            <li>Abstand <b>vor</b> einer Trennlinie ist größer als danach, Verhältnis etwa 3 zu 2. Damit gehört die Linie sichtbar zum folgenden Abschnitt.</li>
+            <li>Zweispaltige Abschnitte nutzen 5 zu 7 oder 7 zu 5, <b>nie 6 zu 6.</b> Symmetrie wirkt hier nach Template.</li>
+            <li>Radien: 2px bei Buttons und Feldern, 0 bei Bildern und Flächen. <b>Keine Schatten</b> außer der mobilen Aktionsleiste.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 BUTTONS -->
+    <section class="blk">
+      <div class="grid">
+        <div class="rail"><span class="n">05</span><span class="lab">Buttons</span></div>
+        <div class="col rv">
+          <h2>Vier Varianten, ein Primärziel je Bildschirmhöhe.</h2>
+          <p class="sm">Zeigen mit der Maus darauf, die Zustände sind echt. Der Pfeil ist Teil des eigenen Zeichensatzes, kein Unicode-Zeichen.</p>
+          <div class="btnrow">
+            <button class="btn btn-primary">Projekt besprechen
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="butt" stroke-linejoin="miter" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+            </button>
+            <button class="btn btn-secondary">Unsere Leistungen</button>
+            <button class="btn btn-quiet">Zum Ratgeber
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="butt" stroke-linejoin="miter" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+            </button>
+            <button class="btn btn-primary btn-loading">Anfrage wird gesendet</button>
+            <button class="btn btn-secondary" disabled>Nicht verfügbar</button>
+          </div>
+          <div class="tw">
+            <table>
+              <thead><tr><th>Zustand</th><th>Verhalten</th><th class="n">Dauer</th></tr></thead>
+              <tbody>
+                <tr><td class="k">hover</td><td>Fläche hellt um 6 Prozent auf, Pfeil rückt 3px nach rechts</td><td class="n">240ms</td></tr>
+                <tr><td class="k">active</td><td>Fläche dunkelt um 4 Prozent, Versatz 1px nach unten</td><td class="n">240ms</td></tr>
+                <tr><td class="k">focus-visible</td><td>2px Solar, Offset 2px, wird nie entfernt</td><td class="n">sofort</td></tr>
+                <tr><td class="k">loading</td><td>Label bleibt, 1px Fortschrittsstrich am unteren Rand, kein Spinner</td><td class="n">1600ms</td></tr>
+                <tr><td class="k">disabled</td><td>Deckkraft 40 Prozent, kein Hover, Grund wird im Text genannt</td><td class="n">keine</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="sm">Kein Button ohne Verb, keine Versalien, keine Ausrufezeichen, kein „Jetzt“.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 FELDER -->
+    <section class="blk">
+      <div class="grid">
+        <div class="rail"><span class="n">06</span><span class="lab">Felder</span></div>
+        <div class="col rv">
+          <h2>Keine Cards. Flächen mit Kante.</h2>
+          <div class="fields">
+            <div class="fld"><span class="lab" style="color:var(--dach)">Dach</span><span class="ttl">Dachsanierung</span><p class="sm">Vollständige Erneuerung von Deckung, Unterdeckung und Dämmung, abgestimmt auf eine spätere PV-Belegung.</p></div>
+            <div class="fld"><span class="lab" style="color:var(--energie)">Energie</span><span class="ttl">Photovoltaik</span><p class="sm">Planung und Montage auf geprüftem Dachaufbau, mit Auslegung nach Verbrauch statt nach Dachfläche.</p></div>
+            <div class="fld"><span class="lab">Beides</span><span class="ttl">Dach und PV</span><p class="sm">Ein Gewerk, eine Planung, eine Baustelle. Reihenfolge und Kosten werden gemeinsam betrachtet.</p></div>
+          </div>
+          <span class="lab">field-choice · Auswahlfläche, Zustand ausgewählt</span>
+          <div class="fields">
+            <div class="fld-choice sel"><span class="spec">01</span><span style="font-size:0.9375rem">Mein Dach braucht Aufmerksamkeit.</span><span class="sm">Reparatur</span></div>
+            <div class="fld-choice"><span class="spec">02</span><span style="font-size:0.9375rem">Mein Dach ist in die Jahre gekommen.</span><span class="sm">Sanierung</span></div>
+            <div class="fld-choice"><span class="spec">05</span><span style="font-size:0.9375rem">Ich weiß noch nicht, was sinnvoll ist.</span><span class="sm">Beratung · häufigster Fall</span></div>
+          </div>
+          <span class="lab">field-row · Prozess, Schichten, Listen</span>
+          <div class="rows">
+            <div class="row"><span class="rn">01</span><span class="rt">Wir schauen hin.</span><span class="rd">Vor-Ort-Termin und Bestandsaufnahme, auch der Bereiche, die man von der Straße nicht sieht.</span></div>
+            <div class="row"><span class="rn">02</span><span class="rt">Wir denken voraus.</span><span class="rd">Dach, Energie und Anforderungen werden gemeinsam betrachtet, nicht nacheinander.</span></div>
+            <div class="row"><span class="rn">03</span><span class="rt">Wir planen sauber.</span><span class="rd">Nachvollziehbare Planung und ein Angebot, das Positionen benennt.</span></div>
+          </div>
+          <p class="sm">Kein Feld mit Schatten, kein Feld mit zwei CTAs, kein Icon oben links. Felder gruppieren sich über 1px Fugen zu Flächenverbänden, so entstehen Bauteile statt Kacheln.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 FORMULAR -->
+    <section class="blk">
+      <div class="grid">
+        <div class="rail"><span class="n">07</span><span class="lab">Formular</span></div>
+        <div class="col rv">
+          <h2>Label sichtbar, Fehler als Satz, optional statt Sternchen.</h2>
+          <form class="form" onsubmit="return false">
+            <div class="prog">
+              <div class="st"><span class="lab">Schritt 3 von 4 · Kontakt</span><span class="spec">Telefon oder E-Mail genügt</span></div>
+              <div class="track"><div class="fill"></div></div>
+            </div>
+            <div class="fgroup">
+              <label for="d-name">Name</label>
+              <input id="d-name" type="text" value="Sabine Wernecke">
+            </div>
+            <div class="fgroup err">
+              <label for="d-plz">Postleitzahl</label>
+              <input id="d-plz" type="text" inputmode="numeric" value="311" aria-describedby="d-plz-msg">
+              <span class="msg" id="d-plz-msg">Bitte eine fünfstellige Postleitzahl eintragen.</span>
+            </div>
+            <div class="fgroup">
+              <label for="d-tel">Telefon <span style="letter-spacing:0.06em;text-transform:none;font-weight:400">optional</span></label>
+              <input id="d-tel" type="tel" placeholder="">
+              <span class="hint">Rückfragen gehen schneller am Telefon.</span>
+            </div>
+            <div class="fgroup">
+              <label for="d-mail">E-Mail</label>
+              <input id="d-mail" type="email" placeholder="">
+              <span class="hint">Fokus setzen, um den Zustand zu sehen.</span>
+            </div>
+            <div class="fgroup" style="grid-column:1/-1">
+              <label for="d-txt">Projektbeschreibung</label>
+              <textarea id="d-txt" placeholder="Worum geht es? Ein paar Sätze genügen."></textarea>
+            </div>
+          </form>
+          <ul class="pl">
+            <li><b>Kein Floating Label.</b> Es entfernt die Information genau dann, wenn man sie braucht.</li>
+            <li>Feldaufbau: Fläche plus <b>Grundlinie unten</b>, kein Rahmen an vier Seiten. Fokus setzt die Grundlinie auf 2px Solar, zusätzlich Fokusring.</li>
+            <li>Validierung erst beim Verlassen des Feldes. Fehlermeldung ist ein Satz mit Lösung, kein Warnsymbol.</li>
+            <li>Pflichtfelder ohne Sternchen, stattdessen sind optionale Felder als <b>optional</b> gekennzeichnet.</li>
+            <li>Zustand im sessionStorage, Zurücknavigation ohne Verlust, Schrittwechsel setzt den Fokus auf die Schrittüberschrift und meldet ihn per aria-live.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 08 ZEICHENSATZ -->
+    <section class="blk">
+      <div class="grid">
+        <div class="rail"><span class="n">08</span><span class="lab">Zeichensatz</span></div>
+        <div class="col rv">
+          <h2>Bauzeichnung statt Icon-Bibliothek.</h2>
+          <p class="bd">Strichstärke 1,25px auf 24px Fläche, keine Füllung, <b>butt</b> statt runder Enden, <b>miter</b> statt runder Ecken. Die Zeichen sind Aufsichten, Schnitte und Seitenansichten, keine Piktogramme mit Charakter.</p>
+          <div class="icons">
+            <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="butt" stroke-linejoin="miter" aria-hidden="true"><path d="M3 12h16M13 6l6 6-6 6"/></svg><span>Pfeil</span></div>
+            <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="butt" stroke-linejoin="miter" aria-hidden="true"><path d="M8 16 18 6M11 6h7v7"/></svg><span>Extern</span></div>
+            <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="butt" stroke-linejoin="miter" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg><span>Plus</span></div>
+            <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="butt" stroke-linejoin="miter" aria-hidden="true"><path d="M4 12h16"/></svg><span>Minus</span></div>
+            <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="butt" stroke-linejoin="miter" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg><span>Schließen</span></div>
+            <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="butt" stroke-linejoin="miter" aria-hidden="true"><path d="M4 13l5 5L20 7"/></svg><span>Häkchen</span></div>
+            <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="butt" stroke-linejoin="miter" aria-hidden="true"><path d="M6 3h4l2 5-2.5 1.5a10 10 0 0 0 5 5L16 12l5 2v4h-3A15 15 0 0 1 3 6V3z"/></svg><span>Telefon</span></div>
+            <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="butt" stroke-linejoin="miter" aria-hidden="true"><path d="M3 6h18v12H3zM3 6l9 7 9-7"/></svg><span>Kuvert</span></div>
+            <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="butt" stroke-linejoin="miter" aria-hidden="true"><circle cx="12" cy="12" r="6"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg><span>Standort</span></div>
+            <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="butt" stroke-linejoin="miter" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l4 2"/></svg><span>Uhr</span></div>
+            <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="butt" stroke-linejoin="miter" aria-hidden="true"><path d="M6 3h9l3 3v15H6zM15 3v3h3M9 12h6M9 16h6"/></svg><span>Dokument</span></div>
+            <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="butt" stroke-linejoin="miter" aria-hidden="true"><path d="M12 17V4M7 9l5-5 5 5M4 20h16"/></svg><span>Upload</span></div>
+            <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="butt" stroke-linejoin="miter" aria-hidden="true"><path d="M3 19h18L3 5z"/><path d="M9 19a8 8 0 0 0 2.4-5.7" stroke-dasharray="2 2"/></svg><span>Neigung</span></div>
+            <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="butt" stroke-linejoin="miter" aria-hidden="true"><path d="M3 8h18M3 12h18M3 16h18M3 20h18"/></svg><span>Schichten</span></div>
+          </div>
+
+          <span class="lab">Technische Zeichnung · Dachaufbau im Schnitt, Maßlinie, Bezugslinien</span>
+          <div class="draw">
+            <svg viewBox="0 0 720 300" role="img" aria-label="Schnittzeichnung des Dachaufbaus mit sieben Schichten, Maßlinie links und Bezugslinien nach rechts.">
+              <defs>
+                <pattern id="p-wood" width="10" height="6" patternUnits="userSpaceOnUse">
+                  <path d="M0 1h10M0 4h10" stroke="#8C867B" stroke-width="0.6"/>
+                </pattern>
+                <pattern id="p-insul" width="16" height="10" patternUnits="userSpaceOnUse">
+                  <path d="M0 5q4 -5 8 0t8 0" fill="none" stroke="#8C867B" stroke-width="0.7"/>
+                </pattern>
+                <pattern id="p-batten" width="24" height="8" patternUnits="userSpaceOnUse">
+                  <rect x="1" y="1" width="12" height="6" fill="none" stroke="#8C867B" stroke-width="0.7"/>
+                </pattern>
+                <pattern id="p-tile" width="26" height="12" patternUnits="userSpaceOnUse">
+                  <path d="M0 11q6 -9 13 0t13 0" fill="none" stroke="#9A6950" stroke-width="1"/>
+                </pattern>
+                <pattern id="p-glass" width="18" height="10" patternUnits="userSpaceOnUse">
+                  <path d="M0 0v10" stroke="#D5B45A" stroke-width="0.7"/>
+                </pattern>
+              </defs>
+              <g font-family="Inter, Arial, sans-serif" font-size="11" fill="#8C867B" letter-spacing="0.6">
+                <!-- Maßlinie -->
+                <path d="M60 40v210" stroke="#8C867B" stroke-width="1"/>
+                <path d="M52 40h16M52 250h16" stroke="#8C867B" stroke-width="1"/>
+                <text x="46" y="150" text-anchor="end">Aufbau</text>
+                <text x="46" y="164" text-anchor="end">gesamt</text>
+
+                <!-- Schichten -->
+                <rect x="90" y="228" width="300" height="22" fill="url(#p-wood)" stroke="#8C867B" stroke-width="1"/>
+                <rect x="90" y="186" width="300" height="42" fill="url(#p-insul)" stroke="#8C867B" stroke-width="1"/>
+                <rect x="90" y="176" width="300" height="10" fill="none" stroke="#8C867B" stroke-width="1"/>
+                <rect x="90" y="160" width="300" height="16" fill="url(#p-batten)" stroke="#8C867B" stroke-width="1"/>
+                <rect x="90" y="136" width="300" height="24" fill="url(#p-tile)" stroke="#9A6950" stroke-width="1"/>
+                <rect x="90" y="118" width="300" height="18" fill="none" stroke="#8C867B" stroke-width="1"/>
+                <rect x="90" y="100" width="300" height="18" fill="url(#p-glass)" stroke="#D5B45A" stroke-width="1"/>
+
+                <!-- Bezugslinien -->
+                <g stroke="#8C867B" stroke-width="0.8">
+                  <path d="M390 239h90l14-14h60"/><path d="M390 207h110l14-14h40"/>
+                  <path d="M390 181h130l14-14h20"/><path d="M390 168h150l14-14h0"/>
+                  <path d="M390 148h100l14-14h50"/><path d="M390 127h80l14-14h70"/>
+                  <path d="M390 109h60l14-14h90"/>
+                </g>
+                <g fill="#8C867B">
+                  <circle cx="390" cy="239" r="1.6"/><circle cx="390" cy="207" r="1.6"/><circle cx="390" cy="181" r="1.6"/>
+                  <circle cx="390" cy="168" r="1.6"/><circle cx="390" cy="148" r="1.6"/><circle cx="390" cy="127" r="1.6"/><circle cx="390" cy="109" r="1.6"/>
+                </g>
+                <g fill="#F3F0E9" font-size="11.5">
+                  <text x="558" y="228">01 Sparren</text>
+                  <text x="548" y="196">02 Dämmung</text>
+                  <text x="538" y="170">03 Unterdeckung</text>
+                  <text x="558" y="157">04 Lattung</text>
+                  <text x="558" y="137">05 Dachziegel</text>
+                  <text x="558" y="116">06 Unterkonstruktion</text>
+                  <text x="558" y="98">07 PV-Module</text>
+                </g>
+                <text x="90" y="278">Signaturen: Holz als Faserlinie, Dämmung als Wellenlinie, Ziegel als Profil, Modulglas als Doppellinie mit Zellteilung.</text>
+              </g>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 09 MATERIAL -->
+    <section class="blk">
+      <div class="grid">
+        <div class="rail"><span class="n">09</span><span class="lab">Material</span></div>
+        <div class="col rv">
+          <h2>Materialflächen tragen die Seite dort, wo kein Bild sinnvoll ist.</h2>
+          <p class="sm">Hier zur Sichtbarkeit deutlich verstärkt dargestellt. In der Umsetzung liegen die Texturen bei 2 bis 6 Prozent Deckkraft und bleiben statisch.</p>
+          <div class="tex">
+            <div class="tx tx-tile"><span class="fillx"></span><span class="cap spec">tex-tile · Ziegelprofil</span></div>
+            <div class="tx tx-zinc"><span class="fillx"></span><span class="cap spec">tex-zinc · Blech, 38°</span></div>
+            <div class="tx tx-glass"><span class="fillx"></span><span class="cap spec">tex-glass · Modulraster</span></div>
+            <div class="tx tx-wood"><span class="fillx"></span><span class="cap spec">tex-grain-wood · Faser</span></div>
+            <div class="tx tx-edge"><span class="fillx"></span><span class="cap spec">light-edge · Lichtkante</span></div>
+          </div>
+          <ul class="pl">
+            <li>Maximal <b>eine Textur je Sektion</b>, keine Textur unter Fließtext in mehr als 5 Prozent Deckkraft.</li>
+            <li>Global liegt über Fotografien und 3D dieselbe <b>Kornkachel bei 2 bis 3 Prozent</b>. Sie nimmt Bildern den sterilen Charakter und verbindet fotografierte mit gerenderten Flächen zu einer Oberfläche.</li>
+            <li>Die Lichtkante ist das <b>einzige leuchtende Element</b> im Interface. Sie markiert Flächenwechsel und den Dachfirst.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 MOTION -->
+    <section class="blk">
+      <div class="grid">
+        <div class="rail"><span class="n">10</span><span class="lab">Motion</span></div>
+        <div class="col rv">
+          <h2>Kamera und Konstruktion.</h2>
+          <p class="bd"><b>Kamera</b> bewegt alles, was Raum zeigt: langsam, entlang einer Achse, 1100 bis 1800ms, ease-in-out, beginnt und endet in Ruhe. <b>Konstruktion</b> setzt Information: Masken öffnen entlang einer Kante, das Element rückt maximal 16px nach, 480 bis 640ms, ease-out. Nichts fliegt ein, nichts skaliert von 0,8, nichts blurrt.</p>
+          <div class="mo">
+            <div class="curve">
+              <span class="lab">ease-out · Konstruktion</span>
+              <svg viewBox="0 0 100 100" aria-hidden="true"><path d="M0 100h100M0 100V0" stroke="rgba(243,240,233,0.15)" stroke-width="0.8" fill="none"/><path d="M0 100 C 16 0, 30 0, 100 0" stroke="#D5B45A" stroke-width="1.6" fill="none"/></svg>
+              <span class="spec">cubic-bezier(0.16, 1, 0.3, 1)</span>
+            </div>
+            <div class="curve">
+              <span class="lab">ease-in-out · Kamera</span>
+              <svg viewBox="0 0 100 100" aria-hidden="true"><path d="M0 100h100M0 100V0" stroke="rgba(243,240,233,0.15)" stroke-width="0.8" fill="none"/><path d="M0 100 C 65 100, 35 0, 100 0" stroke="#9A6950" stroke-width="1.6" fill="none"/></svg>
+              <span class="spec">cubic-bezier(0.65, 0, 0.35, 1)</span>
+            </div>
+            <div class="curve">
+              <span class="lab">Masseregel</span>
+              <div class="tw" style="border:none">
+                <table style="min-width:0">
+                  <tbody>
+                    <tr><td>Sektion, Bild bleed</td><td class="n">8px</td></tr>
+                    <tr><td>Feld, Tabelle</td><td class="n">12px</td></tr>
+                    <tr><td>Textzeile, Label</td><td class="n">16px</td></tr>
+                    <tr><td>Detail, Zahl</td><td class="n">24px</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="demo" id="demo">
+            <span class="lab">Konstruktion · Maskenreveal mit Stagger 0,08s</span>
+            <div class="mask"><span class="m1" style="font-family:var(--display);font-size:clamp(1.5rem,3vw,2.25rem);line-height:1.05">Gute Arbeit endet nicht</span></div>
+            <div class="mask"><span class="m2" style="font-family:var(--display);font-size:clamp(1.5rem,3vw,2.25rem);line-height:1.05">mit der Montage.</span></div>
+            <div class="mask"><span class="m3 sm">Ein Ansprechpartner bleibt nach der Übergabe erreichbar.</span></div>
+            <div class="btnrow"><button class="btn btn-secondary" id="replay">Erneut abspielen</button></div>
+          </div>
+          <ul class="pl">
+            <li><b>Kein Smooth-Scroll-Hijacking.</b> Kein Lenis, kein ScrollSmoother. Es übernimmt die Scrollgeschwindigkeit des Nutzers, stört Tastatur- und Screenreader-Navigation und ruckelt auf schwachen Geräten.</li>
+            <li>Kein Bounce, kein Elastic, kein Endlos-Floating, kein Typewriter, kein Zahlen-Hochzählen, kein Stagger über acht Elemente, kein Parallax über 8 Prozent.</li>
+            <li>Vier Profile: <b>full, mobile, low, reduced.</b> Ein zentrales Modul liefert das Profil, jede Szene fragt nur das Profil ab. Bei reduzierter Bewegung bleiben nur Farb- und Opazitätswechsel unter 240ms.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11 HERO -->
+    <section class="blk">
+      <div class="grid">
+        <div class="rail"><span class="n">11</span><span class="lab">Hero</span></div>
+        <div class="col rv">
+          <h2>3D trägt die Transformation, Fotografie trägt die Glaubwürdigkeit.</h2>
+          <p class="bd">Das Kippen der Ziegelreihen und das Setzen der Modulreihen ist fotografisch nicht darstellbar, deshalb ist der Hero eine 3D-Szene. Ihre Oberflächen, ihr Himmel und ihr Umgebungsband stammen aus <b>fotografischen Vorlagen</b>, das Modulglas spiegelt einen echten Himmel. Direkt nach dem Hero kippt die Seite in echte Fotografie: der Split Screen zeigt zwei Materialaufnahmen. Der Übergang von gebauter zu fotografierter Realität ist der erste Beweis.</p>
+          <div class="layers">
+            <div class="lay"><span class="i">07</span><span class="nm">UI</span><span class="ds">Kopfzeile, Telefonnummer</span></div>
+            <div class="lay"><span class="i">06</span><span class="nm">Typografie</span><span class="ds">Headline, Subheadline, zwei CTAs. Dies ist das LCP-Element</span></div>
+            <div class="lay"><span class="i">05</span><span class="nm">Beschriftung</span><span class="ds">Eyebrow, Materiallabel, Maßlinie</span></div>
+            <div class="lay"><span class="i">04</span><span class="nm">Korn und Vignette</span><span class="ds">global, verbindet Foto und 3D</span></div>
+            <div class="lay t3"><span class="i">03</span><span class="nm">Lichtnebel</span><span class="ds">gerichteter Verlauf entlang 38 Grad, sehr schwach</span></div>
+            <div class="lay t1"><span class="i">02</span><span class="nm">3D-Szene</span><span class="ds">Haus, Dachfläche, Ziegel als InstancedMesh, Module</span></div>
+            <div class="lay"><span class="i">01</span><span class="nm">Umgebungsband</span><span class="ds">fotografische Landschaftssilhouette, 25 Prozent entsättigt</span></div>
+            <div class="lay"><span class="i">00</span><span class="nm">Himmel</span><span class="ds">fotografischer Verlauf, wandert mit dem Lichtbogen</span></div>
+          </div>
+
+          <span class="lab">Die erste Bildschirmhöhe, schematisch</span>
+          <div class="wire">
+            <div class="roof"></div>
+            <div class="top">
+              <span class="mark">DACHWERK</span>
+              <span class="spec">Dach · Photovoltaik · Dach und PV · Projekte · Ratgeber &nbsp;&nbsp; 05121 000000 &nbsp; [Projekt besprechen]</span>
+            </div>
+            <div class="txt">
+              <div class="lab" style="margin-bottom:10px">Hildesheim · Dach &amp; Energie</div>
+              <div class="h">Ein Dach<br>muss <em>mehr</em><br>können.</div>
+              <div class="cta"><span class="p">Projekt besprechen</span><span>Unsere Leistungen</span></div>
+            </div>
+            <div class="measure spec">Dachneigung 38° · Belegbare Fläche 62 m²</div>
+            <div class="cont"><i></i><span class="spec">Weiter</span></div>
+          </div>
+          <ul class="pl">
+            <li>Headline links auf 7 von 12 Spalten, Dachfläche läuft aus der rechten unteren Ecke nach links oben. <b>Text und Dachkante bilden ein Dreieck</b>, das den Blick ins Bild zieht. Kein zentrierter Text, kein Text über der dichtesten Bildstelle.</li>
+            <li><b>Kein animierter Scroll-Indikator.</b> Ein 1px Strich mit dem Wort „Weiter“, statisch.</li>
+            <li>Ladechoreografie: Fläche, Himmelsverlauf als CSS, Kopfzeile und Headline sind bei 0ms sichtbar. Die 3D-Szene wird ab 600ms dynamisch geladen und blendet über 900ms ein. <b>Der Hero ist vollständig lesbar und bedienbar, bevor die 3D-Szene existiert.</b></li>
+            <li>Textlesbarkeit über Bild: kein flächiges Abdunkeln, sondern gerichteter Verlauf von der Textkante, 55 Prozent am Rand, 0 Prozent bei 62 Prozent Bildbreite. Kontrast gemessen, mindestens 7:1 an der dunkelsten Textstelle.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12 MOBILE -->
+    <section class="blk">
+      <div class="grid">
+        <div class="rail"><span class="n">12</span><span class="lab">Mobil</span></div>
+        <div class="col rv">
+          <h2>Eine eigene Inszenierung, keine Verkleinerung.</h2>
+          <div class="phones">
+            <div class="phone">
+              <div class="bar"><span>DACHWERK</span><span>MENÜ</span></div>
+              <div class="img"></div>
+              <div class="hh">Ein Dach muss mehr können.</div>
+              <div class="txtl" style="width:90%"></div>
+              <div class="txtl" style="width:70%"></div>
+              <div class="sticky"><span>ANRUFEN</span><span style="border-left:1px solid var(--hair)">PROJEKT</span></div>
+            </div>
+            <div class="phone">
+              <div class="bar"><span>ZUSTAND 1 VON 3</span><span>38°</span></div>
+              <div class="img" style="height:150px;background:linear-gradient(38deg,rgba(154,105,80,0.55),rgba(27,28,26,0.9))"></div>
+              <span class="spec">Dachfläche</span>
+              <div class="img" style="height:150px;background:linear-gradient(38deg,rgba(213,180,90,0.4),rgba(27,28,26,0.9))"></div>
+              <span class="spec">Energiefläche</span>
+              <div class="sticky"><span>ANRUFEN</span><span style="border-left:1px solid var(--hair)">PROJEKT</span></div>
+            </div>
+          </div>
+          <ul class="pl">
+            <li><b>Kein Pinning im Hero.</b> Statisches Eröffnungsbild, danach eine eigene Sektion mit drei diskreten Zuständen. Kein kontinuierliches Rendern, kein 300vh-Pin.</li>
+            <li>Untere Aktionsleiste mit zwei Zielen, erscheint nach dem Hero, verschwindet im Formular. Höhe 64px, Lichtkante oben, alle Ziele in der Daumenzone, Touch-Target mindestens 48px.</li>
+            <li><b>Eigene Crops je Bildslot</b>, meist 4 zu 5 oder 3 zu 4 statt 16 zu 9, im Briefing festgelegt und nicht automatisch beschnitten.</li>
+            <li>Budget: erste Ansicht unter 400 kB, LCP unter 2,5 s im 4G-Profil, Formular vollständig ohne 3D und ohne GSAP bedienbar.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13 FREIGABE -->
+    <section class="blk">
+      <div class="grid">
+        <div class="rail"><span class="n">13</span><span class="lab">Freigabe</span></div>
+        <div class="col rv">
+          <h2>Vier Punkte, dann beginnt die Implementierung.</h2>
+          <div class="rows">
+            <div class="row"><span class="rn">01</span><span class="rt">Bildproduktion</span><span class="rd">16 Slots sind briefingfertig. Lieferst du die Bilder, sollen sie gezielt generiert werden, oder trage bis dahin die gestalteten Materialflächen? Der Code bleibt in allen Fällen identisch.</span></div>
+            <div class="row"><span class="rn">02</span><span class="rt">Leitmotivhaus</span><span class="rd">Wohnhaus um 1970, Satteldach 38 Grad, rotbrauner Tondachziegel, verputzte Fassade, Holzgiebel. Mit der Bestätigung ist der Winkel 38 Grad systemweit gesetzt.</span></div>
+            <div class="row"><span class="rn">03</span><span class="rt">Materialbreite</span><span class="rd">Neben Ziegel führen die Bilder Schiefer und Titanzink als Nebenmaterialien. Bestätigen oder auf Ziegel und Blech reduzieren.</span></div>
+            <div class="row"><span class="rn">04</span><span class="rt">Wortmarke</span><span class="rd">DACHWERK in Sans 600 mit 0,22em Laufweite, Unterzeile nur im Footer und im Hero-Eyebrow. Kein Bildzeichen, weil jedes erfundene Symbol hier billiger wirkt als eine präzise Wortmarke.</span></div>
+          </div>
+          <p class="note">Nach der Freigabe folgt Phase 6 in dieser Reihenfolge: Tokens und Tailwind-Theme, Design System, Navigation, Hero statisch, Motion-Schicht, Hero-Choreografie, Three.js Hero, Schichtmodell, Startseitensektionen, Unterseiten, Formular, SEO-Schicht, Mobil-Feinschliff, Messung und Selbstbewertung.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div>Dokumente im Repository: <span style="color:var(--text-1)">dachwerk/docs/01-BLUEPRINT.md · 02-ART-DIRECTION.md · 03-BILDBRIEFINGS.md</span></div>
+      <div>DACHWERK ist ein fiktiver Betrieb. Musterprojekt ohne reale Referenzen, Zertifikate oder Bewertungen. Steuerliche Angaben mit Stand 28.08.2026, keine Steuer- oder Rechtsberatung.</div>
+    </footer>
+  </div>
+</main>
+
+<script>
+  (function () {
+    var els = document.querySelectorAll('.rv');
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce || !('IntersectionObserver' in window)) {
+      els.forEach(function (el) { el.classList.add('in'); });
+    } else {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        });
+      }, { rootMargin: '0px 0px -12% 0px', threshold: 0.05 });
+      els.forEach(function (el) { io.observe(el); });
+    }
+
+    var demo = document.getElementById('demo');
+    var replay = document.getElementById('replay');
+    if (!demo || !replay || reduce) { return; }
+    function play() {
+      demo.classList.add('run');
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () { demo.classList.remove('run'); });
+      });
+    }
+    replay.addEventListener('click', play);
+    if ('IntersectionObserver' in window) {
+      var io2 = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) { play(); io2.unobserve(e.target); } });
+      }, { threshold: 0.4 });
+      io2.observe(demo);
+    }
+  })();
+</script>
