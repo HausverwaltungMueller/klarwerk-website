@@ -34,7 +34,7 @@ Zweck · Motiv · Perspektive · Licht · Brennweite und Look · Bildkomposition
 ## Klasse A · Objekt
 
 ### OBJ-01 · Leitmotivhaus, Bestand
-- **Zweck:** Erste fotografische Begegnung mit dem Haus. Referenzzustand für alle späteren Zustände. Einsatz auf `/projekte/` als Vorher, in der Sektion Haltung und auf `/ueber-uns/`.
+- **Zweck:** Erste fotografische Begegnung mit dem Haus. Referenzzustand für alle späteren Zustände. Einsatz auf `/projekte/` als Vorher (Beispielprojekt 01) und als Vorher-Halbbild in der homepage-eigenen Vorher/Nachher-Darstellung. **Korrektur Phase 10.2:** Der frühere Zusatz „in der Sektion Haltung und auf `/ueber-uns/`" ist gestrichen. `04-HOMEPAGE-EXPERIENCE.md`, S02 Haltung, verlangt für diese Sektion ausdrücklich kein Bild; das hat für die Homepage-Dramaturgie Vorrang. Das Leitmotivhaus bleibt darüber hinaus Master Asset für OBJ-03 und, mit eigenem Bildinhalt, für PRO-05. Siehe `08-LEITMOTIVHAUS-MASTER.md`.
 - **Motiv:** Das Leitmotivhaus im Bestand, altes Dach, leichte Moosbildung in den Kehlen, ein Ziegel sichtbar verschoben, Regenrinne mit Patina. Kein Verfall, sondern ein Haus, das gepflegt ist und dessen Dach am Ende seines Lebenszyklus steht.
 - **Perspektive:** Standpunkt von der Straße, Augenhöhe 1,6m, Drei-Viertel-Ansicht von links, sodass Giebel und Traufseite gleichzeitig lesbar sind. Kamera parallel zur Fassade ausgerichtet, keine stürzenden Linien.
 - **Licht:** Bedeckt und gleichmäßig oder früher Morgen mit flachem Licht von links. Keine harten Schlagschatten auf der Dachfläche, damit der Zustand des Ziegels lesbar bleibt.

@@ -230,7 +230,7 @@ Für jede Sektion: Inhalt, Bewegung, Begründung, Verständnisziel, Emotion, vor
 
 ### S10 · Projekte · Akt 06
 
-- **Sieht:** Zwei Beispielprojekte, je mit Vorher-Nachher-Regler auf identischer Bildachse. Deutlich sichtbare Kennzeichnung „Beispielprojekt“.
+- **Sieht:** Zwei Beispielprojekte, je mit Vorher-Nachher-Regler. Deutlich sichtbare Kennzeichnung „Beispielprojekt“. **Korrektur Phase 10.2:** Nur Beispielprojekt 01 (OBJ-01 zu OBJ-03) zeigt tatsächlich dieselbe Kameraachse vorher und nachher, siehe `08-LEITMOTIVHAUS-MASTER.md`. Beispielprojekt 02 nutzt denselben Regler als gestalterisches Mittel, zeigt aber zwei unterschiedliche Bildmotive (Dachfläche außen, Technik im Haus) als Projekt-/Systemstory, nicht als Achsen-Vergleich. Der Lead-Text auf der Startseite darf die Formulierung „identische Kameraachse“ deshalb nicht mehr pauschal für beide Projekte verwenden, siehe Hinweis in `content/home.ts`, `projekte.lead`.
 - **Liest:** „Gute Arbeit sieht man.“ Je Projekt: Nummer, Maßnahme, Ort, Kennzeichnung. Kein erfundener Kundenname, keine erfundene Bewertung, kein erfundener Ertrag.
 - **Verändert sich:** Der Regler läuft an den Scroll gekoppelt einmal durch und bleibt danach per Ziehen bedienbar.
 - **Warum:** Die scrollgebundene Vorführung zeigt das Prinzip, die Bedienbarkeit gibt die Kontrolle zurück. Beides zusammen wirkt souverän statt spielerisch.
