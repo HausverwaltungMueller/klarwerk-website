@@ -10,8 +10,11 @@ const places = [
 ];
 
 export function RegionMap() {
+  // tabIndex noetig: .drawing-box scrollt horizontal auf schmalen Flaechen, ohne
+  // Fokusziel waere dieser Bereich mit der Tastatur nicht erreichbar.
+  // Gefunden ueber tests/e2e/accessibility.spec.ts, Phase 9.
   return (
-    <div className="drawing-box border border-hair bg-surface-1 p-5" data-map>
+    <div className="drawing-box border border-hair bg-surface-1 p-5" data-map tabIndex={0}>
       <svg viewBox="0 0 620 340" className="block h-auto w-full min-w-[520px]" role="img"
         aria-label="Stilisierte Karte des Arbeitsgebiets mit Hildesheim im Zentrum und einem Radius von etwa 70 Kilometern.">
         <g fill="none" stroke="var(--text-2)">

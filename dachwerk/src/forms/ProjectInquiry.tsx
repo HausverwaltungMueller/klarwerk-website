@@ -148,7 +148,14 @@ export function ProjectInquiry() {
       <p className="sr-only" aria-live="polite">{`Schritt ${step} von 4: ${stepTitles[step]}`}</p>
 
       <div className="min-h-[248px]">
-      {step === 1 ? <AnliegenChoice gewaehlt={values.anliegen} toggle={toggle} /> : null}
+      {step === 1 ? (
+        <div className="flex flex-col gap-3">
+          <AnliegenChoice gewaehlt={values.anliegen} toggle={toggle} />
+          {errors.anliegen ? (
+            <p className="text-s text-state-error" role="status" aria-live="polite">{errors.anliegen}</p>
+          ) : null}
+        </div>
+      ) : null}
 
       {step === 2 ? (
         <div className="relative flex max-w-[320px] flex-col gap-2 pb-[42px]">

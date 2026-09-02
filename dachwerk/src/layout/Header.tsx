@@ -21,6 +21,11 @@ export function Header() {
   const [menu, setMenu] = useState(false);
   const location = useLocation();
   const navRef = useRef<HTMLDivElement>(null);
+  /* Bei einer Maus oeffnet mouseenter das Panel, bevor der Klick ankommt, bei
+     Tastaturbedienung tut das der Fokus vor dem Enter. Ohne diese Wache toggelt
+     der folgende Klick das gerade erst geoeffnete Panel sofort wieder zu.
+     Gefunden ueber tests/e2e/navigation.spec.ts, Phase 9. */
+  const justOpened = useRef(false);
 
   useEffect(() => {
     const onScroll = () => setSolid(window.scrollY > 40);
@@ -72,9 +77,12 @@ export function Header() {
                 aria-expanded={panel === d}
                 aria-controls={`panel-${d}`}
                 className="flex items-center gap-2 border-b border-transparent pb-1 text-s text-text-1 hover:text-text-0"
-                onMouseEnter={() => setPanel(d)}
-                onFocus={() => setPanel(d)}
-                onClick={() => setPanel(panel === d ? null : d)}
+                onMouseEnter={() => { justOpened.current = true; setPanel(d); }}
+                onFocus={() => { justOpened.current = true; setPanel(d); }}
+                onClick={() => {
+                  if (justOpened.current) { justOpened.current = false; return; }
+                  setPanel(panel === d ? null : d);
+                }}
                 /* Wandert der Fokus weiter, ohne in das eigene Panel zu gehen,
                    schliesst das Panel. Sonst steht es offen, waehrend weitergetabbt wird. */
                 onBlur={(e) => {

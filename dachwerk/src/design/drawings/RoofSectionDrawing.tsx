@@ -4,8 +4,11 @@
  * Der Explosionsfaktor wird von der Szene layers gesetzt, über CSS-Variablen.
  */
 export function RoofSectionDrawing() {
+  // tabIndex noetig: .drawing-box scrollt horizontal auf schmalen Flaechen, ohne
+  // Fokusziel waere dieser Bereich mit der Tastatur nicht erreichbar.
+  // Gefunden ueber tests/e2e/accessibility.spec.ts, Phase 9.
   return (
-    <div className="drawing-box border border-hair bg-surface-1 p-5" data-layer-drawing>
+    <div className="drawing-box border border-hair bg-surface-1 p-5" data-layer-drawing tabIndex={0}>
       <svg viewBox="0 0 620 300" className="block h-auto w-full min-w-[520px]" role="img"
         aria-label="Schnittzeichnung des Dachaufbaus mit sieben Schichten von den Sparren bis zu den Photovoltaikmodulen.">
         <defs>

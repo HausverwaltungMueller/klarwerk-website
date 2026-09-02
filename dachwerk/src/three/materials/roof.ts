@@ -1,6 +1,10 @@
 import { MeshPhysicalMaterial, MeshStandardMaterial } from 'three';
 
-/** Materialwerte aus docs/02, Abschnitt 14.3. Keine externen Texturen. */
+/**
+ * Materialwerte aus docs/02, Abschnitt 14.3. Keine externen Texturen.
+ * `rahmen` und `laibung` sind Phase-9-Ergaenzungen fuer die Fensterdetaillierung:
+ * dieselbe unbunte, gedeckte Palette wie Holz und Wand, keine neue Farbwelt.
+ */
 export const materials = () => ({
   ziegel: new MeshStandardMaterial({ color: 0x8f5340, roughness: 0.78, metalness: 0 }),
   deck: new MeshStandardMaterial({ color: 0x34312c, roughness: 0.95, metalness: 0 }),
@@ -15,6 +19,10 @@ export const materials = () => ({
     color: 0x16181d, roughness: 0.16, metalness: 0.05,
     clearcoat: 1, clearcoatRoughness: 0.1,
   }),
+  /** Fensterrahmen, anthrazit-matt wie ein Aluminiumrahmen. */
+  rahmen: new MeshStandardMaterial({ color: 0x2b2c2a, roughness: 0.55, metalness: 0.12 }),
+  /** Laibung: abgedunkelte Wandfarbe, deutet den Schatten in der Fensteroeffnung an. */
+  laibung: new MeshStandardMaterial({ color: 0x9d9689, roughness: 0.95, metalness: 0 }),
 });
 
 export type RoofMaterials = ReturnType<typeof materials>;

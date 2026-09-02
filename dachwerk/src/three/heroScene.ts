@@ -74,8 +74,19 @@ export function mountHeroScene(canvas: HTMLCanvasElement, opts: HeroSceneOptions
     battens.instanceMatrix.needsUpdate = true;
   }
 
-  // Ziegel als eine InstancedMesh
+  // Ziegel als eine InstancedMesh, mit leichter Farbstreuung je Instanz, docs/02, 14.3
   const tiles = new InstancedMesh(new BoxGeometry(tileW - 0.03, tileL - 0.02, 0.05), m.ziegel, ROWS * COLS);
+  {
+    const jitter = new Color();
+    for (let i = 0; i < tiles.count; i++) {
+      const x = Math.sin(i * 12.9898 + 78.233) * 43758.5453;
+      const n = x - Math.floor(x);
+      const v = 0.92 + n * 0.16;
+      jitter.setRGB(v, v, v);
+      tiles.setColorAt(i, jitter);
+    }
+    if (tiles.instanceColor) tiles.instanceColor.needsUpdate = true;
+  }
   roof.add(tiles);
 
   // Schienen

@@ -9,6 +9,7 @@ export default defineConfig({
     target: 'es2022',
     cssCodeSplit: false,
     assetsInlineLimit: 2048,
+    sourcemap: true,
     rollupOptions: {
       output: {
         manualChunks(id) {

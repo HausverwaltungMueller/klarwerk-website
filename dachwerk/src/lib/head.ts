@@ -12,7 +12,9 @@ const esc = (s: string): string =>
 export function buildHead(meta: RouteMeta): string {
   const canonical = `${SITE_ORIGIN}${meta.path}`;
   const robots = SITE_INDEXABLE ? 'index,follow' : 'noindex,nofollow';
-  const og = `${SITE_ORIGIN}/og/dachwerk.svg`;
+  // PNG als Primaerformat, da nicht alle Plattformen SVG-Vorschaubilder lesen.
+  // docs/07-PHASE-8-UMSETZUNG.md, offener Punkt 4.
+  const og = `${SITE_ORIGIN}/og/dachwerk.png`;
   const parts = [
     `<title>${esc(meta.title)}</title>`,
     `<meta name="description" content="${esc(meta.description)}">`,
@@ -25,6 +27,9 @@ export function buildHead(meta: RouteMeta): string {
     `<meta property="og:description" content="${esc(meta.description)}">`,
     `<meta property="og:url" content="${canonical}">`,
     `<meta property="og:image" content="${og}">`,
+    `<meta property="og:image:type" content="image/png">`,
+    `<meta property="og:image:width" content="1200">`,
+    `<meta property="og:image:height" content="630">`,
     `<meta name="twitter:card" content="summary_large_image">`,
   ];
   const schema = buildSchema(meta);

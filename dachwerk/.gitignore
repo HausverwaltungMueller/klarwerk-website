@@ -4,3 +4,7 @@ dist-ssr
 assets-src
 .DS_Store
 *.local
+test-results
+playwright-report
+blob-report
+playwright/.cache
