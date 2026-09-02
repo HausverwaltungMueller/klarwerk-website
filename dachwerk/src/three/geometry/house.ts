@@ -116,12 +116,18 @@ export function buildHouse(m: RoofMaterials): Group {
   rinne.position.set(0, EAVE_Y - 0.24, EAVE_Z - 0.05);
   g.add(rinne);
 
-  // Ortgang: Windbretter an beiden Giebelkanten des Daches, im Dachwinkel PITCH.
+  // Ortgang: Windbretter an beiden Giebelkanten. Eigener Rahmen mit derselben
+  // Transformation wie die Dachflaeche in heroScene.ts (Ursprung an der Traufe,
+  // lokal y Richtung First), damit die Bretter exakt in der Dachebene liegen
+  // statt frei im Raum zu stehen.
+  const vergeFrame = new Group();
+  vergeFrame.position.set(0, EAVE_Y, EAVE_Z);
+  vergeFrame.rotation.x = -(Math.PI / 2 - PITCH);
+  g.add(vergeFrame);
   for (const sign of [1, -1]) {
-    const board = new Mesh(new BoxGeometry(0.05, 0.16, SLOPE_LEN), m.holz);
-    board.position.set(sign * (ROOF_W / 2 - 0.03), (EAVE_Y + RIDGE_Y) / 2 - 0.05, EAVE_Z / 2 - 0.05);
-    board.rotation.x = -(Math.PI / 2 - PITCH);
-    g.add(board);
+    const board = new Mesh(new BoxGeometry(0.05, SLOPE_LEN, 0.16), m.holz);
+    board.position.set(sign * (ROOF_W / 2 - 0.03), SLOPE_LEN / 2, 0.05);
+    vergeFrame.add(board);
   }
 
   // Boden
